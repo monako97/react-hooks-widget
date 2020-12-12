@@ -1,14 +1,35 @@
-stages:
-  - lint
-
+# 缓存公共node模块
+cache:
+  key: node_modules_cache
+  paths:
+    - node_modules/
 before_script:
+  - node -v
+  - npm -v
   - git fetch --all
-  - npm install 
+  - npm install
 
-lint:
-  stage: lint
+# 定义 stages
+stages:
+  - deploy
+
+# 定义 job
+npm-publish:
+  cache:
+    key: node_modules_cache
+  stage: deploy
+  only:
+    - tags
   script:
-    - npm run lint
-  only
-    - 特定分支1
-    - 特定分支2
+    # 获取 git 仓库的 tag  通过tag作为npm包发布的版本号
+    - export GIT_TAG=$(git describe --tags)
+    - echo $GIT_TAG
+    - npm run build
+    - export NPM_ORIGIN=$(npm config get registry)
+    - echo "切换npm私有源"
+    - npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+    - npm version $GIT_TAG
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+    - npm publish
+    - echo "回退npm源"
+    - npm config set registry $NPM_ORIGIN
