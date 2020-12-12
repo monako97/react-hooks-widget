@@ -93,7 +93,7 @@
     "stylelint:fix": "stylelint src/**/*.{less,css} --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "uglifyjs": "node ./compile.js --dir=./lib --uglify",
-    "precommit": "npm run lint"
+    "postversion": "git push --follow-tags"
   },
   "typings": "types/index.d.ts",
   "version": "1.1.7"
