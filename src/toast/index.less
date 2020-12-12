@@ -1,0 +1,184 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'react-toast-icon';
+  src: url('../static/fonts/iconfont.eot?t=1579783718619');
+  /* IE9 */
+  src: url('../static/fonts/iconfont.eot?t=1579783718619#iefix') format('embedded-opentype'),
+    url('../static/fonts/iconfont.woff2') format('woff2'),
+    url('../static/fonts/iconfont.woff?t=1579783718619') format('woff'),
+    url('../static/fonts/iconfont.ttf?t=1579783718619') format('truetype'),
+    url('../static/fonts/iconfont.svg?t=1579783718619#react-toast-icon') format('svg');
+  /* iOS 4.1- */
+}
+
+@box-shadow-size: 1px 9px 20px 0;
+@toast-types: warning, success, primary, danger, info;
+@types-length: length(@toast-types);
+
+.loop-toast-type(@count, @idx) when (@idx <= @count) {
+  @color: extract(@toast-types, @idx);
+  .@{color} {
+    background-color: ~"var(--@{color}-color)";
+    box-shadow: @box-shadow-size ~"var(--@{color}-color-rgba)";
+  }
+  .loop-toast-type(@count, @idx + 1);
+}
+
+.react-toast-icon {
+  margin-right: 5px;
+  font-size: 16px;
+  font-family: 'react-toast-icon', serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xia-la::before {
+  content: '\e611';
+}
+.icon-close::before {
+  content: '\e720';
+}
+.icon-circle::before {
+  content: '\e640';
+}
+.icon-warning::before {
+  content: '\e670';
+}
+.icon-info::before {
+  content: '\e6eb';
+}
+.icon-success::before {
+  content: '\e726';
+}
+.icon-zan::before {
+  content: '\e669';
+}
+
+.error {
+  animation: error 1s ease-in-out;
+}
+
+.react-toast {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: fit-content;
+  margin: 10px auto 0;
+  transition: top 0.3s;
+  animation: toast-slide-in 0.3s;
+  .warning,
+  .success,
+  .primary,
+  .danger,
+  .info,
+  .loading {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+    padding: 0.5rem 4rem 0.5rem 1rem;
+    color: #fff;
+    border-radius: 4rem;
+    cursor: pointer;
+    user-select: none;
+    .react-toast {
+      display: inline-block;
+      min-width: 20px;
+      margin-right: 5px;
+      font-weight: 400;
+      font-style: normal;
+      font-variant: normal;
+      line-height: 1;
+      text-align: center;
+      text-rendering: auto;
+      .loading {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: max-content;
+        margin: auto;
+        background-color: #7858ff;
+        box-shadow: 1px 9px 20px 0 rgba(120, 88, 255, 0.6);
+      }
+    }
+    .close {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      bottom: 0;
+      height: 20px;
+      margin: auto;
+      font-size: 15px;
+      line-height: 20px;
+      text-shadow: 0 0 0 #fff;
+      cursor: pointer;
+    }
+    strong {
+      font-weight: bold;
+      text-align: left !important;
+    }
+  }
+
+  .loop-toast-type(@types-length, 0);
+  &.loading {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &-exit {
+    opacity: 0;
+    animation: toast-slide-out 0.3s;
+  }
+  .loop-top(@idx, @count) when(@idx < @count) {
+    &:nth-child(@{idx}) {
+      top: (@idx - 1) * 50px;
+    }
+    .loop-top(@idx + 1, @count);
+  }
+  .loop-top(1, 20);
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translate3d(0, -100%, 1px);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 1px);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    transform: translate3d(0, 0, 1px);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -100%, 1px);
+    opacity: 0;
+  }
+}
+
+@keyframes error {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
