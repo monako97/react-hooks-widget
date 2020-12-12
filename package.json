@@ -75,6 +75,7 @@
     "url": "https://github.com/monako97/react-hooks-widget"
   },
   "scripts": {
+    "postinstall": "husky install",
     "build": "webpack --mode production",
     "compile": "npm run compile:tsc && npm run compile:types && npm run compile:lessc && npm run compile:postcss",
     "compile:lessc": "node ./compile.js --dir=./src",
