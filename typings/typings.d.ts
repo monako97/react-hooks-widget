@@ -1,3 +1,6 @@
 declare module '*.less';
 declare module '*.js';
-declare module 'module-alias/register';
+
+interface ThemeTypes {
+  type: 'light' | 'night';
+}

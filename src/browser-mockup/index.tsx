@@ -7,10 +7,6 @@ interface DefaultOffsetType {
   top: number;
 }
 
-interface ThemeTypes {
-  type: 'light' | 'night';
-}
-
 interface BrowserMockupProps {
   keyName?: string;
   className?: string;

@@ -117,7 +117,6 @@ module.exports = {
     'wrap-iife': [2, 'inside'], // 立即执行函数表达式的小括号风格
     'no-var': 2, // 禁用var，用let和const代替
     'no-alert': 2, // 禁止使用alert confirm prompt
-    'no-undef': 2, // 不能有未定义的变量
     '@typescript-eslint/no-use-before-define': 2, // 未定义前不能使用
     'no-warning-comments': [1, { terms: ['todo', 'fixme', 'xxx'], location: 'start' }], // 不能有警告备注
     'arrow-parens': 1, // 箭头函数用小括号括起来
