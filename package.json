@@ -57,12 +57,10 @@
   "keywords": [
     "@monako/browser-mockup",
     "@monako",
-    "monako",
-    "monako97",
     "browser-mockup",
     "browser",
-    "modal",
-    "panel"
+    "toast",
+    "wave-circle"
   ],
   "license": "ISC",
   "main": "lib/index.js",
@@ -73,7 +71,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/monako97"
+    "url": "https://github.com/monako97/react-hooks-widget"
   },
   "scripts": {
     "build": "webpack --mode production",
@@ -92,8 +90,9 @@
     "stylelint": "stylelint src/**/*.{less,css}",
     "stylelint:fix": "stylelint src/**/*.{less,css} --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "uglifyjs": "node ./compile.js --dir=./lib --uglify"
+    "uglifyjs": "node ./compile.js --dir=./lib --uglify",
+    "precommit": "npm run lint"
   },
   "typings": "types/index.d.ts",
-  "version": "1.1.6"
+  "version": "1.1.7"
 }
