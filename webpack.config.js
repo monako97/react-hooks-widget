@@ -1,22 +1,22 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// 是否是开发模式 process.env.WEBPACK_DEV_SERVER
-
-module.exports = {
-  entry: [path.join(__dirname, './example/src/app.js')],
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const config = {
+  entry: [path.resolve(__dirname, './example/src/app.js')],
   output: {
-    path: path.join(__dirname, 'example/dist'),
+    path: path.resolve(__dirname, './example/dist'),
     filename: 'index.js'
   },
-  externals: {
-    // react: 'React',
-    // 'react-dom': 'ReactDOM'
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
   },
-  optimization: {
-    minimize: true // 开启代码压缩
+  stats: 'errors-only',
+  infrastructureLogging: {
+    level: 'none' // 不显示log
   },
   module: {
     rules: [
@@ -39,15 +39,9 @@ module.exports = {
               publicPath: '../'
             }
           },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-            loader: 'less-loader'
-          }
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
         ]
       },
       {
@@ -63,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './example/src/index.html'),
+      template: path.resolve(__dirname, './example/src/index.html'),
       filename: './index.html'
     }),
     new MiniCssExtractPlugin({
@@ -72,11 +66,39 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
-  },
-  devServer: {
-    port: 8008
   }
 };
+
+// 是否是开发模式 process.env.WEBPACK_DEV_SERVER
+if (process.env.WEBPACK_DEV_SERVER) {
+  config.devServer = {
+    compress: true,
+    port: 8008,
+    quiet: true,
+    overlay: true,
+    open: true,
+    proxy: [
+      {
+        context: ['/docs'],
+        target: 'https://es6.ruanyifeng.com/',
+        changeOrigin: true,
+        secure: false
+      }
+    ],
+  };
+  config.plugins = [
+    ...config.plugins,
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`Application running in http://localhost:8008/`]
+      },
+      clearConsole: true
+    })
+  ];
+} else {
+  config.optimization = {
+    minimize: true // 开启代码压缩
+  };
+}
+
+module.exports = config;

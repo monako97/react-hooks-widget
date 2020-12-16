@@ -1,4 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
+import isEqual from 'lodash/isEqual';
 import './index.less';
 
 interface WaveCircleProps {
@@ -7,13 +8,6 @@ interface WaveCircleProps {
   children?: ReactNode;
 }
 
-/**
- * 圆形波纹
- * @constructor
- * @param {string} bgColor 波浪背景色
- * @param {CSSProperties} style 样式
- * @param {ReactNode} children 内容
- */
 const WaveCircle: React.FC<WaveCircleProps> = ({
   bgColor = '#000',
   style = {},
@@ -37,4 +31,15 @@ const WaveCircle: React.FC<WaveCircleProps> = ({
   );
 };
 
-export default WaveCircle;
+/**
+ * 圆形波纹
+ * @constructor
+ * @param {string} bgColor 波浪背景色
+ * @param {CSSProperties} style 样式
+ * @param {ReactNode} children 内容
+ */
+const WaveCircles = React.memo(WaveCircle, (pre, next) => {
+  return isEqual(pre, next);
+});
+
+export default WaveCircles;

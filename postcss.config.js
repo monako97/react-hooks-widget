@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
   plugins: [
+    require('stylelint')(),
     require('postcss-preset-env'),
     require('postcss-flexbugs-fixes'),
     require('autoprefixer')({

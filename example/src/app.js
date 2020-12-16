@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, toast, WaveCircle } from '../../src';
-import utils from '../../src/utils';
+import { BrowserMockup, MarkDown, toast, WaveCircle } from '../../src';
+import getDefaultTheme from '../../src/utils/get-default-theme';
+import openPanel from '../../src/utils/open-panel';
+
+function ajaxGet(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.send();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      callback(xhr.responseText);
+    }
+  };
+}
 
 let s = 1;
-const App = () => {
-  const [theme, setTheme] = useState();
 
+const App = () => {
+  const [theme, setTheme] = useState(getDefaultTheme());
+  const [md, setMD] = useState();
+  useMemo(() => {
+    ajaxGet('/docs/proxy.md', function (data) {
+      setMD(data);
+    });
+  }, []);
   useEffect(() => {
     window.addEventListener('dblclick', function (e) {
       if (e.target.tagName === 'PRE') {
-        utils.openPanel(
+        openPanel(
           <BrowserMockup
             title={e.target.tagName}
             theme={theme}
-            style={{
-              width: 150,
-              minWidth: 150
-            }}
           >
             {e.target.cloneNode(true)}
           </BrowserMockup>
@@ -35,16 +50,7 @@ const App = () => {
           toast.success('abs', s % 5 ? -1 : 2000, true);
         }}
       />
-      <BrowserMockup
-        title="标题"
-        theme={theme}
-        style={{
-          left: 100,
-          top: 100,
-          bottom: 'unset',
-          right: 'unset'
-        }}
-      >
+      <BrowserMockup title="标题" theme={theme}>
         <div>
           <button
             onClick={() => {
@@ -53,20 +59,7 @@ const App = () => {
           >
             {theme}
           </button>
-          <pre>
-            <code>
-              <span>let num = 0;</span>
-              <br />
-              <span>num++;</span>
-              <br />
-              <span>console.log(num);</span>
-              <br />
-              <span>
-                var el = document.querySelector(&apos;div.user-panel.main
-                input[name=&apos;login&apos;]&apos;);
-              </span>
-            </code>
-          </pre>
+          <MarkDown text={md} />
         </div>
       </BrowserMockup>
       <WaveCircle

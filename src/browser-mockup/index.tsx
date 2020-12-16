@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
-import utils from '../utils';
+import getDefaultTheme from '../utils/get-default-theme';
+import getMaxZIndex from '../utils/get-max-zIndex';
+import isEqual from 'lodash/isEqual';
 import './index.less';
 
 interface DefaultOffsetType {
@@ -18,30 +20,10 @@ interface BrowserMockupProps {
   children?: React.ReactNode | Node;
 }
 
-/**
- * BrowserMockup: 浏览器窗口模型
- * @constructor
- * @param {string} keyName                   - key.
- * @param {string} className                 - 自定义类名.
- * @param {'light' | 'night'} theme          - 风格.
- * @param {boolean} fixed                    - 使用固定定位.
- * @param {boolean} visible                  - 是否显示.
- * @param {React.CSSProperties} style        - 样式.
- * @param {React.ReactNode} children         - ReactNode.
- * @example
- * ``` js
- * <BrowserMockup
- *    className={'demo'}
- *    style={{ width: 500 }}
- *    fixed>
- * Demo
- * </BrowserMockup>
- * ```
- */
-const BrowserMockup: React.FC<BrowserMockupProps> = ({
+const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   keyName,
   className,
-  theme = utils.getDefaultTheme(),
+  theme = getDefaultTheme(),
   fixed = true,
   visible = true,
   style = {},
@@ -69,7 +51,7 @@ const BrowserMockup: React.FC<BrowserMockupProps> = ({
 
   // 获取最大z-index
   const getMaxZInde = () => {
-    const maxZIndex: number = utils.getMaxZIndex();
+    const maxZIndex: number = getMaxZIndex();
 
     // 不是最高层
     setZIndex(maxZIndex + 1);
@@ -249,10 +231,37 @@ const BrowserMockup: React.FC<BrowserMockupProps> = ({
         if (!isValidElement) refChild(instance);
       }}
     >
+      {/* <div className={'monako__browser--mockup--title'}>
+        <i className={'monako__browser--mockup--close'} onClickCapture={() => handleClose()} />
+      </div> */}
       <i className={'monako__browser--mockup--close'} onClickCapture={() => handleClose()} />
       {isValidElement && children}
     </div>
   ) : null;
 };
+
+/**
+ * BrowserMockup: 浏览器窗口模型
+ * @constructor
+ * @param {string} keyName                   - key.
+ * @param {string} className                 - 自定义类名.
+ * @param {'light' | 'night'} theme          - 风格.
+ * @param {boolean} fixed                    - 使用固定定位.
+ * @param {boolean} visible                  - 是否显示.
+ * @param {React.CSSProperties} style        - 样式.
+ * @param {React.ReactNode} children         - ReactNode.
+ * @example
+ * ``` js
+ * <BrowserMockup
+ *    className={'demo'}
+ *    style={{ width: 500 }}
+ *    fixed>
+ * Demo
+ * </BrowserMockup>
+ * ```
+ */
+const BrowserMockup = React.memo(_BrowserMockup, (pre, next) => {
+  return isEqual(pre, next);
+});
 
 export default BrowserMockup;

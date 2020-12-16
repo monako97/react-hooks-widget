@@ -1,0 +1,24 @@
+@import url(./theme.less);
+
+pre {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.5em;
+  overflow: auto;
+  overflow-y: hidden;
+  color: var(--color);
+  font-size: 12px;
+  font-family: 'ui-monospace', sans-serif;
+  line-height: 20px;
+  background-color: var(--pre-bg);
+  border-left: 5px solid var(--pre-border-color);
+  border-radius: 2px;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  code {
+    font-family: 'ui-monospace', sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+}

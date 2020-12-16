@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
-import utils from '../utils';
+import getMaxZIndex from '../utils/get-max-zIndex';
 import './index.less';
 
 interface NoticeType {
@@ -23,6 +23,7 @@ const icons: Record<NoticeType['type'], string> = {
   primary: 'icon-zan',
   warning: 'icon-warning'
 };
+
 const Toast: React.FC<ToastProps> = ({
   notice,
   duration,
@@ -93,7 +94,7 @@ const notice = (
   const div = document.createElement('div');
 
   div.className = `react-toast ${type}`;
-  div.style.zIndex = utils.getMaxZIndex() + 2 + '';
+  div.style.zIndex = getMaxZIndex() + 2 + '';
   panelBox.appendChild(div);
 
   if (!isOldPanel) {

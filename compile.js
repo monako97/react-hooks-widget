@@ -27,7 +27,7 @@ function dealScri(arr) {
   if (arr && arr.length) {
     arr.forEach((filepath) => {
       if (options['--uglify']) {
-        console.log('uglify'.magenta, filepath.cyan);
+        console.log('uglify'.magenta, filepath.cyan, 'Compiling...'.yellow);
         execute(`npx uglifyjs ${filepath} -o ${filepath}`)
           .then((res) => {
             console.log('uglify'.magenta, filepath.cyan, res.green);
@@ -71,19 +71,22 @@ function walk(dir) {
       switch (path.extname(file)) {
         case '.less':
           outputPath = file.replace(pathWithRegex, './lib/').replace(lessRegex, '.css');
+          console.log(fs.existsSync(outputPath));
+          console.log('lessc:'.magenta, `${outputPath}`.cyan, 'Compiling...'.yellow);
           execute(`npx lessc ${file} > ${outputPath}`)
             .then((res) => {
-              console.log('lessc:'.magenta, `${res}`.green, `${outputPath}`.cyan);
+              console.log('lessc:'.magenta, `${outputPath}`.cyan, `${res}`.green);
+              console.log('postcss:'.magenta, `${outputPath}`.cyan, 'Compiling...'.yellow);
               execute(`npx postcss -c postcss.config.js ${outputPath} -o ${outputPath}`)
                 .then((postCssRes) => {
-                  console.log('postcss:'.magenta, `${postCssRes}`.green, `${outputPath}`.cyan);
+                  console.log('postcss:'.magenta, `${outputPath}`.cyan, `${postCssRes}`.green);
                 })
                 .catch((postCssRej) => {
-                  console.log('postcss:'.magenta, `${postCssRej}`.red, `${outputPath}`.red);
+                  console.log('postcss:'.magenta, `${outputPath}`.red, `${postCssRej}`.red);
                 });
             })
             .catch((rej) => {
-              console.log('lessc:'.magenta, `${rej}`.red, `${outputPath}`.red);
+              console.log('lessc:'.magenta, `${outputPath}`.red, `${rej}`.red);
             });
           break;
         case '.js':

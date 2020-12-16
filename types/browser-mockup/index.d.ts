@@ -30,5 +30,5 @@ interface BrowserMockupProps {
  * </BrowserMockup>
  * ```
  */
-declare const BrowserMockup: React.FC<BrowserMockupProps>;
+declare const BrowserMockup: React.NamedExoticComponent<BrowserMockupProps>;
 export default BrowserMockup;
