@@ -25,7 +25,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: 'detect'
+      version: 'latest'
     }
   },
   // 定义了该eslint文件所依赖的插件

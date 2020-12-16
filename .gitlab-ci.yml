@@ -31,5 +31,4 @@ npm-publish:
     - npm version $GIT_TAG
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
     - npm publish
-    - echo "回退npm源"
-    - npm config set registry $NPM_ORIGIN
+    - echo "完成"
