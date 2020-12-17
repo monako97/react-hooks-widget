@@ -1,11 +1,11 @@
 .monako__markdown-box {
   > .monako__markdown-toc {
     position: sticky;
-    top: -78%;
+    top: var(--toc-height);
     float: left;
     max-height: 70%;
     margin: auto 1em auto auto;
-    padding: 1.5em 1em;
+    padding: 1.5rem 1rem;
     list-style: none;
     background: var(--bg);
     border: 0.25rem solid var(--doc-border-color);
@@ -17,7 +17,7 @@
       a {
         color: var(--doc-color);
         font-weight: 600;
-        line-height: 1.5;
+        line-height: 1.5rem;
         text-decoration: auto;
         &:visited {
           color: var(--info-color);

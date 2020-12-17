@@ -5,7 +5,7 @@ import markdownUtil from '../utils/markdown-util';
 const defaultCln = 'monako__markdown-box ';
 
 const MarkDown: React.FC<{ text: string; className: string }> = ({
-  text = '### 加载中...',
+  text = '#### 加载中...',
   className = ''
 }) => {
   const [cln, setCln] = useState(defaultCln);
@@ -18,7 +18,7 @@ const MarkDown: React.FC<{ text: string; className: string }> = ({
     <div
       className={cln}
       dangerouslySetInnerHTML={{
-        __html: markdownUtil(text)
+        __html: markdownUtil(text) as string
       }}
     />
   );
