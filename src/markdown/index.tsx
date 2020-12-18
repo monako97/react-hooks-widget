@@ -4,7 +4,7 @@ import markdownUtil from '../utils/markdown-util';
 
 const defaultCln = 'monako__markdown-box ';
 
-const MarkDown: React.FC<{ text: string; className: string }> = ({
+const _MarkDown: React.FC<{ text: string; className: string }> = ({
   text = '#### 加载中...',
   className = ''
 }) => {
@@ -30,8 +30,8 @@ const MarkDown: React.FC<{ text: string; className: string }> = ({
  * @param {string} className 容器类名
  * @returns {React.FC} ReactNode
  */
-const MarkDowns = React.memo(MarkDown, (pre, next) => {
+const MarkDown = React.memo(_MarkDown, (pre, next) => {
   return pre.text === next.text && pre.className === next.className;
 });
 
-export default MarkDowns;
+export default MarkDown;

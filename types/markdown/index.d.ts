@@ -6,8 +6,8 @@ import React from 'react';
  * @param {string} className 容器类名
  * @returns {React.FC} ReactNode
  */
-declare const MarkDowns: React.NamedExoticComponent<{
+declare const MarkDown: React.NamedExoticComponent<{
     text: string;
     className: string;
 }>;
-export default MarkDowns;
+export default MarkDown;

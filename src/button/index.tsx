@@ -1,5 +1,6 @@
-import React, { ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import isFunction from 'lodash/isFunction';
+import isEqual from 'lodash/isEqual';
 import './index.less';
 
 interface ButtonTypes {
@@ -17,7 +18,7 @@ interface ButtonTypes {
 }
 
 const defaultCln = 'monako__button ';
-const Button: React.FC<ButtonTypes> = ({
+const _Button: React.FC<ButtonTypes> = ({
   className = '',
   children = '按钮',
   type = 'default',
@@ -30,24 +31,33 @@ const Button: React.FC<ButtonTypes> = ({
   circle,
   onClick
 }: ButtonTypes) => {
+  let animTimer: number | undefined;
   const [cln, setCln] = useState(defaultCln);
   const [animating, setAnimating] = useState(false);
-  const handleClick = useCallback(() => {
-    setAnimating(false);
-    setAnimating(true);
-    const animatingTimer = window.setTimeout(() => {
-      setAnimating(false);
-      window.clearTimeout(animatingTimer);
-    }, 500);
 
+  const handleClick = () => {
+    setAnimating(false);
+    window.clearTimeout(animTimer);
+    animTimer = window.setTimeout(() => {
+      setAnimating(false);
+      window.clearTimeout(animTimer);
+    }, 300);
+    setAnimating(true);
     if (isFunction(onClick)) {
       onClick();
     }
-  }, [onClick]);
+  };
 
   useMemo(() => {
-    setCln(`${animating ? 'monako__button-without ' : ''} ${defaultCln + className}`);
-  }, [className, animating]);
+    if (className) setCln(defaultCln + className);
+  }, [className]);
+
+  useEffect(() => {
+    return () => {
+      // 清除
+      window.clearTimeout(animTimer);
+    };
+  }, [animTimer]);
 
   return (
     <button
@@ -60,6 +70,7 @@ const Button: React.FC<ButtonTypes> = ({
       data-round={round}
       data-circle={circle}
       data-size={size}
+      data-without={animating}
       className={cln}
       onClick={() => handleClick()}
     >
@@ -67,5 +78,27 @@ const Button: React.FC<ButtonTypes> = ({
     </button>
   );
 };
+
+/**
+ * @param {string} className 类名
+ * @param {ReactNode} children 内容
+ * @param {boolean} infinite 是否开启循环动画
+ * @param {default | primary | warning} type 按钮类型
+ * @param {boolean} ghost 幽灵按钮
+ * @param {boolean} dange 危险
+ * @param {boolean} dashed 虚线
+ * @param {boolean} round 开启圆角
+ * @param {boolean} circle 圆形按钮
+ * @param {small | default} size 按钮尺寸
+ * @param {Function} onClick 点击回调方法
+ * @returns {Button} Button
+ * @example
+ * <Button dange onClick={() => {
+ *    console.log('click');
+ * }}>Dange</Button>
+ */
+const Button = React.memo(_Button, (pre, next) => {
+  return isEqual(pre, next);
+});
 
 export default Button;

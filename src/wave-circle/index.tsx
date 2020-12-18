@@ -8,7 +8,7 @@ interface WaveCircleProps {
   children?: ReactNode;
 }
 
-const WaveCircle: React.FC<WaveCircleProps> = ({
+const _WaveCircle: React.FC<WaveCircleProps> = ({
   bgColor = '#000',
   style = {},
   children = null
@@ -38,8 +38,8 @@ const WaveCircle: React.FC<WaveCircleProps> = ({
  * @param {CSSProperties} style 样式
  * @param {ReactNode} children 内容
  */
-const WaveCircles = React.memo(WaveCircle, (pre, next) => {
+const WaveCircle = React.memo(_WaveCircle, (pre, next) => {
   return isEqual(pre, next);
 });
 
-export default WaveCircles;
+export default WaveCircle;

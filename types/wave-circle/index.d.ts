@@ -12,5 +12,5 @@ interface WaveCircleProps {
  * @param {CSSProperties} style 样式
  * @param {ReactNode} children 内容
  */
-declare const WaveCircles: React.NamedExoticComponent<WaveCircleProps>;
-export default WaveCircles;
+declare const WaveCircle: React.NamedExoticComponent<WaveCircleProps>;
+export default WaveCircle;

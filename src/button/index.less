@@ -26,6 +26,10 @@
   --btn-active-color: var(--primary-color-active);
   --btn-focus-color: var(--primary-color-focus);
   --btn-border-color: var(--border-color);
+  
+  &::after {
+    content: '';
+  }
   &:active {
     color: var(--btn-active-color);
     border-color: var(--btn-active-color);
@@ -68,8 +72,7 @@
       color: var(--btn-font-color);
     }
   }
-
-  &-without::after,
+  &[data-without='true']::after,
   &[data-infinite='true']::before {
     position: absolute;
     top: -0.0625rem;
@@ -83,7 +86,7 @@
     border-radius: inherit;
     box-shadow: 0 0 0 var(--btn-shadow-color);
     opacity: 0.2;
-    animation: fadeOutEffect 2s cubic-bezier(0.08, 0.82, 0.17, 1),
+    animation: fadeOutEffect 1.5s cubic-bezier(0.08, 0.82, 0.17, 1),
       buttonEffect 0.4s cubic-bezier(0.08, 0.82, 0.17, 1);
     animation-fill-mode: forwards;
     content: '';

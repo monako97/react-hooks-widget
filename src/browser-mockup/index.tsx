@@ -142,7 +142,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   }, [visible]);
 
   // 监听传入的 keyName 变化时更新
-  useMemo(() => {
+  useEffect(() => {
     let timers: number | undefined;
 
     if (init && keyName && visible) {
@@ -158,6 +158,9 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
         }
       }
     }
+    return () => {
+      window.clearTimeout(timers);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyName]);
 
