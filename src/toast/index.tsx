@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import ReactDom from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
 import getMaxZIndex from '../utils/get-max-zIndex';
 import './index.less';
 
@@ -39,7 +39,7 @@ const Toast: React.FC<ToastProps> = ({
     setShow(false);
     const _timer = window.setTimeout(() => {
       window.clearTimeout(_timer);
-      ReactDom.unmountComponentAtNode(parentNode);
+      unmountComponentAtNode(parentNode);
       panelBox.removeChild(parentNode);
     }, 300);
   }, [closeTimer, panelBox, parentNode]);
@@ -101,8 +101,6 @@ const notice = (
     // 如果是新建的父节点，吧父节点插入到dom
     document.body.appendChild(panelBox);
   }
-
-  const render: ReactDom.Renderer = module.hot ? ReactDom.hydrate : ReactDom.render;
 
   render(
     <Toast
