@@ -1,29 +1,4 @@
 {
-  "_from": "@monako/browser-mockup",
-  "_id": "@monako/browser-mockup@1.1.19",
-  "_inBundle": false,
-  "_integrity": "sha512-1GZoSO24fE4jqwRy0Xa6QhepABeJDlSDS4UDwIoDVD2jqmOG5QrKNvuFB5/kY1pxR5c8wmoc89h+Foei4kpaeQ==",
-  "_location": "/@monako/browser-mockup",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "@monako/browser-mockup",
-    "name": "@monako/browser-mockup",
-    "escapedName": "@monako%2fbrowser-mockup",
-    "scope": "@monako",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/@monako/browser-mockup/-/browser-mockup-1.1.19.tgz",
-  "_shasum": "deab5909450d70bf7ea9d8bf4ecc57e4c7badc54",
-  "_spec": "@monako/browser-mockup",
-  "_where": "/Users/moneko/Downloads/ll",
   "author": {
     "name": "monako"
   },
