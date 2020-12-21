@@ -33,6 +33,7 @@ pre {
     max-width: initial;
     overflow: auto;
     white-space: pre;
+    margin: 2rem 0;
     &::after {
       content: '';
       display: block;
@@ -44,12 +45,12 @@ pre {
       background-color: var(--code-after-bg);
       box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
       color: black;
+      z-index: -1;
     }
     &::before {
       position: absolute;
       top: 0.4rem;
       left: 1rem;
-      z-index: 1;
       display: inline-block;
       width: 0.5rem;
       height: 0.5rem;
