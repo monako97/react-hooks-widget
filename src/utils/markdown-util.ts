@@ -18,13 +18,13 @@ const tocObj = {
 
     const addStartUL = () => {
       if (!result.trim().length) {
-        result += `<ul style="--toc-height: ${hei};" class="monako__markdown-toc">`;
+        result += `<ol style="--toc-height: ${hei};" class="monako__markdown-toc">`;
       } else {
-        result += `<ul>`;
+        result += `<ol>`;
       }
     };
     const addEndUL = () => {
-      result += '</ul>\n';
+      result += '</ol>\n';
     };
     const addLI = (anchor: string, text: string) => {
       result += '<li><a href="#' + anchor + '">' + text + '</a></li>\n';
@@ -77,6 +77,9 @@ class MyRenderer extends Renderer {
               ${text}
             </h${level}>`;
   }
+  image(href: string, title: string, text: string) {
+    return `<img src="${href}" alt="${text}" title="${title || text}"/>`;
+  }
 }
 
 marked.setOptions({
@@ -84,10 +87,13 @@ marked.setOptions({
   highlight: function (code, lang) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const hljs = require('highlight.js');
-    const validLanguage = hljs.getLanguage(lang) ? lang : 'plaintext';
 
-    return hljs.highlight(validLanguage, code).value;
+    if (hljs.getLanguage(lang)) {
+      return hljs.highlight(lang, code).value;
+    }
+    return hljs.highlightAuto(code).value;
   },
+  headerPrefix: '&',
   gfm: true, // 允许 GitHub标准的markdown.
   tables: true, // 支持支持github表格语法。该选项要求 gfm 为true。
   breaks: true, // 支持github回车换行。该选项要求 gfm 为true

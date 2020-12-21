@@ -1,4 +1,29 @@
 {
+  "_from": "@monako/browser-mockup",
+  "_id": "@monako/browser-mockup@1.1.19",
+  "_inBundle": false,
+  "_integrity": "sha512-1GZoSO24fE4jqwRy0Xa6QhepABeJDlSDS4UDwIoDVD2jqmOG5QrKNvuFB5/kY1pxR5c8wmoc89h+Foei4kpaeQ==",
+  "_location": "/@monako/browser-mockup",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@monako/browser-mockup",
+    "name": "@monako/browser-mockup",
+    "escapedName": "@monako%2fbrowser-mockup",
+    "scope": "@monako",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@monako/browser-mockup/-/browser-mockup-1.1.19.tgz",
+  "_shasum": "deab5909450d70bf7ea9d8bf4ecc57e4c7badc54",
+  "_spec": "@monako/browser-mockup",
+  "_where": "/Users/moneko/Downloads/ll",
   "author": {
     "name": "monako"
   },
@@ -40,7 +65,6 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^5.0.0-alpha.15",
-    "husky": "^5.0.6",
     "less": "^3.13.0",
     "less-loader": "^7.1.0",
     "mini-css-extract-plugin": "^1.3.3",
@@ -92,11 +116,10 @@
     "eslint": "eslint --fix --ext src/**/*.{ts,tsx}",
     "lint": "npm run eslint && npm run stylelint:fix",
     "postcompile": "babel src/static --out-dir lib/static --copy-files && npm run uglifyjs",
-    "postspublish": "git push --follow-tags",
     "ppostinstall": "husky install && husky add .husky/pre-commit 'npm run lint'",
     "prebuild": "npm run lint && rm -rf ./example/dist",
     "precompile": "rm -rf ./lib && rm -rf ./types",
-    "prepublish": "npm run build && npm run compile && npm version patch",
+    "prepublishOnly": "npm run build && npm run compile && npm version patch",
     "start": "webpack serve --mode development",
     "stylelint": "stylelint src/**/*.{less,css}",
     "stylelint:fix": "stylelint src/**/*.{less,css} --fix",
@@ -104,5 +127,5 @@
     "uglifyjs": "node ./compile.js --dir=./lib --uglify"
   },
   "typings": "types/index.d.ts",
-  "version": "1.1.17"
+  "version": "1.1.19"
 }

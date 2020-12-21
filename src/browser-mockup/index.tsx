@@ -61,8 +61,6 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   const onMouseDown = useCallback((event) => {
     // 触屏
     if ('ontouchstart' in window && event.type === 'mousedown') return;
-    // z移到最上层
-    getMaxZInde();
     let _event = window.event || event;
     let target = _event.srcElement || _event.target || _event.currentTarget;
 
@@ -70,6 +68,8 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       const top: number = _event.pageY || _event.clientY || _event.changedTouches[0].pageY;
       const left: number = _event.pageX || _event.clientX || _event.changedTouches[0].pageX;
 
+      // z移到最上层
+      getMaxZInde();
       // touch的初始偏移量
       setOffset({ left, top });
       // 开启拖动

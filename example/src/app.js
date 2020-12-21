@@ -21,7 +21,7 @@ const App = () => {
   const [theme, setTheme] = useState(getDefaultTheme());
   const [md, setMD] = useState();
   useMemo(() => {
-    ajaxGet('/docs/proxy.md', function (data) {
+    ajaxGet('/docs/symbol.md', function (data) {
       setMD(data);
     });
   }, []);
@@ -47,10 +47,6 @@ const App = () => {
         <Button
         children="dange"
         dange
-        onClick={() => {
-          s++;
-          toast.danger('dange', s % 5 ? -1 : 2000, true);
-        }}
       />
       <Button
       type='warning'

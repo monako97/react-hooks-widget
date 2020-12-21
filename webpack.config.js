@@ -84,7 +84,14 @@ if (process.env.WEBPACK_DEV_SERVER) {
         target: 'https://es6.ruanyifeng.com/',
         changeOrigin: true,
         secure: false
-      }
+      },
+      {
+        context: ['/doc/'],
+        target: 'https://es6.ruanyifeng.com/',
+        changeOrigin: true,
+        pathRewrite: {'^/doc/' : ''},
+        secure: false
+      },
     ],
   };
   config.plugins = [
