@@ -64,7 +64,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     let _event = window.event || event;
     let target = _event.srcElement || _event.target || _event.currentTarget;
 
-    if (target.className.indexOf('monako__browser--mockup') !== -1) {
+    if (target?.getAttribute('m-drag')) {
       const top: number = _event.pageY || _event.clientY || _event.changedTouches[0].pageY;
       const left: number = _event.pageX || _event.clientX || _event.changedTouches[0].pageX;
 
@@ -124,6 +124,24 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     },
     [isDrag, poi]
   );
+
+  // 单击
+  const onClose = useCallback((event) => {
+    let _event = window.event || event;
+    let target = _event.srcElement || _event.target || _event.currentTarget;
+
+    if (target?.getAttribute('m-close')) {
+      const top: number = _event.pageY || _event.clientY || _event.changedTouches[0].pageY;
+      const left: number = _event.pageX || _event.clientX || _event.changedTouches[0].pageX;
+
+      const lefts = left - target.offsetLeft > 18 && left - target.offsetLeft < 23;
+
+      console.log({ left: lefts, top: top, offsetTop: target.offsetTop });
+    }
+
+    _event = null;
+    target = null;
+  }, []);
 
   // 关闭
   const handleClose = useCallback(() => {
@@ -208,6 +226,8 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   return show !== null ? (
     <div
       ui-theme={theme}
+      m-drag="true"
+      m-close="true"
       className={`monako__browser--mockup${fixed ? ` monako__browser--mockup--fixed` : ''}${
         className ? ' ' + className : ''
       }${dragIng ? ` monako__browser--mockup--drag` : ''}${
@@ -230,6 +250,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       onTouchMoveCapture={onMouseMove}
       onTouchEndCapture={onMouseEnd}
       onTouchCancelCapture={onMouseEnd}
+      onClick={onClose}
       ref={(instance) => {
         if (!isValidElement) refChild(instance);
       }}

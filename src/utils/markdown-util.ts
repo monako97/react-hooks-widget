@@ -80,6 +80,16 @@ class MyRenderer extends Renderer {
   image(href: string, title: string, text: string) {
     return `<img src="${href}" alt="${text}" title="${title || text}"/>`;
   }
+  codespan(text: string) {
+    const match = text.match(/[=]=+([^==\n]+?)==+/);
+
+    if (match) {
+      console.log(text);
+      return `<mark>${match[1].trim()}</mark>`;
+    }
+
+    return text;
+  }
 }
 
 marked.setOptions({
@@ -103,12 +113,63 @@ marked.setOptions({
   xhtml: true
 } as MarkedOptions);
 
+// class MTokenizer extends Tokenizer {
+//   rules = {
+//     inline: {
+//       toc: /\s*\[TOC\]/
+//     }
+//   };
+//   constructor(options?: MarkedOptions) {
+//     super(options);
+//     console.log(this.rules);
+//   }
+// }
+
+// const lexer = new Lexer({
+//   tokenizer: new MTokenizer()
+// });
+
+// const tocRules = /\s*\[TOC\]/;
+// const inlineRules = cloneDeep(marked.Lexer.rules.inline);
+
+// inlineRules.text = tocRules;
+
+// marked.Lexer.rules.inline = inlineRules;
+
+console.log(marked.Lexer.rules.inline);
+marked.use({
+  tokenizer: ({
+    rules: {
+      inline: {
+        toc: /\s*\[TOC\]/
+      }
+    },
+    codespan(src: string) {
+      const match = src.match(/[=]=+([^==\n]+?)==+/);
+
+      if (match) {
+        return {
+          type: 'codespan',
+          raw: match[0],
+          text: src
+        };
+      }
+
+      return false;
+    }
+  } as unknown) as marked.Tokenizer
+});
+
+// marked.use(({ walkTokens } as unknown) as MarkedOptions);
+
 /**
  * Markdown to Html
  * @param {string} text Markdown文本
  * @returns {string} Html文本
  */
 const markdownUtil = (text: string): void | string => {
+  // eslint-disable-next-line no-param-reassign
+  text = `csac ==latex== ==code== csacs \n> ssas \n` + text;
   // 是否包含目录
   const toc = text.startsWith('[TOC]');
 

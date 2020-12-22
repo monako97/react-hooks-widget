@@ -5,57 +5,78 @@
 .monako__browser--mockup {
   position: relative;
   width: fit-content;
-  min-width: 10em;
+  min-width: 10rem;
   max-width: 80vw;
   height: fit-content;
   margin: auto;
-  padding-top: 2em;
+  padding-top: 1.5rem;
   overflow: hidden;
   color: var(--browser-mockup-color);
   font-family: @font-family;
   background-color: var(--browser-mockup-bg);
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 0.1em 0.5em 0 rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.28);
   transition: opacity 0.2s, border-radius 0.2s, background-color 0.2s, border-color 0.2s;
+  // pointer-events: none; // 禁用点击事件
   animation: browser-mockup-zoom-in 0.3s ease-in;
   &::before {
     position: absolute;
-    top: 0.75em;
-    left: 1em;
+    top: 0.375rem;
+    left: 0.45rem;
     z-index: 1;
     display: inline-block;
-    width: 0.5em;
-    height: 0.5em;
+    width: 0.25rem;
+    height: 0.25rem;
     text-align: center;
-    background-color: #f44;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
+    background-color: #444;
+    // pointer-events: auto; // 启用点击事件，使鼠标只能点击到伪元素
+    border: 0.25rem solid #f44;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 0 #f44, 1.125rem 0 0 0 #9b3, 2.25rem 0 0 0 #fb5;
     cursor: pointer;
+    transition: width 0.2s, height 0.2s, border-width 0.2s;
     content: '';
   }
+
+  // &:hover {
+  //   &::before {
+  //     width: 0.5rem;
+  //     height: 0.5rem;
+  //     border-width: 0.125rem;
+  //   }
+  // }
+
+  // &:active {
+  //   &::before {
+  //     width: 0.75rem;
+  //     height: 0.75rem;
+  //     border-width: 0;
+  //   }
+  // }
   &::after {
     position: absolute;
-    top: 0.4em;
-    left: 5.5em;
+    top: 0;
+    left: 0;
     display: block;
-    width: calc(100% - 7rem);
-    height: 1.2em;
-    padding: 0 0.5rem;
+    width: 100%;
     color: var(--browser-mockup-color);
-    line-height: 1.2em;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    text-align: center;
     background-color: var(--browser-mockup-after-bg);
-    border-radius: 2px;
+    border-radius: 0.125rem;
     cursor: grab;
     transition: color 0.2s, background-color 0.2s;
     content: attr(data-title);
+    // pointer-events: auto; // 启用点击事件，使鼠标只能点击到伪元素
   }
-  & > div:nth-child(2) {
+  & > div {
     max-height: 85vh;
     padding: 0.5rem;
     overflow-y: auto;
   }
   &--drag {
-    border-radius: 0.625rem;
     user-select: none;
     &::after {
       cursor: grabbing;
@@ -72,25 +93,16 @@
     opacity: 0;
     animation: browser-mockup-zoom-out 0.3s ease-out;
   }
+
   &--close {
-    &::after {
-      position: absolute;
-      top: 0.45em;
-      left: 1.25em;
-      z-index: 1;
-      color: white;
-      font-size: smaller;
-      font-family: @font-family;
-      font-style: initial;
-      opacity: 0.2;
-      transition: opacity 0.2s;
-      content: 'x';
-    }
-    &:hover {
-      &::after {
-        opacity: 1;
-      }
-    }
+    position: absolute;
+    top: 0.35rem;
+    left: 0.45rem;
+    z-index: 1;
+    display: block;
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
   }
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     & {
@@ -117,10 +129,12 @@
   from {
     transform: var(--transform-drag) scale(1);
     opacity: 1;
+    pointer-events: none;
   }
   to {
     transform: var(--transform-drag) scale(0);
     opacity: 0;
+    pointer-events: none;
   }
 }
 
