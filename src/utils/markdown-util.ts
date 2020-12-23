@@ -80,16 +80,15 @@ class MyRenderer extends Renderer {
   image(href: string, title: string, text: string) {
     return `<img src="${href}" alt="${text}" title="${title || text}"/>`;
   }
-  codespan(text: string) {
-    const match = text.match(/[=]=+([^==\n]+?)==+/);
+  // codespan(text: string) {
+  //   const match = text.match(/[=]=+([^==\n]+?)==+/);
 
-    if (match) {
-      console.log(text);
-      return `<mark>${match[1].trim()}</mark>`;
-    }
+  //   if (match) {
+  //     return `<mark>${match[1].trim()}</mark>`;
+  //   }
 
-    return text;
-  }
+  //   return text;
+  // }
 }
 
 marked.setOptions({
@@ -136,31 +135,29 @@ marked.setOptions({
 
 // marked.Lexer.rules.inline = inlineRules;
 
-console.log(marked.Lexer.rules.inline);
-marked.use({
-  tokenizer: ({
-    rules: {
-      inline: {
-        toc: /\s*\[TOC\]/
-      }
-    },
-    codespan(src: string) {
-      const match = src.match(/[=]=+([^==\n]+?)==+/);
+// console.log(marked.Lexer.rules.inline);
+// marked.use({
+//   tokenizer: ({
+//     rules: {
+//       inline: {
+//         toc: /\s*\[TOC\]/
+//       }
+//     },
+//     codespan(src: string) {
+//       const match = src.match(/[=]=+([^==\n]+?)==+/);
 
-      if (match) {
-        return {
-          type: 'codespan',
-          raw: match[0],
-          text: src
-        };
-      }
+//       if (match) {
+//         return {
+//           type: 'codespan',
+//           raw: match[0],
+//           text: src
+//         };
+//       }
 
-      return false;
-    }
-  } as unknown) as marked.Tokenizer
-});
-
-// marked.use(({ walkTokens } as unknown) as MarkedOptions);
+//       return false;
+//     }
+//   } as unknown) as marked.Tokenizer
+// });
 
 /**
  * Markdown to Html
@@ -168,8 +165,6 @@ marked.use({
  * @returns {string} Html文本
  */
 const markdownUtil = (text: string): void | string => {
-  // eslint-disable-next-line no-param-reassign
-  text = `csac ==latex== ==code== csacs \n> ssas \n` + text;
   // 是否包含目录
   const toc = text.startsWith('[TOC]');
 

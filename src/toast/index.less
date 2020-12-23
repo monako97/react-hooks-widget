@@ -1,15 +1,4 @@
 @charset "UTF-8";
-@font-face {
-  font-family: 'react-toast-icon';
-  src: url('../static/fonts/iconfont.eot?t=1579783718619');
-  /* IE9 */
-  src: url('../static/fonts/iconfont.eot?t=1579783718619#iefix') format('embedded-opentype'),
-    url('../static/fonts/iconfont.woff2') format('woff2'),
-    url('../static/fonts/iconfont.woff?t=1579783718619') format('woff'),
-    url('../static/fonts/iconfont.ttf?t=1579783718619') format('truetype'),
-    url('../static/fonts/iconfont.svg?t=1579783718619#react-toast-icon') format('svg');
-  /* iOS 4.1- */
-}
 
 @box-shadow-size: 1px 9px 20px 0;
 @toast-types: warning, success, primary, danger, info;
@@ -18,46 +7,19 @@
 .loop-toast-type(@count, @idx) when (@idx <= @count) {
   @color: extract(@toast-types, @idx);
   .@{color} {
-    background-color: ~"var(--@{color}-color)";
-    box-shadow: @box-shadow-size ~"var(--@{color}-color-rgba)";
+    background-color: ~'var(--@{color}-color)';
+    box-shadow: @box-shadow-size ~'var(--@{color}-color-rgba)';
   }
   .loop-toast-type(@count, @idx + 1);
 }
 
-.react-toast-icon {
+.monako__icon {
   margin-right: 5px;
   font-size: 16px;
-  font-family: 'react-toast-icon', serif;
+  font-family: 'monako__icon', serif;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-xia-la::before {
-  content: '\e611';
-}
-
-.icon-close::before {
-  content: '\e720';
-}
-
-.icon-circle::before {
-  content: '\e640';
-}
-.icon-warning::before {
-  content: '\e670';
-}
-
-.icon-info::before {
-  content: '\e6eb';
-}
-
-.icon-success::before {
-  content: '\e726';
-}
-
-.icon-zan::before {
-  content: '\e669';
 }
 
 .error {

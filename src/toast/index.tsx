@@ -64,10 +64,10 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div className={`${notice.type}${show ? '' : ' react-toast-exit'}`}>
-      <i className={'react-toast-icon '.concat(icons[notice.type])} />
+      <i className={'monako__icon '.concat(icons[notice.type])} />
       <strong>{notice.content}</strong>
       {close ? (
-        <i className={'react-toast-icon icon-close close'} onClick={() => handleColse()} />
+        <i className={'monako__icon icon-close close'} onClick={() => handleColse()} />
       ) : null}
     </div>
   );

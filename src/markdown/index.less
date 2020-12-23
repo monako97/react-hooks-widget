@@ -188,23 +188,24 @@
     position: relative;
     margin: 0;
     padding: 1.875rem 3.75rem;
+    font-weight: 500;
     border-radius: 0.25rem;
-    quotes: '' '';
     &::before,
     &::after {
       position: absolute;
       color: orange;
       font-size: 3rem;
+      font-family: 'monako__icon', sans-serif;
     }
     &::before {
-      top: -1.5625rem;
-      left: 0.75rem;
-      content: '“';
+      top: -0.5625rem;
+      left: 0.3125rem;
+      content: '\e68e';
     }
     &::after {
-      right: -0.3125rem;
-      bottom: -1.5625rem;
-      content: '”';
+      right: 0.3125rem;
+      bottom: -0.5625rem;
+      content: '\e68d';
     }
     cite {
       color: #bfbfbf;
@@ -216,7 +217,6 @@
     }
     p {
       margin: auto 0;
-      color: #5e6d82;
       font-size: 0.875rem;
       line-height: 1.5rem;
     }

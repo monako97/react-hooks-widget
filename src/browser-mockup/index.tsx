@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import getDefaultTheme from '../utils/get-default-theme';
 import getMaxZIndex from '../utils/get-max-zIndex';
 import isEqual from 'lodash/isEqual';
@@ -30,6 +30,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   title = '',
   children = <p style={{ textAlign: 'center', margin: 0 }}>无内容</p>
 }: BrowserMockupProps) => {
+  const browser = useRef<HTMLDivElement | null>(null);
   // 显示
   const [show, setShow] = useState<boolean | number | null>(visible);
   // 第一次渲染
@@ -48,6 +49,13 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   const [zIndex, setZIndex] = useState<number | null>(1);
   // 判断传入是否为 React 元素
   const [isValidElement, setIsValidElement] = useState<boolean>(React.isValidElement(children));
+  // 设置全屏
+  const [fullScreen, setFullScreen] = useState<boolean>();
+  // 设置宽高
+  const [boxSize, setBoxSize] = useState<React.CSSProperties>({
+    width: style?.width || 'fit-content',
+    height: style?.height || 'fit-content'
+  });
 
   // 获取最大z-index
   const getMaxZInde = () => {
@@ -125,28 +133,25 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     [isDrag, poi]
   );
 
-  // 单击
-  const onClose = useCallback((event) => {
-    let _event = window.event || event;
-    let target = _event.srcElement || _event.target || _event.currentTarget;
-
-    if (target?.getAttribute('m-close')) {
-      const top: number = _event.pageY || _event.clientY || _event.changedTouches[0].pageY;
-      const left: number = _event.pageX || _event.clientX || _event.changedTouches[0].pageX;
-
-      const lefts = left - target.offsetLeft > 18 && left - target.offsetLeft < 23;
-
-      console.log({ left: lefts, top: top, offsetTop: target.offsetTop });
-    }
-
-    _event = null;
-    target = null;
-  }, []);
-
   // 关闭
   const handleClose = useCallback(() => {
     setShow(false);
   }, []);
+
+  // 放大
+  const handleFullScreen = useCallback(() => {
+    if (!fullScreen) {
+      const _size: React.CSSProperties = {
+        width: style?.width || browser.current?.offsetWidth || 'fit-content',
+        height: style?.height || browser.current?.offsetHeight || 'fit-content'
+      };
+
+      if (!isEqual(boxSize, _size)) {
+        setBoxSize(_size);
+      }
+    }
+    setFullScreen(!fullScreen);
+  }, [boxSize, fullScreen, style]);
 
   useMemo(() => {
     setIsValidElement(React.isValidElement(children));
@@ -158,6 +163,18 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     setShow(visible);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
+
+  useEffect(() => {
+    if (!isValidElement) {
+      // 判断传入的 节点 是否已存在
+      const containChild =
+        children === browser.current ? false : browser.current?.contains(children as Node);
+
+      if (!containChild && children) {
+        browser.current?.appendChild(children as Node);
+      }
+    }
+  }, [children, isValidElement]);
 
   // 监听传入的 keyName 变化时更新
   useEffect(() => {
@@ -209,39 +226,40 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     getMaxZInde();
   }, []);
 
-  const refChild = useCallback(
-    (instance) => {
-      if (instance && !isValidElement) {
-        // 判断传入的 节点 是否已存在
-        const containChild = children === instance ? false : instance.contains(children);
+  // let timer: number;
 
-        if (!containChild) {
-          instance.appendChild(children);
-        }
-      }
-    },
-    [children, isValidElement]
-  );
+  // const refChild = (instance: any) => {
+  //   if (instance) {
+  //     browser = instance;
+  //     if (!isValidElement) {
+  //       // 判断传入的 节点 是否已存在
+  //       const containChild = children === instance ? false : instance.contains(children);
+
+  //       if (!containChild) {
+  //         instance.appendChild(children);
+  //       }
+  //     }
+  //   }
+  // };
 
   return show !== null ? (
     <div
       ui-theme={theme}
-      m-drag="true"
-      m-close="true"
       className={`monako__browser--mockup${fixed ? ` monako__browser--mockup--fixed` : ''}${
         className ? ' ' + className : ''
-      }${dragIng ? ` monako__browser--mockup--drag` : ''}${
-        show ? '' : ` monako__browser--mockup--out`
-      }`}
+      }${show ? '' : ` monako__browser--mockup--out`}`}
       style={
         {
           ...style,
           transform: `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`,
           zIndex: zIndex,
+          width: boxSize.width,
+          height: boxSize.height,
           '--transform-drag': `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`
         } as React.CSSProperties
       }
-      data-title={title}
+      data-draging={dragIng}
+      data-fullscreen={fullScreen}
       onMouseDownCapture={onMouseDown}
       onMouseMoveCapture={onMouseMove}
       onMouseUpCapture={onMouseEnd}
@@ -250,15 +268,25 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       onTouchMoveCapture={onMouseMove}
       onTouchEndCapture={onMouseEnd}
       onTouchCancelCapture={onMouseEnd}
-      onClick={onClose}
-      ref={(instance) => {
-        if (!isValidElement) refChild(instance);
-      }}
+      ref={browser}
     >
-      {/* <div className={'monako__browser--mockup--title'}>
-        <i className={'monako__browser--mockup--close'} onClickCapture={() => handleClose()} />
-      </div> */}
-      <i className={'monako__browser--mockup--close'} onClickCapture={() => handleClose()} />
+      <div className={'monako__browser--mockup--title'}>
+        <div className="monako__browser--mockup--title--left">
+          <i className="monako__browser--mockup--close" onClickCapture={() => handleClose()} />
+          <i className="monako__browser--mockup--minimize" />
+          <i
+            className="monako__browser--mockup--fullscreen"
+            onClickCapture={() => handleFullScreen()}
+          />
+        </div>
+        <h4 m-drag="true" title={title}>
+          {title}
+        </h4>
+        <div className={'monako__browser--mockup--tool'}>
+          <i className={'copy'} />
+          <i className={'theme'} />
+        </div>
+      </div>
       {isValidElement && children}
     </div>
   ) : null;
