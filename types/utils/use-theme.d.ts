@@ -1,6 +1,9 @@
 /// <reference types="react" />
-interface UseThemeTypes {
+interface ThemeTypes {
     type: 'light' | 'night';
+}
+interface UseThemeTypes {
+    type: ThemeTypes['type'];
     setType: React.Dispatch<ThemeTypes['type']>;
 }
 /**

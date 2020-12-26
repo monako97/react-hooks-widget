@@ -1,3 +1,6 @@
+interface ThemeTypes {
+    type: 'light' | 'night';
+}
 /**
  * 判断当前时间是晚上还是白天
  * @returns {string} light | night

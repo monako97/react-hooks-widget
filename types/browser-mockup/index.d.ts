@@ -1,5 +1,8 @@
 import React from 'react';
 import './index.less';
+interface ThemeTypes {
+    type: 'light' | 'night';
+}
 interface BrowserMockupProps {
     keyName?: string;
     className?: string;
