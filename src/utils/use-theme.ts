@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import getDefaultTheme from './get-default-theme';
-
-interface UseThemeTypes {
+interface ThemeTypes {
   type: 'light' | 'night';
+}
+interface UseThemeTypes {
+  type: ThemeTypes['type'];
   setType: React.Dispatch<ThemeTypes['type']>;
 }
 

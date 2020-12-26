@@ -4,10 +4,11 @@
 
 .monako__browser--mockup {
   position: relative;
-  width: var(--browser-width);
+  width: fit-content;
   min-width: 10rem;
   max-width: 80vw;
-  height: var(--browser-height);
+  height: fit-content;
+  max-height: 90vh;
   margin: auto;
   overflow: hidden;
   color: var(--browser-mockup-color);
@@ -15,7 +16,7 @@
   background-color: var(--browser-mockup-bg);
   border-radius: 8px;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.28);
-  transition: all 0.2s;
+  transition: all 0.3s;
   // pointer-events: none; // 禁用点击事件
   animation: browser-mockup-zoom-in 0.3s ease-in;
   &--title {
@@ -24,6 +25,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--browser-mockup-after-bg);
+    user-select: none;
     &--left {
       display: flex;
       align-items: center;
@@ -65,9 +67,11 @@
         &:nth-child(2) {
           &::after {
             background-color: #fb5;
+            transition: width 0.2s, height 0.2s;
           }
           &::before {
             color: #fb5;
+            transition: font-size 0.2s;
             content: '\e643';
           }
         }
@@ -109,6 +113,8 @@
     max-height: 85vh;
     padding: 0.5rem;
     overflow-y: auto;
+    transition: max-height 0.2s;
+    animation: browser-fade-in 0.6s forwards;
   }
   [m-drag='true'] {
     cursor: grab;
@@ -128,7 +134,8 @@
     left: 0;
   }
 
-  &[data-fullscreen='true'] {
+  // 窗口全屏
+  &[data-fullscreen='fullscreen'] {
     position: fixed !important;
     top: 0 !important;
     right: 0 !important;
@@ -148,6 +155,52 @@
       pointer-events: none;
     }
   }
+  // 最小化浮窗
+  &[data-fullscreen='minimize'] {
+    min-width: 2rem !important;
+    max-width: 2rem !important;
+    min-height: 2rem !important;
+    max-height: 2rem !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0.1rem 0.5rem 0 rgba(249, 186, 88, 50%);
+    transform: translate3d(46vw, 46vh, 1px) perspective(1px) translateZ(0) !important;
+    pointer-events: none;
+    .monako__browser--mockup--title {
+      &--left {
+        width: 2rem;
+        padding: 0;
+        > i {
+          display: none;
+          &:nth-child(2) {
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            pointer-events: auto;
+            &::before {
+              font-size: 2rem;
+              content: '\e641';
+            }
+            &::after {
+              width: 1.125rem;
+              height: 1.125rem;
+              background-color: #444;
+            }
+          }
+        }
+      }
+      > h4 {
+        display: none;
+      }
+    }
+    .monako__browser--mockup--tool {
+      display: none;
+    }
+    > div:nth-child(2) {
+      animation: browser-fade-out 0.4s forwards;
+    }
+  }
+
   &--out {
     opacity: 0;
     animation: browser-mockup-zoom-out 0.3s ease-out;
@@ -185,6 +238,26 @@
   }
 }
 
+@keyframes browser-fade-in {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes browser-fade-out {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    display: none;
+  }
+}
 .backdrop-filter(@color, @not-color) {
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     & {

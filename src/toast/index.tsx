@@ -17,11 +17,11 @@ interface ToastProps {
 
 const icons: Record<NoticeType['type'], string> = {
   loading: '',
-  info: 'icon-info',
-  success: 'icon-success',
-  danger: 'icon-circle',
-  primary: 'icon-zan',
-  warning: 'icon-warning'
+  info: 'iconinfo',
+  success: 'iconsuccess',
+  danger: 'icon14CIRCLE',
+  primary: 'iconzan-f',
+  warning: 'iconwarning'
 };
 
 const Toast: React.FC<ToastProps> = ({
@@ -67,7 +67,7 @@ const Toast: React.FC<ToastProps> = ({
       <i className={'monako__icon '.concat(icons[notice.type])} />
       <strong>{notice.content}</strong>
       {close ? (
-        <i className={'monako__icon icon-close close'} onClick={() => handleColse()} />
+        <i className={'monako__icon iconclose close'} onClick={() => handleColse()} />
       ) : null}
     </div>
   );

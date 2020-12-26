@@ -3,7 +3,9 @@ import getDefaultTheme from '../utils/get-default-theme';
 import getMaxZIndex from '../utils/get-max-zIndex';
 import isEqual from 'lodash/isEqual';
 import './index.less';
-
+interface ThemeTypes {
+  type: 'light' | 'night';
+}
 interface DefaultOffsetType {
   left: number;
   top: number;
@@ -50,12 +52,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   // 判断传入是否为 React 元素
   const [isValidElement, setIsValidElement] = useState<boolean>(React.isValidElement(children));
   // 设置全屏
-  const [fullScreen, setFullScreen] = useState<boolean>();
-  // 设置宽高
-  const [boxSize, setBoxSize] = useState<React.CSSProperties>({
-    width: style?.width || 'fit-content',
-    height: style?.height || 'fit-content'
-  });
+  const [screen, setScreen] = useState<'window' | 'minimize' | 'fullscreen'>('window');
 
   // 获取最大z-index
   const getMaxZInde = () => {
@@ -133,25 +130,23 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     [isDrag, poi]
   );
 
-  // 关闭
-  const handleClose = useCallback(() => {
-    setShow(false);
-  }, []);
-
-  // 放大
-  const handleFullScreen = useCallback(() => {
-    if (!fullScreen) {
-      const _size: React.CSSProperties = {
-        width: style?.width || browser.current?.offsetWidth || 'fit-content',
-        height: style?.height || browser.current?.offsetHeight || 'fit-content'
-      };
-
-      if (!isEqual(boxSize, _size)) {
-        setBoxSize(_size);
+  // 关闭 缩小 放大
+  const handleScreen = useCallback(
+    (type) => {
+      if (type === 'close') {
+        setShow(false);
+        return;
       }
-    }
-    setFullScreen(!fullScreen);
-  }, [boxSize, fullScreen, style]);
+      const _type = screen === type ? 'window' : type;
+
+      if (_type === 'fullscreen') {
+        // z移到最上层
+        getMaxZInde();
+      }
+      setScreen(_type);
+    },
+    [screen]
+  );
 
   useMemo(() => {
     setIsValidElement(React.isValidElement(children));
@@ -226,22 +221,6 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     getMaxZInde();
   }, []);
 
-  // let timer: number;
-
-  // const refChild = (instance: any) => {
-  //   if (instance) {
-  //     browser = instance;
-  //     if (!isValidElement) {
-  //       // 判断传入的 节点 是否已存在
-  //       const containChild = children === instance ? false : instance.contains(children);
-
-  //       if (!containChild) {
-  //         instance.appendChild(children);
-  //       }
-  //     }
-  //   }
-  // };
-
   return show !== null ? (
     <div
       ui-theme={theme}
@@ -253,13 +232,11 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
           ...style,
           transform: `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`,
           zIndex: zIndex,
-          width: boxSize.width,
-          height: boxSize.height,
           '--transform-drag': `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`
         } as React.CSSProperties
       }
       data-draging={dragIng}
-      data-fullscreen={fullScreen}
+      data-fullscreen={screen}
       onMouseDownCapture={onMouseDown}
       onMouseMoveCapture={onMouseMove}
       onMouseUpCapture={onMouseEnd}
@@ -272,11 +249,18 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     >
       <div className={'monako__browser--mockup--title'}>
         <div className="monako__browser--mockup--title--left">
-          <i className="monako__browser--mockup--close" onClickCapture={() => handleClose()} />
-          <i className="monako__browser--mockup--minimize" />
+          <i
+            className="monako__browser--mockup--close"
+            onClickCapture={() => handleScreen('close')}
+          />
+          <i
+            className="monako__browser--mockup--minimize"
+            // m-drag={screen === 'minimize' ? 'true' : null}
+            onClickCapture={() => handleScreen('minimize')}
+          />
           <i
             className="monako__browser--mockup--fullscreen"
-            onClickCapture={() => handleFullScreen()}
+            onClickCapture={() => handleScreen('fullscreen')}
           />
         </div>
         <h4 m-drag="true" title={title}>
