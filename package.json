@@ -57,9 +57,9 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
     "stylelint-order": "^4.1.0",
+    "terser": "^5.5.1",
     "ts-loader": "^8.0.12",
     "typescript": "^4.1.3",
-    "uglify-js": "^3.12.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0",
@@ -90,7 +90,7 @@
     "compile:types": "tsc --declaration --emitDeclarationOnly --outDir types",
     "eslint": "eslint --fix --ext src/**/*.{ts,tsx}",
     "lint": "npm run eslint && npm run stylelint:fix",
-    "postcompile": "babel src/static --out-dir lib/static --copy-files && npm run uglifyjs",
+    "postcompile": "babel src/static --out-dir lib/static --copy-files && npm run terser",
     "ppostinstall": "husky install && husky add .husky/pre-commit 'npm run lint'",
     "prebuild": "npm run lint && rm -rf ./example/dist",
     "precompile": "rm -rf ./lib && rm -rf ./types",
@@ -99,11 +99,12 @@
     "stylelint": "stylelint src/**/*.{less,css}",
     "stylelint:fix": "stylelint src/**/*.{less,css} --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "uglifyjs": "node ./compile.js --dir=./lib --uglify"
+    "terser": "node ./compile.js --dir=./lib --terser"
   },
   "typings": "types/index.d.ts",
   "version": "1.1.28",
   "files": [
+    "example/dist",
     "lib",
     "types",
     "README.md",

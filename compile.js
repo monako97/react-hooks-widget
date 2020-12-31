@@ -26,14 +26,23 @@ function execute(cmd) {
 function dealScri(arr) {
   if (arr && arr.length) {
     arr.forEach((filepath) => {
-      if (options['--uglify']) {
-        console.log('uglify'.magenta, filepath.cyan, 'Compiling...'.yellow);
-        execute(`npx uglifyjs ${filepath} -o ${filepath}`)
+      if (options['--terser']) {
+        console.log('terser'.magenta, filepath.cyan, 'Compiling...'.yellow);
+        /**
+         * -c即compress表示普通的压缩代码
+         * pure_funcs表示删除代码中的console.log方法
+         * toplevel为true表示只在顶级作用域压缩清理变量
+         * -m即mangle会压缩变量名等等
+         * -o代表输出路径
+         */
+        execute(
+          `npx terser ${filepath} -c pure_funcs=[console.log],toplevel=true -m -o ${filepath}`
+        )
           .then((res) => {
-            console.log('uglify'.magenta, filepath.cyan, res.green);
+            console.log('terser'.magenta, filepath.cyan, res.green);
           })
           .catch(() => {
-            console.log('uglify'.red, filepath.yellow, 'error'.red);
+            console.log('terser'.red, filepath.yellow, 'error'.red);
           });
       } else {
         const pathWithRegex = /\*?.less/g; // 替换 .less 为 .css
