@@ -50,16 +50,6 @@ const App = () => {
         theme={theme}
       >
         <div>
-          <Button children="dange" dange />
-          <Button
-            type="warning"
-            infinite
-            children="w"
-            onClick={() => {
-              s++;
-              toast.warn('abs', s % 5 ? -1 : 2000, true);
-            }}
-          />
           <Button
             dashed
             ghost
@@ -78,23 +68,6 @@ const App = () => {
             onClick={() => {
               s++;
               toast.primary('primary', s % 5 ? -1 : 2000, true);
-            }}
-          />
-          <Button
-            ghost
-            children="ghost"
-            onClick={() => {
-              s++;
-              toast.success('ghost', s % 5 ? -1 : 2000, true);
-            }}
-          />
-
-          <Button
-            children="showToast"
-            size="small"
-            onClick={() => {
-              s++;
-              toast.success('abs', s % 5 ? -1 : 2000, true);
             }}
           />
           <MarkDown text={md} />

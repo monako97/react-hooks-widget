@@ -4,21 +4,24 @@
 
 .monako__browser--mockup {
   position: relative;
+  display: inline-block;
   width: fit-content;
   min-width: 10rem;
   max-width: 80vw;
   height: fit-content;
+  min-height: 2rem;
   max-height: 90vh;
   margin: auto;
   overflow: hidden;
   color: var(--browser-mockup-color);
   font-family: @font-family;
   background-color: var(--browser-mockup-bg);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.28);
-  transition: all 0.3s;
-  // pointer-events: none; // 禁用点击事件
-  animation: browser-mockup-zoom-in 0.3s ease-in;
+  transition: height 0.3s, width 0.3s, max-height 0.3s, max-width 0.3s, min-height 0.3s,
+    min-width 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s, border-radius 0.3s, top 0.3s,
+    left 0.3s, right 0.3s, bottom 0.3s, transform 0.3s, margin 0.3s, padding 0.3s;
+  animation: browser-mockup-zoom-in 0.3s ease-in 1;
   &--title {
     display: flex;
     flex-direction: row;
@@ -102,7 +105,7 @@
       color: var(--browser-mockup-color);
       font-weight: 500;
       font-size: 0.875rem;
-      line-height: 1.5rem;
+      line-height: 2rem;
       white-space: nowrap;
       text-align: center;
       text-overflow: ellipsis;
@@ -113,8 +116,8 @@
     max-height: 85vh;
     padding: 0.5rem;
     overflow-y: auto;
-    transition: max-height 0.2s;
-    animation: browser-fade-in 0.6s forwards;
+    transition: max-height 0.3s;
+    animation: browser-fade-in 0.6s forwards 1;
   }
   [m-drag='true'] {
     cursor: grab;
@@ -149,7 +152,7 @@
     border-radius: 0 !important;
     transform: translate3d(0, 0, 1px) perspective(1px) translateZ(0) !important;
     > div:nth-child(2) {
-      max-height: calc(100vh - 2.5rem);
+      max-height: calc(100vh - 3rem);
     }
     [m-drag='true'] {
       pointer-events: none;
@@ -157,13 +160,19 @@
   }
   // 最小化浮窗
   &[data-fullscreen='minimize'] {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
     min-width: 2rem !important;
     max-width: 2rem !important;
     min-height: 2rem !important;
     max-height: 2rem !important;
+    margin: auto !important;
     overflow: hidden !important;
     border-radius: 50% !important;
-    box-shadow: 0 0.1rem 0.5rem 0 rgba(249, 186, 88, 50%);
+    box-shadow: 0 0.1rem 0.5rem 0 rgba(249, 186, 88, 0.5) !important;
     transform: translate3d(46vw, 46vh, 1px) perspective(1px) translateZ(0) !important;
     pointer-events: none;
     .monako__browser--mockup--title {
@@ -197,7 +206,8 @@
       display: none;
     }
     > div:nth-child(2) {
-      animation: browser-fade-out 0.4s forwards;
+      overflow: hidden !important;
+      animation: browser-fade-out 0.3s forwards 1;
     }
   }
 
@@ -209,7 +219,7 @@
     & {
       background-color: var(--browser-mockup-supports-bg);
       border-color: var(--browser-mockup-supports-border-color);
-      backdrop-filter: blur(1rem);
+      backdrop-filter: blur(16px);
     }
   }
 }
@@ -257,18 +267,5 @@
   }
   100% {
     display: none;
-  }
-}
-.backdrop-filter(@color, @not-color) {
-  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    & {
-      background-color: @color;
-      backdrop-filter: blur(1rem);
-    }
-  }
-  @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-    & {
-      background-color: @not-color;
-    }
   }
 }

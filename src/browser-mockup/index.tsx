@@ -245,7 +245,6 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       onTouchMoveCapture={onMouseMove}
       onTouchEndCapture={onMouseEnd}
       onTouchCancelCapture={onMouseEnd}
-      ref={browser}
     >
       <div className={'monako__browser--mockup--title'}>
         <div className="monako__browser--mockup--title--left">
@@ -271,7 +270,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
           <i className={'theme'} />
         </div>
       </div>
-      {isValidElement && children}
+      <div ref={browser}>{isValidElement && children}</div>
     </div>
   ) : null;
 };
