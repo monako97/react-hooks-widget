@@ -1,3 +1,4 @@
+/* eslint-disable callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -9,6 +10,53 @@ const options = {
 };
 
 require('colors');
+// 测试某个路径下文件是否存在
+const exists = function (src, dst, callback) {
+  // eslint-disable-next-line no-shadow
+  fs.exists(dst, function (exists) {
+    if (exists) {
+      callback(src, dst);
+    } else {
+      console.log(`create ${dst}`.cyan);
+      // 不存在 创建目录
+      fs.mkdir(dst, function () {
+        callback(src, dst);
+      });
+    }
+  });
+};
+
+const copy = function (src, dst) {
+  // 读取目录
+  fs.readdir(src, function (err, paths) {
+    if (err) {
+      throw err;
+    }
+    paths.forEach(function (_path) {
+      let _src = src + '/' + _path;
+      let _dst = dst + '/' + _path;
+      let readable;
+      let writable;
+
+      // eslint-disable-next-line no-shadow
+      fs.stat(_src, function (err, st) {
+        if (err) {
+          throw err;
+        }
+
+        if (st.isFile()) {
+          console.log(`${_src} copy ${_dst}`.cyan);
+          readable = fs.createReadStream(_src); // 创建读取流
+          writable = fs.createWriteStream(_dst); // 创建写入流
+          readable.pipe(writable);
+        } else if (st.isDirectory()) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          exists(_src, _dst, copy);
+        }
+      });
+    });
+  });
+};
 
 function execute(cmd) {
   return new Promise((resolut, reject) => {
@@ -44,6 +92,8 @@ function dealScri(arr) {
           .catch(() => {
             console.log('terser'.red, filepath.yellow, 'error'.red);
           });
+      } else if (options['--copy']) {
+        exists(options['--entry'], options['--output'], copy);
       } else {
         const pathWithRegex = /\*?.less/g; // 替换 .less 为 .css
         let fileStr = fs.readFileSync(filepath, 'utf-8');
@@ -109,8 +159,6 @@ function walk(dir) {
   });
   return results;
 }
-
-console.log('执行打包后的文件');
 
 const args = process.argv.splice(2);
 
