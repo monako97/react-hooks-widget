@@ -6,4 +6,6 @@
 - [x] toast
 - [x] wave-circle
 - [x] markdown
+- [x] markdown-edit
 - [x] button
+- [x] bubbly-button

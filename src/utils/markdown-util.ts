@@ -1,4 +1,4 @@
-import marked, { MarkedOptions, Renderer } from 'marked-extended';
+import marked, { MarkedOptions, Renderer } from 'marked-completed';
 
 class MyRenderer extends Renderer {
   image(href: string, title: string, text: string) {
@@ -31,7 +31,7 @@ marked.setOptions({
  * @param {string} text Markdown文本
  * @returns {string} Html文本
  */
-const markdownUtil = (text: string): void | string => {
+const markdownUtil = (text: string): string => {
   return marked(text);
 };
 

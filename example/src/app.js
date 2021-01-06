@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, WaveCircle, Button } from '../../src';
+import { BrowserMockup, MarkDown, toast, WaveCircle, Button, MarkDownEdit } from '../../src';
 import getDefaultTheme from '../../src/utils/get-default-theme';
 import openPanel from '../../src/utils/open-panel';
 
@@ -45,6 +45,9 @@ const App = () => {
   }, []);
   return (
     <>
+    <MarkDownEdit htmlClass="monako__markdown-box" onSubmit={(value) => {
+      console.log(value);
+    }}/>
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}
