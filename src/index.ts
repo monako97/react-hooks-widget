@@ -6,3 +6,4 @@ export { default as MarkDown } from './markdown';
 export { MarkDownEdit } from './markdown-edit';
 export { BubblyButton } from './bubbly-button';
 export { default as Button } from './button';
+export { default as utils } from './utils';

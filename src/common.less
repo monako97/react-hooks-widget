@@ -42,7 +42,7 @@ pre {
       background-color: var(--code-after-bg);
       box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
       color: black;
-      z-index: -1;
+      z-index: 1;
     }
     &::before {
       position: absolute;
@@ -58,6 +58,7 @@ pre {
       cursor: pointer;
       content: '';
       transition: all 0.2s;
+      z-index: 2;
     }
     &::-webkit-scrollbar {
       display: inherit;
