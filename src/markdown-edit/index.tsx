@@ -14,7 +14,7 @@ import { BubblyButton } from '../bubbly-button';
 interface MarkDownEditType {
   initValue?: string;
   // eslint-disable-next-line no-unused-vars
-  onSubmit?: (value?: string) => void;
+  onSubmit?: (value: string) => void;
   htmlClass?: string;
 }
 
@@ -36,7 +36,7 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
 
   const handleSubmit = useCallback(() => {
     if (isFunction(onSubmit)) {
-      onSubmit(mdEditor?.current?.getMdValue());
+      onSubmit(mdEditor.current?.getMdValue() || '');
     }
   }, [onSubmit]);
 
