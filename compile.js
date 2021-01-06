@@ -95,7 +95,7 @@ function dealScri(arr) {
       } else if (options['--copy']) {
         exists(options['--entry'], options['--output'], copy);
       } else {
-        const pathWithRegex = /\*?.less/g; // 替换 .less 为 .css
+        const pathWithRegex = /\*?\.less/g; // 替换 .less 为 .css
         let fileStr = fs.readFileSync(filepath, 'utf-8');
 
         if (pathWithRegex.test(fileStr)) {
