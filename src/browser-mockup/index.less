@@ -5,14 +5,14 @@
 .monako__browser--mockup {
   position: relative;
   display: inline-block;
-  width: fit-content;
+  // width: fit-content;
   min-width: 10rem;
   max-width: 80vw;
-  height: fit-content;
+  // height: fit-content;
   min-height: 2rem;
   max-height: 90vh;
   margin: auto;
-  overflow: hidden;
+  overflow-x: hidden;
   color: var(--browser-mockup-color);
   font-family: @font-family;
   background-color: var(--browser-mockup-bg);
@@ -22,12 +22,20 @@
     min-width 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s, border-radius 0.3s, top 0.3s,
     left 0.3s, right 0.3s, bottom 0.3s, transform 0.3s, margin 0.3s, padding 0.3s;
   animation: browser-mockup-zoom-in 0.3s ease-in 1;
+  & ::-webkit-scrollbar {
+    width: 0.3125rem;
+    &-thumb {
+      background-color: #eee;
+    }
+  }
+  
   &--title {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: var(--browser-mockup-after-bg);
+    background-color: var(--browser-mockup-title-bg);
+    box-shadow: 0 0.0625rem 0.3125rem rgba(0,0,0,.1);
     user-select: none;
     &--left {
       display: flex;
@@ -52,38 +60,38 @@
           width: 0.5rem;
           height: 0.5rem;
           margin: auto;
-          background-color: #f44;
+          background-color: #fc625d;
           content: '';
         }
         &::before {
           position: absolute;
           z-index: 2;
           display: block;
-          color: #f44;
-          font-size: 0.75rem;
+          color: #fc625d;
+          font-size: 0.875rem;
           font-family: monako__icon, sans-serif;
           font-style: normal;
           line-height: 1;
-          transition: transform 0.1s;
+          transform: translate3d(-0.0625rem, -0.0625rem, 1px);
+          transition: all 0.2s;
           content: '\e642';
         }
         &:nth-child(2) {
           &::after {
-            background-color: #fb5;
+            background-color: #fdbc40;
             transition: width 0.2s, height 0.2s;
           }
           &::before {
-            color: #fb5;
-            transition: font-size 0.2s;
+            color: #fdbc40;
             content: '\e643';
           }
         }
         &:nth-child(3) {
           &::after {
-            background-color: #9b3;
+            background-color: #35cd4b;
           }
           &::before {
-            color: #9b3;
+            color: #35cd4b;
             content: '\e641';
           }
         }
@@ -113,7 +121,7 @@
     }
   }
   > div:nth-child(2) {
-    max-height: 85vh;
+    max-height: calc(90vh - 3rem);
     padding: 0.5rem;
     overflow-y: auto;
     transition: max-height 0.3s;
@@ -136,7 +144,6 @@
     bottom: 0;
     left: 0;
   }
-
   // 窗口全屏
   &[data-fullscreen='fullscreen'] {
     position: fixed !important;
@@ -188,12 +195,13 @@
             pointer-events: auto;
             &::before {
               font-size: 2rem;
+              transform: unset;
               content: '\e641';
             }
             &::after {
               width: 1.125rem;
               height: 1.125rem;
-              background-color: #444;
+              background-color: rgba(0, 0, 0, 0.7);
             }
           }
         }
@@ -215,13 +223,13 @@
     opacity: 0;
     animation: browser-mockup-zoom-out 0.3s ease-out;
   }
-  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    & {
-      background-color: var(--browser-mockup-supports-bg);
-      border-color: var(--browser-mockup-supports-border-color);
-      backdrop-filter: blur(16px);
-    }
-  }
+  // @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  //   & {
+  //     background-color: var(--browser-mockup-supports-bg);
+  //     border-color: var(--browser-mockup-supports-border-color);
+  //     backdrop-filter: blur(16px);
+  //   }
+  // }
 }
 
 @keyframes browser-mockup-zoom-in {

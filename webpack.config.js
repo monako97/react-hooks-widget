@@ -91,6 +91,12 @@ if (process.env.WEBPACK_DEV_SERVER) {
         pathRewrite: {'^/doc/' : ''},
         secure: false
       },
+      {
+        context: ['/static_file/'],
+        target: 'https://local.monako.club/',
+        changeOrigin: true,
+        secure: false
+      }
     ],
   };
   config.plugins = [

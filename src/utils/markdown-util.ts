@@ -17,7 +17,7 @@ marked.setOptions({
     }
     return hljs.highlightAuto(code).value;
   },
-  headerPrefix: '&',
+  headerPrefix: '# ',
   tables: true, // 支持支持github表格语法。该选项要求 gfm 为true。
   breaks: true, // 支持github回车换行。该选项要求 gfm 为true
   pedantic: false, // 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。

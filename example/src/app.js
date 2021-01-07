@@ -21,7 +21,7 @@ const App = () => {
   const [theme, setTheme] = useState(getDefaultTheme());
   const [md, setMD] = useState();
   useMemo(() => {
-    ajaxGet('/docs/symbol.md', function (data) {
+    ajaxGet('/static_file/markdown/142a5ca9-1426-4370-8f34-43c4db3761c0.md', function (data) {
       setMD(data);
     });
   }, []);
@@ -45,7 +45,7 @@ const App = () => {
   }, []);
   return (
     <>
-    <MarkDownEdit htmlClass="monako__markdown-box" onSubmit={(value) => {
+    <MarkDownEdit initValue={md} htmlClass="monako__markdown-box" onSubmit={(value) => {
       console.log(value);
     }}/>
       <BrowserMockup
