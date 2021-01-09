@@ -44,13 +44,16 @@ const App = () => {
     });
   }, []);
   return (
-    <>
+    <div style={{
+      padding: '30px'
+    }}>
     <MarkDownEdit initValue={md} htmlClass="monako__markdown-box" onSubmit={(value) => {
       console.log(value);
     }}/>
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}
+        visible={false}
       >
         <div>
           <Button
@@ -76,7 +79,7 @@ const App = () => {
           <MarkDown text={md} />
         </div>
       </BrowserMockup>
-      <WaveCircle
+      {/* <WaveCircle
         bgColor="pink"
         style={{
           width: 100,
@@ -84,8 +87,8 @@ const App = () => {
         }}
       >
         <span style={{ color: 'white', textAlign: 'center' }}>哈哈哈/</span>
-      </WaveCircle>
-    </>
+      </WaveCircle> */}
+    </div>
   );
 };
 render(<App />, document.getElementById('root'));
