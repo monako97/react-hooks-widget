@@ -1,11 +1,11 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import isFunction from 'lodash/isFunction';
 import isEqual from 'lodash/isEqual';
 import './index.less';
 
 interface ButtonTypes {
   className?: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   infinite?: boolean;
   type?: 'default' | 'primary' | 'warning';
   ghost?: boolean;
@@ -32,8 +32,8 @@ const _Button: React.FC<ButtonTypes> = ({
   onClick
 }: ButtonTypes) => {
   let animTimer: number | undefined;
-  const [cln, setCln] = useState(defaultCln);
-  const [animating, setAnimating] = useState(false);
+  const [cln, setCln] = React.useState(defaultCln);
+  const [animating, setAnimating] = React.useState(false);
 
   const handleClick = () => {
     setAnimating(false);
@@ -48,11 +48,11 @@ const _Button: React.FC<ButtonTypes> = ({
     }
   };
 
-  useMemo(() => {
+  React.useMemo(() => {
     if (className) setCln(defaultCln + className);
   }, [className]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     return () => {
       // 清除
       window.clearTimeout(animTimer);

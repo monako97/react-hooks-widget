@@ -1,6 +1,7 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import isEqual from 'lodash/isEqual';
 import isFunction from 'lodash/isFunction';
+import { BubblyButton } from '../bubbly-button';
 import marked from 'marked-completed';
 import Editor from 'react-markdown-editor-lite';
 import Sub from './plugin/sub';
@@ -9,7 +10,6 @@ import Emoji from './plugin/emoji';
 // 导入编辑器的样式
 import 'react-markdown-editor-lite/lib/index.css';
 import './index.less';
-import { BubblyButton } from '../bubbly-button';
 
 interface MarkDownEditType {
   initValue?: string;
@@ -29,14 +29,14 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
   submitText = '提交',
   htmlClass
 }: MarkDownEditType) => {
-  const [value, setValue] = useState('');
-  const mdEditor = useRef<Editor>(null);
+  const [value, setValue] = React.useState('');
+  const mdEditor = React.useRef<Editor>(null);
 
-  useMemo(() => {
+  React.useMemo(() => {
     if (initValue) setValue(initValue);
   }, [initValue]);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = React.useCallback(() => {
     if (isFunction(onSubmit)) {
       onSubmit(mdEditor.current?.getMdValue() || '');
     }

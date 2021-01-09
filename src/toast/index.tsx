@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import getMaxZIndex from '../utils/get-max-zIndex';
 import './index.less';
@@ -31,10 +31,10 @@ const Toast: React.FC<ToastProps> = ({
   parentNode,
   panelBox
 }: ToastProps) => {
-  const [show, setShow] = useState<boolean>(true);
-  const [closeTimer, setCloseTimer] = useState<number>();
+  const [show, setShow] = React.useState<boolean>(true);
+  const [closeTimer, setCloseTimer] = React.useState<number>();
 
-  const handleColse = useCallback(() => {
+  const handleColse = React.useCallback(() => {
     window.clearTimeout(closeTimer);
     setShow(false);
     const _timer = window.setTimeout(() => {
@@ -44,13 +44,13 @@ const Toast: React.FC<ToastProps> = ({
     }, 300);
   }, [closeTimer, panelBox, parentNode]);
 
-  const closeEvent = useCallback(() => {
+  const closeEvent = React.useCallback(() => {
     return window.setTimeout(() => {
       handleColse();
     }, duration);
   }, [duration, handleColse]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // 当 duration 为 -1 时，不自动关闭
     if (duration !== -1) {
       // 执行退场动画

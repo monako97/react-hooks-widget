@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import React from 'react';
 import getDefaultTheme from '../utils/get-default-theme';
 import getMaxZIndex from '../utils/get-max-zIndex';
 import isEqual from 'lodash/isEqual';
@@ -32,27 +32,29 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   title = '',
   children = <p style={{ textAlign: 'center', margin: 0 }}>无内容</p>
 }: BrowserMockupProps) => {
-  const browser = useRef<HTMLDivElement | null>(null);
+  const browser = React.useRef<HTMLDivElement | null>(null);
   // 显示
-  const [show, setShow] = useState<boolean | number | null>(visible);
+  const [show, setShow] = React.useState<boolean | number | null>(visible);
   // 第一次渲染
-  const [init, setInit] = useState<boolean>(false);
+  const [init, setInit] = React.useState<boolean>(false);
   // 开始拖拽
-  const [isDrag, setIsDrag] = useState<boolean>(false);
+  const [isDrag, setIsDrag] = React.useState<boolean>(false);
   // 拖拽中
-  const [dragIng, setDragIng] = useState<boolean>(false);
+  const [dragIng, setDragIng] = React.useState<boolean>(false);
   // 偏移像素
-  const [poi, setPoi] = useState<DefaultOffsetType>({ left: 0, top: 0 });
+  const [poi, setPoi] = React.useState<DefaultOffsetType>({ left: 0, top: 0 });
   // 初始偏移像素
-  const [offset, setOffset] = useState<DefaultOffsetType>({ left: 0, top: 0 });
+  const [offset, setOffset] = React.useState<DefaultOffsetType>({ left: 0, top: 0 });
   // 上一次的偏移量
-  const [prePoi, setPrePoi] = useState<DefaultOffsetType>({ left: 0, top: 0 });
+  const [prePoi, setPrePoi] = React.useState<DefaultOffsetType>({ left: 0, top: 0 });
   // 最大z-index
-  const [zIndex, setZIndex] = useState<number | null>(1);
+  const [zIndex, setZIndex] = React.useState<number | null>(1);
   // 判断传入是否为 React 元素
-  const [isValidElement, setIsValidElement] = useState<boolean>(React.isValidElement(children));
+  const [isValidElement, setIsValidElement] = React.useState<boolean>(
+    React.isValidElement(children)
+  );
   // 设置全屏
-  const [screen, setScreen] = useState<'window' | 'minimize' | 'fullscreen'>('window');
+  const [screen, setScreen] = React.useState<'window' | 'minimize' | 'fullscreen'>('window');
 
   // 获取最大z-index
   const getMaxZInde = () => {
@@ -63,7 +65,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   };
 
   // 按下拖拽部分，开始拖动
-  const onMouseDown = useCallback((event) => {
+  const onMouseDown = React.useCallback((event) => {
     // 触屏
     if ('ontouchstart' in window && event.type === 'mousedown') return;
     let _event = window.event || event;
@@ -85,7 +87,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   }, []);
 
   // 拖动位置
-  const onMouseMove = useCallback(
+  const onMouseMove = React.useCallback(
     (event) => {
       if (isDrag) {
         setDragIng(true);
@@ -103,7 +105,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   );
 
   // 结束拖拽
-  const onMouseEnd = useCallback(
+  const onMouseEnd = React.useCallback(
     (event) => {
       // 触屏
       if ('ontouchstart' in window && event.type === 'mouseup') return;
@@ -131,7 +133,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   );
 
   // 关闭 缩小 放大
-  const handleScreen = useCallback(
+  const handleScreen = React.useCallback(
     (type) => {
       if (type === 'close') {
         setShow(false);
@@ -148,18 +150,18 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     [screen]
   );
 
-  useMemo(() => {
+  React.useMemo(() => {
     setIsValidElement(React.isValidElement(children));
   }, [children]);
 
   // 监听传入的 visible 以改变show
-  useMemo(() => {
+  React.useMemo(() => {
     if (!visible && !show) return;
     setShow(visible);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isValidElement) {
       // 判断传入的 节点 是否已存在
       const containChild =
@@ -172,7 +174,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   }, [children, isValidElement]);
 
   // 监听传入的 keyName 变化时更新
-  useEffect(() => {
+  React.useEffect(() => {
     let timers: number | undefined;
 
     if (init && keyName && visible) {
@@ -195,7 +197,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   }, [keyName]);
 
   // 监听 show，为 null 时卸载 Dom
-  useEffect(() => {
+  React.useEffect(() => {
     let timer: number | undefined;
 
     if (init) {
@@ -217,7 +219,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     getMaxZInde();
   }, []);
 

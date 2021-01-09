@@ -1,5 +1,6 @@
-import { isFunction } from 'lodash';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
+import isEqual from 'lodash/isEqual';
+import isFunction from 'lodash/isFunction';
 import './index.less';
 
 interface BubblyButtonProps {
@@ -11,10 +12,10 @@ const _BubblyButton: React.FC<BubblyButtonProps> = function ({
   text = 'Submit',
   onClick
 }: BubblyButtonProps) {
-  const [clsName, setClsName] = useState<string>('bubbly_button');
+  const [clsName, setClsName] = React.useState<string>('bubbly_button');
   let _timer = -1000;
 
-  const animateButton = useCallback(() => {
+  const animateButton = React.useCallback(() => {
     if (_timer !== -1000) {
       return;
     }
@@ -39,4 +40,4 @@ const _BubblyButton: React.FC<BubblyButtonProps> = function ({
   );
 };
 
-export const BubblyButton = React.memo(_BubblyButton, () => true);
+export const BubblyButton = React.memo(_BubblyButton, (pre, next) => isEqual(pre, next));

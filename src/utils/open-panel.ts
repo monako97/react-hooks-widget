@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
 /**
@@ -12,7 +12,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
  * openPanel(<span>指定 容器id为 demo-panel</span>, 'demo-panel');
  * ```
  */
-const openPanel = (renderDom: ReactElement, newPanel?: string): void => {
+const openPanel = (renderDom: React.ReactElement, newPanel?: string): void => {
   const ids: string = newPanel || 'Panel-Panel-panel-Box';
   let box: HTMLElement | null = document.getElementById(ids);
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import getDefaultTheme from './get-default-theme';
 interface ThemeTypes {
   type: 'light' | 'night';
@@ -13,7 +13,7 @@ interface UseThemeTypes {
  * @returns {UseThemeTypes} theme and setTheme
  */
 const useTheme = (): UseThemeTypes => {
-  const [type, setType] = useState<ThemeTypes['type']>(getDefaultTheme());
+  const [type, setType] = React.useState<ThemeTypes['type']>(getDefaultTheme());
 
   return { type, setType };
 };

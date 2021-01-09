@@ -1,16 +1,15 @@
-import './index.less';
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import markdownUtil from '../utils/markdown-util';
-
+import './index.less';
 const defaultCln = 'monako__markdown-box ';
 
 const _MarkDown: React.FC<{ text: string; className: string }> = ({
   text = '#### 加载中...',
   className = ''
 }) => {
-  const [cln, setCln] = useState(defaultCln);
+  const [cln, setCln] = React.useState(defaultCln);
 
-  useMemo(() => {
+  React.useMemo(() => {
     setCln(defaultCln.concat(className));
   }, [className]);
 
