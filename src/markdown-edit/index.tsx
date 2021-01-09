@@ -13,6 +13,7 @@ import { BubblyButton } from '../bubbly-button';
 
 interface MarkDownEditType {
   initValue?: string;
+  submitText?: string;
   // eslint-disable-next-line no-unused-vars
   onSubmit?: (value: string) => void;
   htmlClass?: string;
@@ -25,6 +26,7 @@ Editor.use(Emoji);
 const _MarkDownEdit: React.FC<MarkDownEditType> = ({
   initValue,
   onSubmit,
+  submitText = '提交',
   htmlClass
 }: MarkDownEditType) => {
   const [value, setValue] = useState('');
@@ -75,7 +77,7 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
         }}
         defaultValue={value}
       />
-      <BubblyButton text="提交" onClick={handleSubmit} />
+      <BubblyButton text={submitText} onClick={handleSubmit} />
     </div>
   );
 };
