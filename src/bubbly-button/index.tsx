@@ -24,14 +24,13 @@ const _BubblyButton: React.FC<BubblyButtonProps> = function ({
     if (isFunction(onClick)) {
       onClick();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     _timer = window.setTimeout(function () {
       window.clearTimeout(_timer);
       setClsName('bubbly_button');
       _timer = -1000;
     }, 700);
-  }, []);
+  }, [onClick]);
 
   return (
     <button className={clsName} onClick={() => animateButton()}>

@@ -15,7 +15,7 @@ interface MarkDownEditType {
   initValue?: string;
   submitText?: string;
   // eslint-disable-next-line no-unused-vars
-  onSubmit?: (value: string) => void;
+  onSubmit?: (value: string, mdEditor: Editor | null) => void;
   htmlClass?: string;
 }
 
@@ -36,11 +36,11 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
     if (initValue) setValue(initValue);
   }, [initValue]);
 
-  const handleSubmit = React.useCallback(() => {
+  const handleSubmit = () => {
     if (isFunction(onSubmit)) {
-      onSubmit(mdEditor.current?.getMdValue() || '');
+      onSubmit(mdEditor.current?.getMdValue() || '', mdEditor.current);
     }
-  }, [onSubmit]);
+  };
 
   return (
     <div className="editor_box">
