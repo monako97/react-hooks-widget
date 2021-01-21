@@ -82,7 +82,7 @@ const _EmojiList: React.FC<EmojiListTypes> = ({ onClick }: EmojiListTypes) => {
       overscanColumnCount={0}
       rowCount={rowCount}
       rowHeight={() => 2 * remSize}
-      overscanRowCount={1}
+      overscanRowCount={8}
       height={14 * remSize}
       width={20.5 * remSize}
     >

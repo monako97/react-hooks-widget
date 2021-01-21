@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import getMaxZIndex from '../utils/get-max-zIndex';
+import { getMaxZindex } from '../utils/document-utils';
 import './index.less';
 
 interface NoticeType {
@@ -94,7 +94,7 @@ const notice = (
   const div = document.createElement('div');
 
   div.className = `react-toast ${type}`;
-  div.style.zIndex = getMaxZIndex() + 2 + '';
+  div.style.zIndex = getMaxZindex() + 2 + '';
   panelBox.appendChild(div);
 
   if (!isOldPanel) {

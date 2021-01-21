@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, WaveCircle, Button, MarkDownEdit } from '../../src';
+import { BrowserMockup, MarkDown, toast, WaveCircle, Button, MarkDownEdit, BackTop } from '../../src';
 import getDefaultTheme from '../../src/utils/get-default-theme';
 import openPanel from '../../src/utils/open-panel';
 
@@ -44,12 +44,23 @@ const App = () => {
     });
   }, []);
   return (
+    <>
     <div style={{
       padding: '30px'
     }}>
     <MarkDownEdit initValue={md} htmlClass="monako__markdown-box" onSubmit={(value) => {
       console.log(value);
     }}/>
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
+    <MarkDownEdit />
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}
@@ -89,6 +100,8 @@ const App = () => {
         <span style={{ color: 'white', textAlign: 'center' }}>哈哈哈/</span>
       </WaveCircle> */}
     </div>
+      <BackTop children={"TOP"} className="cs" />
+      </>
   );
 };
 render(<App />, document.getElementById('root'));

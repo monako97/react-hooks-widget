@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+.back-top {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  text-align: center;
+  background-image: url(../static/images/bubble.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 4.5rem 4.5rem;
+  cursor: pointer;
+  animation: back-top-fade-in 1s forwards;
+}
+
+.back-top--out {
+  animation: back-top-fade-out 1s forwards;
+}
+
+@keyframes back-top-fade-in {
+  from {
+    transform: translate3d(0, 1rem, 1px) scale(1);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 1px) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes back-top-fade-out {
+  from,
+  20% {
+    transform: translate3d(0, 0, 1px);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, 1rem, 1px);
+    opacity: 0;
+  }
+}

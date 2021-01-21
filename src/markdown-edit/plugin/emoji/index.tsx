@@ -30,7 +30,7 @@ const Emoji: EmojiTypes = ({ editor }: EmojiProps) => {
   return (
     <span
       className={`button button-type-emoji monako__icon`}
-      title="Emoji表情"
+      // title="Emoji表情"
       onMouseEnter={() => handleShow(true)}
       onMouseLeave={() => handleShow(false)}
     >

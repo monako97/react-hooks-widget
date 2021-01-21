@@ -1,6 +1,6 @@
 import React from 'react';
 import getDefaultTheme from '../utils/get-default-theme';
-import getMaxZIndex from '../utils/get-max-zIndex';
+import { getMaxZindex } from '../utils/document-utils';
 import isEqual from 'lodash/isEqual';
 import './index.less';
 interface ThemeTypes {
@@ -58,7 +58,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
 
   // 获取最大z-index
   const getMaxZInde = () => {
-    const maxZIndex: number = getMaxZIndex();
+    const maxZIndex: number = getMaxZindex();
 
     // 不是最高层
     setZIndex(maxZIndex + 1);

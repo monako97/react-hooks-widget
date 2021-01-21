@@ -6,4 +6,12 @@ export { default as MarkDown } from './markdown';
 export { MarkDownEdit } from './markdown-edit';
 export { BubblyButton } from './bubbly-button';
 export { default as Button } from './button';
-export { markdownUtil, getDefaultTheme, getMaxZindex, openPanel, useTheme } from './utils';
+export { BackTop } from './back-top';
+export {
+  markdownUtil,
+  getDefaultTheme,
+  getMaxZindex,
+  openPanel,
+  useTheme,
+  getClientSize
+} from './utils';

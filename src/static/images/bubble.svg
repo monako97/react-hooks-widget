@@ -1,0 +1,38 @@
+<svg id="bubble" width="300" height="300" xmlns="http://www.w3.org/2000/svg" filter="url(#goo)">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </defs>
+ <g>
+  <circle filter="url(#goo)" fill="#e9f0f1" id="bubble_4" r="100" cy="145" cx="150" >
+    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 145 150" to="360 145 150" dur="1s" repeatCount="indefinite"/>
+   </circle>
+  <circle filter="url(#goo)" fill="#e9f0f1" id="bubble_3" r="100" cy="155" cx="150">
+    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360 155 150" to="0 155 150" dur="2s" repeatCount="indefinite"/>
+   </circle>
+  <circle filter="url(#goo)" fill="#e9f0f1" id="bubble_2" r="100" cy="150" cx="145">
+    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 150 145" to="360 150 145" dur="3s" repeatCount="indefinite"/>
+   </circle>
+  <circle filter="url(#goo)" fill="#e9f0f1" id="bubble_1" r="100" cy="150" cx="155">
+    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360 150 155" to="0 150 155" dur="2.5s" repeatCount="indefinite"/>
+   </circle>
+	 <circle filter="url(#goo)" r="25" cy="130" cx="95" fill="#f9d7be">
+		 <animateTransform attributeName="transform" type="translate"  dur="3s" repeatCount="indefinite"  values="-10 0; 0 -10; 10 0; 0 10; -10 0"/>
+	 </circle>
+	 <circle filter="url(#goo)" r="25" cy="130" cx="185" fill="#f9d7be">
+		 <animateTransform attributeName="transform" type="translate"  dur="3s" repeatCount="indefinite"  values="-10 0; 0 -10; 10 0; 0 10; -10 0"/>
+	 </circle>
+	 <ellipse filter="url(#goo)" rx="15" ry="3" cx="140" cy="125" >
+		 <animateTransform attributeName="transform" type="translate"  dur="3s" repeatCount="indefinite"  values="-10 0; 0 -10; 10 0; 0 10; -10 0"/>
+	 </ellipse>
+	 <circle filter="url(#goo)" r="15" cy="110" cx="105">
+		 <animateTransform attributeName="transform" type="translate"  dur="3s" repeatCount="indefinite"  values="-10 0; 0 -10; 10 0; 0 10; -10 0"/>
+	 </circle>
+	 <circle filter="url(#goo)" r="15" cy="110" cx="175">
+		 <animateTransform attributeName="transform" type="translate"  dur="3s" repeatCount="indefinite"  values="-10 0; 0 -10; 10 0; 0 10; -10 0"/>
+	 </circle>
+ </g>
+</svg>
