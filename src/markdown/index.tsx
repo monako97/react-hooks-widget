@@ -10,17 +10,6 @@ interface MarkedImageListType {
   src: string;
 }
 
-const copyText = (event: MouseEvent) => {
-  event.stopImmediatePropagation();
-  event.stopPropagation();
-  let target: HTMLElement | null = event.target as HTMLElement;
-
-  if (target?.tagName === 'PRE' && !target?.hasAttribute('data-copy')) {
-    setClipboard(target.innerText, target);
-    target = null;
-  }
-  return '';
-};
 const defaultCln = 'monako__markdown-box ';
 
 const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boolean }> = ({
@@ -28,7 +17,6 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
   className = '',
   pictureViewer = false
 }) => {
-  let mdel: HTMLElement | null = null;
   const [cln, setCln] = React.useState(defaultCln);
   const [visible, setVisible] = React.useState(false);
   const [photoIndex, setPhotoIndex] = React.useState(0);
@@ -49,18 +37,6 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
     }
   }, [htmlString, pictureViewer]);
 
-  React.useEffect(() => {
-    mdel?.querySelectorAll('pre').forEach((pre) => {
-      pre.addEventListener('click', copyText, false);
-    });
-
-    return () => {
-      mdel?.querySelectorAll('pre').forEach((pre) => {
-        pre.removeEventListener('click', copyText, false);
-      });
-    };
-  }, [mdel]);
-
   const handleClick = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (pictureViewer) {
@@ -73,6 +49,10 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
               setVisible(true);
             }
           });
+        } else if (target?.tagName === 'PRE') {
+          if (!target?.hasAttribute('data-copy')) {
+            setClipboard(target.innerText, target);
+          }
         }
         target = null;
       }
@@ -83,7 +63,6 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
   return (
     <>
       <div
-        ref={(instance) => (mdel = instance)}
         className={cln}
         dangerouslySetInnerHTML={{
           __html: htmlString
