@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { getMaxZindex } from '../utils/document-utils';
+import { getMaxZindex } from '../utils/document';
 import './index.less';
 
 interface NoticeType {
@@ -77,7 +77,7 @@ const notice = (
   type: NoticeType['type'],
   content: NoticeType['content'],
   duration = 4000,
-  close: boolean
+  close = false
 ) => {
   // 检测父容器是否存在
   let panelBox = document.getElementById('@monako__panel--box');
@@ -129,7 +129,7 @@ const notice = (
  * toast.success("成功", -1);
  * ```
  */
-const toast = {
+export const toast = {
   /**
    * 信息
    * @constructor
@@ -137,7 +137,7 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  info: (content: string, duration: number, close: boolean): void =>
+  info: (content: string, duration?: number, close?: boolean): void =>
     notice('info', content, duration, close),
   /**
    * 成功
@@ -146,7 +146,7 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  success: (content: string, duration: number, close: boolean): void =>
+  success: (content: string, duration?: number, close?: boolean): void =>
     notice('success', content, duration, close),
   /**
    * 错误
@@ -155,7 +155,7 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  danger: (content: string, duration: number, close: boolean): void =>
+  danger: (content: string, duration?: number, close?: boolean): void =>
     notice('danger', content, duration, close),
   /**
    * Loading
@@ -164,7 +164,7 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  loading: (content: string, duration: number, close: boolean): void =>
+  loading: (content: string, duration?: number, close?: boolean): void =>
     notice('loading', content, duration, close),
   /**
    * 警告
@@ -173,7 +173,7 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  warn: (content: string, duration: number, close: boolean): void =>
+  warn: (content: string, duration?: number, close?: boolean): void =>
     notice('warning', content, duration, close),
   /**
    * 重要
@@ -182,8 +182,6 @@ const toast = {
    * @param {Number} duration                 - 显示时间.
    * @param {Boolean} close                   - 显示关闭按钮.
    */
-  primary: (content: string, duration: number, close: boolean): void =>
+  primary: (content: string, duration?: number, close?: boolean): void =>
     notice('primary', content, duration, close)
 };
-
-export default toast;

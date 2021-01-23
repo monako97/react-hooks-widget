@@ -2,64 +2,84 @@
 @import url(./iconfont.less);
 
 code {
-  font-family: 'Liberation Mono',Monaco,Menlo,Consolas,'Source Code Pro','Liberation Mono','Ubuntu Mono','Microsoft Yahei','微软雅黑',Courier,'Helvetica Neue','Lantinghei SC',STXihei,WenQuanYi,sans-serif!important;
+  font-family: 'Liberation Mono',Monaco,Menlo,Consolas,'Source Code Pro','Ubuntu Mono','Microsoft Yahei','微软雅黑',Courier,'Helvetica Neue','Lantinghei SC',STXihei,WenQuanYi,sans-serif !important;
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-all;
 }
 
 pre {
+  position: relative;
   display: block;
   max-width: 100%;
-  overflow: auto;
-  border-radius: 0.3125rem;
-  color: var(--pre-color);
-  padding: 2rem .625rem .625rem;
-  background-color: var(--pre-bg);
-  line-height: 1.25rem;
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
-  position: relative;
   margin: 2.1875rem auto;
+  padding: 2rem .625rem .625rem;
+  overflow: auto;
+  color: var(--pre-color);
   font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: var(--pre-bg);
+  border-radius: 0.3125rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
   transition: color 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  pointer-events: none;
+  &::after {
+    content: '\e631';
+    font-family: 'monako__icon';
+    display: block;
+    font-size: 0.875rem;
+    position: absolute;
+    right: .5rem;
+    top: 0;
+    z-index: 1;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: var(--pre-lang-type-color);
+    cursor: pointer;
+    pointer-events: auto;
+  }
   > code {
-    color: var(--pre-color);
     display: block;
     max-width: initial;
     overflow: auto;
-    white-space: pre;
+    color: var(--pre-color);
     line-height: 1.8;
+    white-space: pre;
+    pointer-events: auto;
     &::after {
-      content: attr(data-lang) '';
-      display: block;
-      width: 100%;
-      height: 1.5rem;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 1.5rem;
+      color: var(--pre-lang-type-color);
+      font-size: 0.875rem;
+      font-weight: bold;
+      font-family: Ubuntu, sans-serif;
+      text-transform: uppercase;
+      line-height: 1.5rem;
+      text-align: center;
       background-color: var(--code-after-bg);
       box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
-      color: #4d4d4c;
-      z-index: 1;
-      text-align: center;
+      content: attr(data-lang) '';
     }
     &::before {
       position: absolute;
       top: 0.625rem;
       left: 0.75rem;
+      z-index: 2;
       display: inline-block;
       width: 0.25rem;
       height: 0.25rem;
       text-align: center;
-      border-radius: 0.25rem;
       background-color: #444;
+      border-radius: 0.25rem;
       box-shadow: 0 0 0 0.25rem #999, 1.25rem 0 0 0.25rem #999, 2.5rem 0 0 0.25rem #999;
       cursor: pointer;
-      content: '';
       transition: all 0.2s;
-      z-index: 2;
+      content: '';
     }
     &::-webkit-scrollbar {
       display: inherit;
@@ -68,17 +88,85 @@ pre {
     }
   }
   &::-webkit-scrollbar {
-    height: 0.5rem;
     display: block;
+    height: 0.5rem;
   }
   &:hover {
     box-shadow: 0 0.125rem 1.25rem rgba(0, 0, 0, 0.2);
     > code {
       &::before {
         background-color: #444;
-        box-shadow: 0 0 0 0.25rem #fc625d, 1.25rem 0 0 0.25rem #fdbc40, 2.5rem 0 0 0.25rem #35cd4b;
         background-color: #fc625d;
+        box-shadow: 0 0 0 0.25rem #fc625d, 1.25rem 0 0 0.25rem #fdbc40, 2.5rem 0 0 0.25rem #35cd4b;
       }
     }
+  }
+}
+
+[data-copy] {
+  &::before {
+    content: '复制成功';
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    margin: auto;
+    display: inline-block;
+    z-index: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    top: 2rem;
+    font-size: 0.75rem;
+    border: 0.0625rem solid;
+    animation-fill-mode: forwards;
+  }
+}
+
+[data-copy='success'] {
+  &::before {
+    content: '复制成功';
+    background-color: var(--copy-success-bg);
+    border-color: var(--copy-success-border);
+    color: var(--copy-success-color);
+    animation: copy-slide-in 0.3s ease-in-out;
+  }
+}
+
+[data-copy='failure'] {
+  &::before {
+    content: '复制失败';
+    background-color: var(--copy-failure-bg);
+    border-color: var(--copy-failure-border);
+    color: var(--copy-failure-color);
+    animation: copy-slide-in 0.3s ease-in-out,error 1s ease-in-out 1s;
+  }
+}
+
+[data-copy-exit] {
+  &::before {
+    animation: copy-slide-out .3s forwards ease-in-out;
+  }
+}
+
+@keyframes copy-slide-in {
+  from {
+    transform: translate3d(0, -100%, 0) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes copy-slide-out {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -100%, 0) scale(0);
+    opacity: 0;
   }
 }

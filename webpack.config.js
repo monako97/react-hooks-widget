@@ -92,7 +92,7 @@ if (process.env.WEBPACK_DEV_SERVER) {
         secure: false
       },
       {
-        context: ['/static_file/'],
+        context: ['/static_file/', '/markdown/img/'],
         target: 'https://local.monako.club/',
         changeOrigin: true,
         secure: false

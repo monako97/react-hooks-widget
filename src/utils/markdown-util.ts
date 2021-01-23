@@ -1,4 +1,5 @@
 import marked from 'marked-completed';
+import { entityToString } from './document';
 
 marked.setOptions({
   highlight: function (code: string, lang: string) {
@@ -23,8 +24,41 @@ marked.setOptions({
  * @param {string} text Markdown文本
  * @returns {string} Html文本
  */
-const markdownUtil = (text: string): string => {
+export const markdownUtil = (text: string): string => {
   return marked(text);
 };
 
-export default markdownUtil;
+interface MarkedImageListType {
+  ids: number;
+  intro: string;
+  src: string;
+}
+/**
+ * 提取md图片src
+ * @param {string} text HTML string
+ * @returns {MarkedImageListType[]} 链接list
+ */
+export const getMarkedImgList = (text: string): MarkedImageListType[] | null => {
+  if (!text) return null;
+  let imageList = text.match(/role=('|")dialog('|") src=('|")(.+?)alt=('|")(.+?)('|")/g);
+  const imageArr = [];
+
+  if (imageList) {
+    for (let i = 0, len = imageList.length; i < len; i++) {
+      let params: URLSearchParams | null = new URLSearchParams(
+        entityToString(
+          imageList[i].replace(/('|")/g, '').replace(/ src=/, '&src=').replace(/ alt=/, '&alt=')
+        )
+      );
+
+      imageArr.push({
+        ids: i,
+        intro: params.get('alt') || '',
+        src: params.get('src') || ''
+      });
+      params = null;
+    }
+  }
+  imageList = null;
+  return imageArr;
+};

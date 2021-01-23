@@ -12,7 +12,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
  * openPanel(<span>指定 容器id为 demo-panel</span>, 'demo-panel');
  * ```
  */
-const openPanel = (renderDom: React.ReactElement, newPanel?: string): void => {
+export const openPanel = (renderDom: React.ReactElement, newPanel?: string): void => {
   const ids: string = newPanel || 'Panel-Panel-panel-Box';
   let box: HTMLElement | null = document.getElementById(ids);
 
@@ -25,5 +25,3 @@ const openPanel = (renderDom: React.ReactElement, newPanel?: string): void => {
   }
   render(renderDom, box);
 };
-
-export default openPanel;

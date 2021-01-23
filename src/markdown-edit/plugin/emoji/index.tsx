@@ -3,16 +3,16 @@ import Editor, { DropList } from 'react-markdown-editor-lite';
 import EmojiList from '../emoji-list';
 import './index.less';
 
-interface EmojiProps {
+interface EditorPlugin {
   editor: Editor;
 }
 
-interface EmojiTypes extends React.FC<EmojiProps> {
+interface EditorPluginTypes extends React.FC<EditorPlugin> {
   align: 'left' | 'right';
   pluginName: string;
 }
 
-const Emoji: EmojiTypes = ({ editor }: EmojiProps) => {
+const Emoji: EditorPluginTypes = ({ editor }: EditorPlugin) => {
   const [show, setShow] = React.useState<boolean>(false);
   const handleShow = React.useCallback((flag: boolean) => {
     setShow(flag);

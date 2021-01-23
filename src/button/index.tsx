@@ -97,11 +97,9 @@ const _Button: React.FC<ButtonTypes> = ({
  *    console.log('click');
  * }}>Dange</Button>
  */
-const Button = React.memo(_Button, (pre, next) => {
+export const Button = React.memo(_Button, (pre, next) => {
   return isEqual(
     { ...pre, onClick: pre.onClick?.toString() },
     { ...next, onClick: next.onClick?.toString() }
   );
 });
-
-export default Button;

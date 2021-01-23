@@ -1,7 +1,6 @@
 import React from 'react';
-import isUndefined from 'lodash/isUndefined';
 import './index.less';
-import { getMaxZindex } from '../utils';
+import { getMaxZindex, getScrollTop } from '../utils';
 import { isFunction } from 'lodash';
 
 interface BackTopTypes {
@@ -9,22 +8,6 @@ interface BackTopTypes {
   target?: () => HTMLElement;
   children?: React.ReactNode;
 }
-
-/**
- * 获取滚动条距离顶端的距离
- * @param {HTMLElement} ele HTMLElement
- * @return {Number} scrollTop
- */
-export const getScrollTop = (ele?: HTMLElement): number => {
-  if (ele) {
-    return ele.scrollTop;
-  } else if (!isUndefined(window.pageXOffset)) {
-    return window.pageYOffset;
-  } else if ((document.compatMode || '') === 'CSS1Compat') {
-    return document.documentElement.scrollTop;
-  }
-  return document.body.scrollTop;
-};
 
 const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackTopTypes) => {
   // 显示
@@ -51,7 +34,7 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
       scrollTop = getScrollTop();
       offsetHeight = document.documentElement.offsetHeight || document.body.offsetHeight;
     }
-    let _nextShow: boolean | null = scrollTop > offsetHeight / 4;
+    let _nextShow: boolean | null = scrollTop > offsetHeight / 3 || scrollTop > 400;
 
     if (Boolean(show) !== _nextShow) {
       setShow(_nextShow);
@@ -63,7 +46,7 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
 
   const handleClick = React.useCallback(() => {
     if (isFunction(target)) {
-      target().scrollTo({
+      target()?.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
@@ -103,13 +86,13 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
   }, [show]);
   React.useEffect(() => {
     if (isFunction(target)) {
-      target().addEventListener('scroll', handleScrollY, false);
+      target()?.addEventListener('scroll', handleScrollY, false);
     } else {
       window.addEventListener('scroll', handleScrollY, false);
     }
     return () => {
       if (isFunction(target)) {
-        target().removeEventListener('scroll', handleScrollY, false);
+        target()?.removeEventListener('scroll', handleScrollY, false);
       } else {
         window.removeEventListener('scroll', handleScrollY, false);
       }

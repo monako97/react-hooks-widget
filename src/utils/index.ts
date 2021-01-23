@@ -1,7 +1,11 @@
-import markdownUtil from './markdown-util';
-import getDefaultTheme from './get-default-theme';
-import openPanel from './open-panel';
-import useTheme from './use-theme';
-import { getClientSize, getMaxZindex } from './document-utils';
-
-export { markdownUtil, getDefaultTheme, getMaxZindex, openPanel, useTheme, getClientSize };
+export { markdownUtil, getMarkedImgList } from './markdown-util';
+export { getDefaultTheme } from './theme';
+export { openPanel } from './open-panel';
+export { useTheme } from './use-theme';
+export {
+  getClientSize,
+  getMaxZindex,
+  getScrollTop,
+  entityToString,
+  setClipboard
+} from './document';

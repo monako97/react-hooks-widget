@@ -7,6 +7,8 @@ import Editor from 'react-markdown-editor-lite';
 import Sub from './plugin/sub';
 import Sup from './plugin/sup';
 import Emoji from './plugin/emoji';
+import Checkbox from './plugin/checkbox';
+import Collapsible from './plugin/collapsible';
 // 导入编辑器的样式
 import 'react-markdown-editor-lite/lib/index.css';
 import './index.less';
@@ -22,6 +24,8 @@ interface MarkDownEditType {
 Editor.use(Sub);
 Editor.use(Sup);
 Editor.use(Emoji);
+Editor.use(Checkbox);
+Editor.use(Collapsible);
 
 const _MarkDownEdit: React.FC<MarkDownEditType> = ({
   initValue,
@@ -57,7 +61,9 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
           'font-sup',
           'list-unordered',
           'list-ordered',
+          'checkbox',
           'block-quote',
+          'collapsible',
           'block-wrap',
           'block-code-inline',
           'block-code-block',
@@ -84,7 +90,5 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
 
 export const MarkDownEdit = React.memo(
   _MarkDownEdit,
-  (pre: MarkDownEditType, next: MarkDownEditType) => {
-    return isEqual(pre, next);
-  }
+  (pre: MarkDownEditType, next: MarkDownEditType) => isEqual(pre, next)
 );

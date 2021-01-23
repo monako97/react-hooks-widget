@@ -13,17 +13,12 @@
   .loop-toast-type(@count, @idx + 1);
 }
 
-.monako__icon {
-  margin-right: 5px;
-  font-size: 16px;
-  font-family: 'monako__icon', serif;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .error {
   animation: error 1s ease-in-out;
+}
+
+.monako__icon {
+  margin-right: 0.5rem;
 }
 
 .react-toast {
@@ -110,22 +105,22 @@
 
 @keyframes toast-slide-in {
   from {
-    transform: translate3d(0, -100%, 1px);
+    transform: translate3d(0, -100%, 0);
     opacity: 0;
   }
   to {
-    transform: translate3d(0, 0, 1px);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes toast-slide-out {
   from {
-    transform: translate3d(0, 0, 1px);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
   to {
-    transform: translate3d(0, -100%, 1px);
+    transform: translate3d(0, -100%, 0);
     opacity: 0;
   }
 }

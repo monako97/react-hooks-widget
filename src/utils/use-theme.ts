@@ -1,5 +1,5 @@
 import React from 'react';
-import getDefaultTheme from './get-default-theme';
+import { getDefaultTheme } from './theme';
 interface ThemeTypes {
   type: 'light' | 'night';
 }
@@ -12,10 +12,8 @@ interface UseThemeTypes {
  * 主题 hooks
  * @returns {UseThemeTypes} theme and setTheme
  */
-const useTheme = (): UseThemeTypes => {
+export const useTheme = (): UseThemeTypes => {
   const [type, setType] = React.useState<ThemeTypes['type']>(getDefaultTheme());
 
   return { type, setType };
 };
-
-export default useTheme;

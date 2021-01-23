@@ -2,16 +2,16 @@ import React from 'react';
 import Editor from 'react-markdown-editor-lite';
 import './index.less';
 
-interface SupProps {
+interface EditorPlugin {
   editor: Editor;
 }
 
-interface SupTypes extends React.FC<SupProps> {
+interface EditorPluginTypes extends React.FC<EditorPlugin> {
   align: 'left' | 'right';
   pluginName: string;
 }
 
-const Sup: SupTypes = ({ editor }: SupProps) => {
+const Sup: EditorPluginTypes = ({ editor }: EditorPlugin) => {
   const handleClick = () => {
     // 调用API，往编辑器中插入字符
     editor.insertText('^^', false, {

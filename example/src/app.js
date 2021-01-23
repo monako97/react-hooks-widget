@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, WaveCircle, Button, MarkDownEdit, BackTop } from '../../src';
-import getDefaultTheme from '../../src/utils/get-default-theme';
-import openPanel from '../../src/utils/open-panel';
+import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop } from '../../src';
+import { getDefaultTheme, openPanel } from '../../src/utils';
 
 function ajaxGet(url, callback) {
   var xhr = new XMLHttpRequest();
@@ -55,16 +54,11 @@ const App = () => {
     <MarkDownEdit />
     <MarkDownEdit />
     <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}
-        visible={false}
+        visible={Boolean(md)}
+        className="markdown-demo"
       >
         <div>
           <Button
@@ -87,7 +81,14 @@ const App = () => {
               toast.primary('primary', s % 5 ? -1 : 2000, true);
             }}
           />
-          <MarkDown text={md} />
+          <MarkDown text={md} pictureViewer />
+          <BackTop target={() => {
+            try {
+              return document.getElementsByClassName('markdown-demo')[0].getElementsByClassName('monako__browser--mockup--body')[0];
+            } catch (error) {
+              // return null;
+            }
+          }}/>
         </div>
       </BrowserMockup>
       {/* <WaveCircle

@@ -24,9 +24,11 @@
   --browser-mockup-title-bg: #eeeff2;
   --browser-mockup-supports-bg: rgba(255, 255, 255, 0.7);
   --browser-mockup-supports-border-color: transparent;
-  --pre-bg: rgb(255, 255, 255);
+  --pre-bg: #fff;
   --pre-color: #585260;
+  --pre-lang-type-color: #4d4d4c;
   /* markdown */
+  --doc-bg: #fff;
   --doc-border-color: #e9887c;
   --doc-shadow-color: rgba(0, 0, 0, 0.1);
   --doc-color: #5fa1f2;
@@ -37,6 +39,19 @@
   --code-bg-color: rgba(255, 118, 168, 0.1);
   --code-after-bg: rgba(220, 224, 229, 0.5);
   --table-th-bg: #e9897c;
+  --heading-color: #111;
+  --blockquote-bg: #ecf8ff;
+  --blockquote-icon-color: #fb5;
+  --blockquote-color: #5e6d82;
+  --mark-bg: #f9f2f4;
+  --scrollbar-thumb-bg: #eee;
+  /* copy */
+  --copy-success-color: #03a9f4;
+  --copy-success-bg: #f5fafe;
+  --copy-success-border: #a5dafb;
+  --copy-failure-color: #f44336;
+  --copy-failure-bg: #fef5f4;
+  --copy-failure-border: #fdb1aa;
 }
 
 :root [ui-theme='night'] {
@@ -48,17 +63,32 @@
   --browser-mockup-bg: #000;
   --browser-mockup-title-bg: rgba(255, 255, 255, 0.1);
   --browser-mockup-supports-bg: rgba(0, 0, 0, 0.5);
-  --pre-bg: rgba(0, 0, 0, 0.5);
+  --pre-bg: rgba(40, 40, 40, 0.5);
   --pre-color: #f8f8f2;
+  --pre-lang-type-color: #c6c6c1;
   /* markdown */
-  --doc-border-color: rgba(230, 230, 230, 0.3);
-  --doc-shadow-color: rgba(0, 0, 0, 0.4);
-  --doc-color: var(--color);
-  --doc-color-hover: #409eff;
   --code-color: var(--color);
   --code-bg-color: rgba(0, 0, 0, 0.3);
   --code-after-bg: rgba(63, 63, 63, 0.2);
+  --doc-bg: #141414;
+  --doc-border-color: #1d1d1d;
+  --doc-shadow-color: rgba(0, 0, 0, 0.4);
+  --doc-color: var(--color);
+  --doc-color-hover: #409eff;
   --table-border-color: #9e9e9d;
   --table-tr-hover: rgba(241, 241, 236, 0.2);
   --table-th-bg: #666;
+  --heading-color: var(--color);
+  --blockquote-bg: var(--pre-bg);
+  --blockquote-icon-color: #6a483b;
+  --blockquote-color: #b3b3ae;
+  --mark-bg: rgba(249 ,242, 244, 0.1);
+  --scrollbar-thumb-bg: #4d4d4c;
+  /* copy */
+  --copy-success-color: #03a9f4;
+  --copy-success-border: #1c5f84;
+  --copy-success-bg: #141414;
+  --copy-failure-color: #f44336;
+  --copy-failure-bg: #141414;
+  --copy-failure-border: #6d2923;
 }

@@ -12,7 +12,6 @@
   min-height: 2rem;
   max-height: 90vh;
   margin: auto;
-  overflow-x: hidden;
   color: var(--browser-mockup-color);
   font-family: @font-family;
   background-color: var(--browser-mockup-bg);
@@ -25,7 +24,7 @@
   & ::-webkit-scrollbar {
     width: 0.3125rem;
     &-thumb {
-      background-color: #eee;
+      background-color: var(--scrollbar-thumb-bg);
     }
   }
   
@@ -65,6 +64,8 @@
         }
         &::before {
           position: absolute;
+          top: -0.0625rem;
+          left: -0.0625rem;
           z-index: 2;
           display: block;
           color: #fc625d;
@@ -72,7 +73,6 @@
           font-family: monako__icon, sans-serif;
           font-style: normal;
           line-height: 1;
-          transform: translate3d(-0.0625rem, -0.0625rem, 1px);
           transition: all 0.2s;
           content: '\e642';
         }
@@ -157,7 +157,7 @@
     max-height: 100vh !important;
     margin: auto !important;
     border-radius: 0 !important;
-    transform: translate3d(0, 0, 1px) perspective(1px) translateZ(0) !important;
+    transform: translate3d(0, 0, 0) perspective(1px) translateZ(0) !important;
     > div:nth-child(2) {
       max-height: calc(100vh - 3rem);
     }
@@ -180,7 +180,7 @@
     overflow: hidden !important;
     border-radius: 50% !important;
     box-shadow: 0 0.1rem 0.5rem 0 rgba(249, 186, 88, 0.5) !important;
-    transform: translate3d(46vw, 46vh, 1px) perspective(1px) translateZ(0) !important;
+    transform: translate3d(46vw, 46vh, 0) perspective(1px) translateZ(0) !important;
     pointer-events: none;
     .monako__browser--mockup--title {
       &--left {
@@ -194,8 +194,9 @@
             height: 2rem;
             pointer-events: auto;
             &::before {
+              top: unset;
+              left: unset;
               font-size: 2rem;
-              transform: unset;
               content: '\e641';
             }
             &::after {

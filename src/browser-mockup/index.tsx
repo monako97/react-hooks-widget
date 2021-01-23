@@ -1,6 +1,6 @@
 import React from 'react';
-import getDefaultTheme from '../utils/get-default-theme';
-import { getMaxZindex } from '../utils/document-utils';
+import { getDefaultTheme } from '../utils/theme';
+import { getMaxZindex } from '../utils/document';
 import isEqual from 'lodash/isEqual';
 import './index.less';
 interface ThemeTypes {
@@ -232,9 +232,9 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       style={
         {
           ...style,
-          transform: `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`,
+          transform: `translate3d(${poi.left}px, ${poi.top}px, 0) perspective(1px) translateZ(0)`,
           zIndex: zIndex,
-          '--transform-drag': `translate3d(${poi.left}px, ${poi.top}px, 1px) perspective(1px) translateZ(0)`
+          '--transform-drag': `translate3d(${poi.left}px, ${poi.top}px, 0) perspective(1px) translateZ(0)`
         } as React.CSSProperties
       }
       data-draging={dragIng}
@@ -272,7 +272,9 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
           <i className={'theme'} />
         </div>
       </div>
-      <div ref={browser}>{isValidElement && children}</div>
+      <div className={'monako__browser--mockup--body'} ref={browser}>
+        {isValidElement && children}
+      </div>
     </div>
   ) : null;
 };
@@ -297,8 +299,6 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
  * </BrowserMockup>
  * ```
  */
-const BrowserMockup = React.memo(_BrowserMockup, (pre, next) => {
+export const BrowserMockup = React.memo(_BrowserMockup, (pre, next) => {
   return isEqual(pre, next);
 });
-
-export default BrowserMockup;
