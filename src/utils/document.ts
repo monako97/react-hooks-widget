@@ -79,10 +79,6 @@ export const entityToString = (entity: string): string => {
  * @returns {Promise<void>} Promise<void>
  */
 export const setClipboard = (text: string, target?: HTMLElement): void => {
-  let data: DataTransfer | null = new DataTransfer();
-
-  data.items.add('text/plain', text);
-
   if (target) {
     navigator.clipboard
       .writeText(text)
@@ -95,7 +91,6 @@ export const setClipboard = (text: string, target?: HTMLElement): void => {
         }
       )
       .finally(() => {
-        data = null;
         let _clipboardTimer: number | null = window.setTimeout(() => {
           target.setAttribute('data-copy-exit', '');
           if (_clipboardTimer !== null) {
@@ -113,8 +108,6 @@ export const setClipboard = (text: string, target?: HTMLElement): void => {
         }, 3000);
       });
   } else {
-    navigator.clipboard.writeText(text).finally(() => {
-      data = null;
-    });
+    navigator.clipboard.writeText(text);
   }
 };

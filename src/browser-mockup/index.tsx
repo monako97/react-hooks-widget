@@ -58,10 +58,8 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
 
   // 获取最大z-index
   const getMaxZInde = () => {
-    const maxZIndex: number = getMaxZindex();
-
     // 不是最高层
-    setZIndex(maxZIndex + 1);
+    setZIndex(getMaxZindex() + 1);
   };
 
   // 按下拖拽部分，开始拖动

@@ -10,13 +10,25 @@ interface MarkedImageListType {
   src: string;
 }
 
+interface MarkDownProps {
+  text: string;
+  className: string;
+  pictureViewer: boolean;
+}
+
 const defaultCln = 'monako__markdown-box ';
 
-const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boolean }> = ({
+/**
+ * MarkDown
+ * @param {string} text md内容
+ * @param {string} className 容器类名
+ * @returns {Element} ReactNode
+ */
+const _MarkDown: React.FC<MarkDownProps> = ({
   text = '#### 加载中...',
   className = '',
   pictureViewer = false
-}) => {
+}: MarkDownProps): React.ReactElement<unknown, React.FC<MarkDownProps>> => {
   const [cln, setCln] = React.useState(defaultCln);
   const [visible, setVisible] = React.useState(false);
   const [photoIndex, setPhotoIndex] = React.useState(0);
@@ -69,7 +81,7 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
         }}
         onClick={handleClick}
       />
-      {pictureViewer && imgList?.length && (
+      {pictureViewer && imgList?.length ? (
         <PhotoSlider
           images={imgList}
           visible={visible}
@@ -77,7 +89,7 @@ const _MarkDown: React.FC<{ text: string; className: string; pictureViewer?: boo
           index={photoIndex}
           onIndexChange={setPhotoIndex}
         />
-      )}
+      ) : null}
     </>
   );
 };

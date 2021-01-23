@@ -9,6 +9,25 @@ interface BackTopTypes {
   children?: React.ReactNode;
 }
 
+/**
+ * 回到顶部
+ * @constructor
+ * @param {Function} target target
+ */
+const handleBackTopClick = (target: BackTopTypes['target']) => {
+  if (isFunction(target)) {
+    target()?.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+};
+
 const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackTopTypes) => {
   // 显示
   const [show, setShow] = React.useState<boolean | number | null>(null);
@@ -43,20 +62,6 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
     offsetHeight = null;
     _nextShow = null;
   }, [show, target]);
-
-  const handleClick = React.useCallback(() => {
-    if (isFunction(target)) {
-      target()?.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  }, [target]);
 
   // 监听 show，为 null 时卸载 Dom
   React.useEffect(() => {
@@ -108,7 +113,7 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
       style={{
         zIndex: zindex
       }}
-      onClick={() => handleClick()}
+      onClick={() => handleBackTopClick(target)}
     >
       {children}
     </div>
