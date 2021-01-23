@@ -40,7 +40,7 @@ interface MarkedImageListType {
  */
 export const getMarkedImgList = (text: string): MarkedImageListType[] | null => {
   if (!text) return null;
-  let imageList = text.match(/role=('|")dialog('|") src=('|")(.+?)alt=('|")(.+?)('|")/g);
+  let imageList = text.match(/role=('|")dialog('|") src=('|")(.*?) alt=('|")(.*?)('|")/g);
   const imageArr = [];
 
   if (imageList) {
