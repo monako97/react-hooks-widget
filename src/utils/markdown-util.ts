@@ -14,8 +14,9 @@ marked.setOptions({
       return window.Prism.highlight(code, window.Prism.languages[lang], lang);
     } else if (LANGUAGE_REGEX.test(lang)) {
       window.Prism.languages[lang] = window.Prism.languages.diff;
+      return window.Prism.highlight(code, window.Prism.languages[lang], lang);
     }
-    return window.Prism.highlight(code, window.Prism.languages[lang], lang);
+    return window.Prism.highlight(code, window.Prism.languages.markup, 'markup');
   },
   headerPrefix: '# ',
   langLineNumber: true,
