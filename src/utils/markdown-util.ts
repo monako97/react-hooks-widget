@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import marked from 'marked-completed';
 import { entityToString } from './document';
-import * as Prism from './prism.js';
-import './inline-color';
-import './line-numbers';
-import './diff-highlight';
+import * as Prism from '../lib/prism.js';
+import '../lib/inline-color';
+import '../lib/line-numbers';
+import '../lib/diff-highlight';
 
 marked.setOptions({
   highlight: function (code: string, lang: string) {

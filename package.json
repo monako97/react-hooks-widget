@@ -88,8 +88,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "compile": "npm run compile:tsc && npm run compile:types && npm run compile:lessc && npm run compile:postcss",
-    "compile:lessc": "node ./compile.js --dir=./src",
+    "compile:lessc": "node ./compile.js --dir=./src --copy --entry=./src/lib --output=./lib/lib",
     "compile:postcss": "node ./compile.js --dir=./lib",
+    "compile:copylib": "node ./compile.js --dir=./src",
     "compile:copy": "node ./compile.js --dir=./lib --copy --entry=./src/static --output=./lib/static",
     "compile:tsc": "tsc --removeComments",
     "compile:types": "tsc --declaration --emitDeclarationOnly --outDir types",

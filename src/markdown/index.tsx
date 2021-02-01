@@ -4,7 +4,7 @@ import { getMarkedImgList, markdownUtil } from '../utils/markdown-util';
 import { PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/index.css';
 import './index.less';
-import * as Prism from '../utils/prism.js';
+import * as Prism from '../lib/prism.js';
 interface MarkedImageListType {
   ids: number;
   intro: string;
