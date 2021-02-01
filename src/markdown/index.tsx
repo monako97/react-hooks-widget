@@ -4,7 +4,6 @@ import { getMarkedImgList, markdownUtil } from '../utils/markdown-util';
 import { PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/index.css';
 import './index.less';
-import * as Prism from '../lib/prism.js';
 interface MarkedImageListType {
   ids: number;
   intro: string;
@@ -49,7 +48,7 @@ const _MarkDown: React.FC<MarkDownProps> = ({
     if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     _lineTimer = window.setTimeout(() => {
-      Prism.highlightAll();
+      window.Prism.highlightAll();
       if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
       _lineTimer = null;
     }, 500);

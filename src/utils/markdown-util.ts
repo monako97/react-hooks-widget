@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import marked from 'marked-completed';
 import { entityToString } from './document';
-import * as Prism from '../lib/prism.js';
+import '../lib/prism.js';
 import '../lib/inline-color';
 import '../lib/line-numbers';
 import '../lib/diff-highlight';
@@ -10,12 +10,12 @@ marked.setOptions({
   highlight: function (code: string, lang: string) {
     const LANGUAGE_REGEX = /^diff-([\w-]+)/i;
 
-    if (Prism.languages[lang]) {
-      return Prism.highlight(code, Prism.languages[lang], lang);
+    if (window.Prism.languages[lang]) {
+      return window.Prism.highlight(code, window.Prism.languages[lang], lang);
     } else if (LANGUAGE_REGEX.test(lang)) {
-      Prism.languages[lang] = Prism.languages.diff;
+      window.Prism.languages[lang] = window.Prism.languages.diff;
     }
-    return Prism.highlight(code, Prism.languages[lang], lang);
+    return window.Prism.highlight(code, window.Prism.languages[lang], lang);
   },
   headerPrefix: '# ',
   langLineNumber: true,
