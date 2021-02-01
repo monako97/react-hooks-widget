@@ -1,0 +1,32 @@
+pre.line-numbers {
+  > code {
+    padding-left: 3.8em;
+    white-space: inherit;
+    counter-reset: linenumber;
+  }
+  .line-numbers-rows {
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    width: 3em;
+    font-size: 100%;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    > span {
+      display: block;
+      counter-increment: linenumber;
+      &::before {
+        display: block;
+        padding-right: 0.8em;
+        color: #999;
+        text-align: right;
+        content: counter(linenumber);
+      }
+    }
+  }
+}

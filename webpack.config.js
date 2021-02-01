@@ -22,7 +22,7 @@ const config = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
+        use: ['babel-loader','ts-loader'],
         exclude: /node_modules/
       },
       {
@@ -66,12 +66,8 @@ const config = {
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-  }
-};
-
-// 是否是开发模式 process.env.WEBPACK_DEV_SERVER
-if (process.env.WEBPACK_DEV_SERVER) {
-  config.devServer = {
+  },
+  devServer: {
     compress: true,
     port: 8008,
     quiet: true,
@@ -98,7 +94,11 @@ if (process.env.WEBPACK_DEV_SERVER) {
         secure: false
       }
     ],
-  };
+  }
+};
+
+// 是否是开发模式 process.env.WEBPACK_DEV_SERVER
+if (process.env.WEBPACK_DEV_SERVER) {
   config.plugins = [
     ...config.plugins,
     new FriendlyErrorsWebpackPlugin({

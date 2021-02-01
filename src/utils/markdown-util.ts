@@ -1,31 +1,40 @@
+/* eslint-disable no-unused-vars */
 import marked from 'marked-completed';
 import { entityToString } from './document';
+import * as Prism from './prism.js';
+import './inline-color';
+import './line-numbers';
+import './diff-highlight';
 
 marked.setOptions({
   highlight: function (code: string, lang: string) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const hljs = require('highlight.js');
+    const LANGUAGE_REGEX = /^diff-([\w-]+)/i;
 
-    if (hljs.getLanguage(lang)) {
-      return hljs.highlight(lang, code).value;
+    if (Prism.languages[lang]) {
+      return Prism.highlight(code, Prism.languages[lang], lang);
+    } else if (LANGUAGE_REGEX.test(lang)) {
+      Prism.languages[lang] = Prism.languages.diff;
     }
-    return hljs.highlightAuto(code).value;
+    return Prism.highlight(code, Prism.languages[lang], lang);
   },
   headerPrefix: '# ',
-  breaks: true, // 支持github回车换行。该选项要求 gfm 为true
-  pedantic: false, // 尽可能地兼容 markdown.pl的晦涩部分。不纠正原始模型任何的不良行为和错误。
-  smartLists: true, // 使用比原生markdown更优雅的列表。 旧的列表将可能被作为pedantic的处理内容过滤掉.
-  smartypants: true, // 使用更为优雅的标点，比如在引用语法中加入破折号。
+  langLineNumber: true,
+  langToolbar: ['copy'],
+  breaks: true,
+  pedantic: false,
+  smartLists: true,
+  smartypants: true,
   xhtml: true
 });
 
 /**
  * Markdown to Html
  * @param {string} text Markdown文本
+ * @param {MarkedOptions} option MarkedOptions
  * @returns {string} Html文本
  */
-export const markdownUtil = (text: string): string => {
-  return marked(text);
+export const markdownUtil = (text: string, option: marked.MarkedOptions = {}): string => {
+  return marked(text, option);
 };
 
 interface MarkedImageListType {

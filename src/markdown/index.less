@@ -74,6 +74,7 @@
     font-size: 90%;
     background-color: var(--mark-bg);
     border-radius: 4px;
+    transition: background-color 0.2s;
   }
   a {
     position: relative;
@@ -87,8 +88,8 @@
       height: 2px;
       background-color: var(--doc-color-hover);
       transform: scaleX(0);
-      transform-origin: bottom right;
-      transition: transform 0.25s ease-out;
+      transform-origin: center;
+      transition: transform 0.25s ease-out, color 0.2s;
       content: '';
     }
     &:visited {
@@ -98,7 +99,6 @@
       color: var(--doc-color-hover);
       &::after {
         transform: scaleX(1);
-        transform-origin: bottom left;
       }
     }
   }
@@ -200,12 +200,14 @@
         padding: 10px;
         color: #fff;
         background-color: var(--table-th-bg);
+        transition: background-color 0.2s;
       }
       td {
         padding: 10px;
         border-color: var(--table-border-color);
         border-style: dotted;
         border-width: 0 0 1px 1px;
+        transition: border-color 0.2s;
         &:first-child {
           border-left: 1px solid var(--table-border-color);
         }
@@ -228,12 +230,14 @@
     font-weight: 500;
     background-color: var(--blockquote-bg);
     border-radius: 0.5rem;
+    transition: background-color 0.2s;
     &::before,
     &::after {
       position: absolute;
       color: var(--blockquote-icon-color);
       font-size: 3rem;
       font-family: 'monako__icon', sans-serif;
+      transition: color 0.2s;
     }
     &::before {
       top: -0.5rem;
@@ -260,6 +264,7 @@
       color: var(--blockquote-color);
       font-size: 0.875rem;
       line-height: 1.5rem;
+      transition: color 0.2s;
     }
   }
   p {
@@ -276,13 +281,6 @@
       cursor: pointer;
       transition: box-shadow 0.3s;
     }
-  }
-  mark {
-    padding: 2px 4px;
-    color: #e9887c;
-    font-size: 90%;
-    background-color: var(--mark-bg);
-    border-radius: 4px;
   }
   details {
     transition: padding 0.2s, background-color 0.2s;
@@ -308,100 +306,7 @@
   }
 }
 
-.hljs-variable,
-.hljs-template-variable,
-.hljs-attribute,
-.hljs-tag,
-.hljs-name,
-.hljs-regexp,
-.hljs-link,
-.hljs-selector-id,
-.hljs-selector-class {
-  color: #be4678;
-}
-
-.hljs-comment,
-.hljs-quote {
-  display: inline-block;
-  box-sizing: border-box;
-  width: auto;
-  height: auto;
-  color: #a50;
-  font-size: 12px;
-  line-height: 21px;
-  white-space: pre-wrap;
-  text-align: left;
-  word-wrap: break-word;
-  word-break: normal;
-  cursor: text;
-  -webkit-font-smoothing: antialiased;
-}
-
-.hljs-number,
-.hljs-meta,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params {
-  color: #aa573c;
-}
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet {
-  color: #2a9292;
-}
-.hljs-title,
-.hljs-section {
-  color: #576ddb;
-}
-.hljs-keyword,
-.hljs-selector-tag {
-  color: #955ae7;
-}
-
-.hljs-deletion,
-.hljs-addition {
-  display: inline-block;
-  width: 100%;
-  color: #19171c;
-}
-.hljs-deletion {
-  background-color: #be4678;
-}
-.hljs-addition {
-  background-color: #2a9292;
-}
-.hljs-emphasis {
-  color: #a8a8a2;
-  font-style: italic;
-}
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-code {
-  color: #a6e22e;
-}
-
-.hljs-attr {
-  color: #f92672;
-}
-
-.hljs,
-.hljs-subst {
-  color: #8bc34a;
-}
-
-.hljs-class,
-.hljs-title {
-  color: #5ac4d2;
-}
-
-.hljs-selector-attr,
-.hljs-selector-pseudo {
-  color: #ff9800;
-}
+@import url(./prism.less);
 @media (max-width: 1450px) {
   .monako__markdown-box {
     margin: 0 auto;

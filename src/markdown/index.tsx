@@ -4,6 +4,7 @@ import { getMarkedImgList, markdownUtil } from '../utils/markdown-util';
 import { PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/index.css';
 import './index.less';
+import * as Prism from '../utils/prism.js';
 interface MarkedImageListType {
   ids: number;
   intro: string;
@@ -42,11 +43,22 @@ const _MarkDown: React.FC<MarkDownProps> = ({
   React.useMemo(() => {
     setHtmlString(markdownUtil(text));
   }, [text]);
+  let _lineTimer: number | null | undefined;
 
   React.useEffect(() => {
+    if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    _lineTimer = window.setTimeout(() => {
+      Prism.highlightAll();
+      if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
+      _lineTimer = null;
+    }, 500);
     if (pictureViewer) {
       setImgList(getMarkedImgList(htmlString));
     }
+    return () => {
+      if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
+    };
   }, [htmlString, pictureViewer]);
 
   const handleClick = React.useCallback(
@@ -61,9 +73,9 @@ const _MarkDown: React.FC<MarkDownProps> = ({
               setVisible(true);
             }
           });
-        } else if (target?.tagName === 'PRE') {
-          if (!target?.hasAttribute('data-copy')) {
-            setClipboard(target.innerText, target);
+        } else if (target.className.includes('toolbar-copy')) {
+          if (!target.offsetParent?.hasAttribute('data-copy')) {
+            setClipboard((target.offsetParent as HTMLImageElement).innerText, target.offsetParent);
           }
         }
         target = null;

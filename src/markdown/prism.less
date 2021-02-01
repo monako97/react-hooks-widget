@@ -1,0 +1,271 @@
+:root [ui-theme='light'] {
+  @import url(./light.less);
+}
+@import url(./line-numbers.less);
+
+code[class*='language-'],
+pre[class*='language-'] {
+  font-family: 'Liberation Mono', Monaco, Menlo, Consolas, 'Source Code Pro', 'Ubuntu Mono',
+    'Microsoft Yahei', '微软雅黑', Courier, 'Helvetica Neue', 'Lantinghei SC', STXihei, WenQuanYi,
+    sans-serif !important;
+  white-space: pre-line;
+  text-align: left;
+  word-wrap: normal;
+  word-break: normal;
+  word-spacing: normal;
+  tab-size: 4;
+  hyphens: none;
+}
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+/* diff-highlight */
+pre[class*="language-diff"] > code,
+pre > code[class*="language-diff"] {
+  .token.deleted:not(.prefix) {
+    display: block;
+    color: inherit;
+    background-color: rgba(255, 0, 0, .1);
+  }
+  .token.inserted:not(.prefix) {
+    display: block;
+    color: inherit;
+    background-color: rgba(0, 255, 128, .1);
+  }
+}
+/* inline-color */
+span {
+  .inline-color-wrapper {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 1.333ch;
+    height: 1.333ch;
+    margin: 0 .333ch;
+    overflow: hidden;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyIDIiPjxwYXRoIGZpbGw9ImdyYXkiIGQ9Ik0wIDBoMnYySDB6Ii8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wIDBoMXYxSDB6TTEgMWgxdjFIMXoiLz48L3N2Zz4=");
+    background-position: center;
+    background-size: 110%;
+    border: 1px solid #fff;
+    outline: 1px solid rgba(0,0,0,.5);
+  }
+  .inline-color {
+    display: block;
+    width: 120%;
+    height: 120%;
+  }
+}
+pre {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  margin: 2.1875rem auto;
+  padding: 1.5rem 0 0.625rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: #fff;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 1.5rem;
+    color: #4d4d4c;
+    font-weight: bold;
+    font-size: 0.875rem;
+    font-family: Ubuntu, sans-serif;
+    line-height: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: rgba(220, 224, 229, 0.5);
+    box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, color 0.2s;
+    content: attr(data-lang) '';
+  }
+  & .toolbar-copy{
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    z-index: 3;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &::after {
+      display: block;
+      color: #4d4d4c;
+      font-weight: 600;
+      font-size: .875rem;
+      font-family: 'monako__icon', sans-serif;
+      line-height: 1.5rem;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      content: '\e631';
+    }
+    &:hover {
+      &::after {
+        color: #1c5f84;
+        font-weight: bold;
+      }
+    }
+  }
+  &::before {
+    position: absolute;
+    top: 0.625rem;
+    left: 0.75rem;
+    z-index: 2;
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.25rem;
+    text-align: center;
+    background-color: #444;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.25rem #999, 1.25rem 0 0 0.25rem #999, 2.5rem 0 0 0.25rem #999;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    content: '';
+  }
+  > code {
+    position: relative;
+    display: block;
+    max-width: initial;
+    max-height: 600px;
+    padding: .5rem 0 0;
+    padding-right: 0.625rem;
+    overflow: auto;
+    color: #585260;
+    line-height: 1.8;
+    white-space: pre;
+    transition: color 0.2s, background-color 0.2s;
+    pointer-events: auto;
+    &::-webkit-scrollbar {
+      display: inherit;
+      width: 0.3125rem;
+      height: 0.0625rem;
+    }
+  }
+  &::-webkit-scrollbar {
+    display: block;
+    height: 0.5rem;
+  }
+  &:hover {
+    box-shadow: 0 0.125rem 1.25rem rgba(0, 0, 0, 0.2);
+    &::before {
+      background-color: #fc625d;
+      box-shadow: 0 0 0 0.25rem #fc625d, 1.25rem 0 0 0.25rem #fdbc40, 2.5rem 0 0 0.25rem #35cd4b;
+    }
+  }
+}
+
+[data-copy] {
+  >code::before {
+    position: absolute;
+    top: 0.625rem;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: fit-content;
+    margin: auto;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border: 0.0625rem solid;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    animation-fill-mode: forwards;
+    content: '\590d\5236\6210\529f';
+  }
+}
+[data-copy='success'] {
+  >code::before {
+    color: #03a9f4;
+    background-color: #f5fafe;
+    border-color: #a5dafb;
+    animation: copy-slide-in 0.3s ease-in-out;
+    content: '\590d\5236\6210\529f';
+  }
+}
+
+[data-copy='failure'] {
+  >code::before {
+    color: #f44336;
+    background-color: #fef5f4;
+    border-color: #fdb1aa;
+    animation: copy-slide-in 0.3s ease-in-out, error 1s ease-in-out 1s;
+    content: '\590d\5236\5931\8d25';
+  }
+}
+
+[data-copy-exit] {
+  >code::before {
+    animation: copy-slide-out 0.3s forwards ease-in-out;
+  }
+}
+
+:root [ui-theme='night'] {
+  pre {
+    background-color: #1d1d1d;
+    &::after {
+      color: #c6c6c1;
+      background-color: rgba(63, 63, 63, 0.2);
+    }
+    .toolbar-copy {
+      
+&::after {
+  color: #c6c6c1;
+}
+    &:hover {
+      &::after {
+        color: #1c5f84;
+        font-weight: bold;
+      }
+    }
+    }
+  }
+  [data-copy='success'] {
+    >code::before {
+      color: #03a9f4;
+      background-color:  #1d1d1d;
+      border-color:#1c5f84;
+    }
+  }
+  [data-copy='failure'] {
+    >code::before {
+      color: #f44336;
+      background-color: #1d1d1d;
+      border-color: #6d2923;
+    }
+  }
+  @import url(./night.less);
+}
+
+@keyframes copy-slide-in {
+  from {
+    transform: translate3d(0, -100%, 0) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes copy-slide-out {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -100%, 0) scale(0);
+    opacity: 0;
+  }
+}

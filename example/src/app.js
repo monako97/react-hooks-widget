@@ -20,9 +20,32 @@ const App = () => {
   const [theme, setTheme] = useState(getDefaultTheme());
   const [md, setMD] = useState();
   useMemo(() => {
+    // /static_file/markdown/a1ad17f0-782d-4751-a86d-c340a54056bb.md
     // 14a01a2b-b736-473f-a36d-3bd1f3576345 a1ad17f0-782d-4751-a86d-c340a54056bb 9fad4afb-4454-47e5-a1c2-6903ba20c3e1
-    ajaxGet('/static_file/markdown/14a01a2b-b736-473f-a36d-3bd1f3576345.md', function (data) {
-      setMD(data);
+    ajaxGet('/docs/regex.md', function (data) {
+      setMD(`
+\`\`\`diff-javascript diff-highlight
+@@ -4,6 +4,5 @@
+-    let foo = bar.baz([1, 2, 3]);
+-    foo = foo + 1;
++    const foo = bar.baz([1, 2, 3]) + 1;
+      console.log(\`foo: \${foo}\`);
+\`\`\`
+\`\`\`diff-javascript diff-highlight
+@@ -4,6 +4,5 @@
+-    let foo = bar.baz([1, 2, 3]);
+-    foo = foo + 1;
++    const foo = bar.baz([1, 2, 3]) + 1;
+      console.log(\`foo: \${foo}\`);
+\`\`\`
+\`\`\`css
+a:hover {
+  color: green !important;
+}
+\`\`\`
+\n
+${data}
+`);
     });
   }, []);
   useEffect(() => {

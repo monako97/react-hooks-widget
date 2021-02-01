@@ -75,10 +75,10 @@ export const entityToString = (entity: string): string => {
 /**
  * 复制文本到剪切板
  * @param {string} text 内容
- * @param {HTMLElement} target 提示的节点
+ * @param {HTMLElement|Element} target 提示的节点
  * @returns {Promise<void>} Promise<void>
  */
-export const setClipboard = (text: string, target?: HTMLElement): void => {
+export const setClipboard = (text: string, target?: HTMLElement | Element | null): void => {
   if (target) {
     navigator.clipboard
       .writeText(text)
