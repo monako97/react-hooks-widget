@@ -1,22 +1,26 @@
 pre.line-numbers {
+  // padding-left: 3.8em;
   > code {
+    // position: relative;
     padding-left: 3.8em;
     white-space: inherit;
     counter-reset: linenumber;
   }
   .line-numbers-rows {
     position: absolute;
-    top: 0.5rem;
+    top: 2.125rem;
+    // top: 0.5rem;
     left: 0;
     width: 3em;
     font-size: 100%;
     letter-spacing: -1px;
-    border-right: 1px solid #999;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    border-right: 1px solid rgba(204, 204, 204, 0.5);
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
     user-select: none;
     pointer-events: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     > span {
       display: block;
       counter-increment: linenumber;
@@ -25,6 +29,7 @@ pre.line-numbers {
         padding-right: 0.8em;
         color: #999;
         text-align: right;
+        opacity: 0.5;
         content: counter(linenumber);
       }
     }

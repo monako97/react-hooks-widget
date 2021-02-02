@@ -1,0 +1,25 @@
+.token.punctuation {
+    &.brace-hover,&.brace-selected {
+        outline: solid 1px;
+    }
+}
+
+.rainbow-braces {
+    .token.punctuation[class*='brace-level-'] {
+        opacity: 1;
+    }
+    .token.punctuation.brace-level {
+        &-1, &-5, &-9  {
+            color: #e50;
+        }
+        &-2, &-6, &-10  {
+            color: #0b3;
+        }
+        &-3, &-7, &-11  {
+            color: #26f;
+        }
+        &-4, &-8, &-12  {
+            color: #e0e;
+        }
+    }
+}

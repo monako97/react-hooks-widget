@@ -1,22 +1,38 @@
 /* eslint-disable no-unused-vars */
 import marked from 'marked-completed';
 import { entityToString } from './document';
-import '../lib/prism.js';
-import '../lib/inline-color';
-import '../lib/line-numbers';
-import '../lib/diff-highlight';
+import Prism from '../lib/prism.js';
+// import * as Prism from 'prismjs';
+// import 'prismjs/components/prism-diff';
+// import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
+// import 'prismjs/plugins/inline-color/prism-inline-color';
+// import 'prismjs/plugins/diff-highlight/prism-diff-highlight';
+// import 'prismjs/plugins/line-numbers/prism-line-numbers';
+// import 'prismjs/plugins/match-braces/prism-match-braces';
+// import 'prismjs/plugins/treeview/prism-treeview';
+// import 'prismjs/plugins/wpd/prism-wpd';
+// const getLang = (lang: string) => import(/**/ `prismjs/components/prism-${lang}`);
 
 marked.setOptions({
   highlight: function (code: string, lang: string) {
     const LANGUAGE_REGEX = /^diff-([\w-]+)/i;
 
-    if (window.Prism.languages[lang]) {
-      return window.Prism.highlight(code, window.Prism.languages[lang], lang);
+    if (Prism.languages[lang]) {
+      return Prism.highlight(code, Prism.languages[lang], lang);
     } else if (LANGUAGE_REGEX.test(lang)) {
-      window.Prism.languages[lang] = window.Prism.languages.diff;
-      return window.Prism.highlight(code, window.Prism.languages[lang], lang);
+      Prism.languages[lang] = Prism.languages.diff;
+      return Prism.highlight(code, Prism.languages[lang], lang);
     }
-    return window.Prism.highlight(code, window.Prism.languages.markup, 'markup');
+    // try {
+    //   getLang(lang);
+    //   // require(`prismjs/components/prism-${lang}`);
+    //   return Prism.highlight(code, Prism.languages[lang], lang);
+    // } catch (e) {
+    //   // eslint-disable-next-line no-console
+    //   console.log(e);
+    // }
+
+    return Prism.highlight(code, Prism.languages.markup, 'markup');
   },
   headerPrefix: '# ',
   langLineNumber: true,

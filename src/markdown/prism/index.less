@@ -1,8 +1,7 @@
-:root [ui-theme='light'] {
-  @import url(./light.less);
-}
-@import url(./line-numbers.less);
-
+// :root [ui-theme='light'] {
+  
+// }
+@import url(./light.less);
 code[class*='language-'],
 pre[class*='language-'] {
   font-family: 'Liberation Mono', Monaco, Menlo, Consolas, 'Source Code Pro', 'Ubuntu Mono',
@@ -15,7 +14,11 @@ pre[class*='language-'] {
   word-spacing: normal;
   tab-size: 4;
   hyphens: none;
+  a[href] {
+    cursor: help;
+  }
 }
+
 @media print {
 	code[class*="language-"],
 	pre[class*="language-"] {
@@ -62,7 +65,7 @@ pre {
   display: block;
   max-width: 100%;
   margin: 2.1875rem auto;
-  padding: 1.5rem 0 0.625rem;
+  // padding: 1.5rem 0 0;
   overflow: hidden;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -70,96 +73,95 @@ pre {
   border-radius: 0.3125rem;
   box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
   transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    height: 1.5rem;
-    color: #4d4d4c;
-    font-weight: bold;
-    font-size: 0.875rem;
-    font-family: Ubuntu, sans-serif;
-    line-height: 1.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    background-color: rgba(220, 224, 229, 0.5);
-    box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, color 0.2s;
-    content: attr(data-lang) '';
-  }
-  & .toolbar-copy{
-    position: absolute;
-    top: 0;
-    right: .5rem;
-    z-index: 3;
-    padding: 0;
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  & .toolbar {
     &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
       display: block;
+      width: 100%;
+      height: 1.5rem;
       color: #4d4d4c;
-      font-weight: 600;
-      font-size: .875rem;
-      font-family: 'monako__icon', sans-serif;
+      font-weight: bold;
+      font-size: 0.875rem;
+      font-family: Ubuntu, sans-serif;
       line-height: 1.5rem;
+      text-align: center;
       text-transform: uppercase;
-      transition: color 0.2s;
-      content: '\e631';
+      background-color: rgba(220, 224, 229, 0.5);
+      box-shadow: 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s, color 0.2s;
+      content: attr(data-lang) '';
     }
-    &:hover {
+    &::before {
+      position: absolute;
+      top: 0.625rem;
+      left: 0.75rem;
+      z-index: 2;
+      display: inline-block;
+      width: 0.25rem;
+      height: 0.25rem;
+      text-align: center;
+      background-color: #444;
+      border-radius: 0.25rem;
+      box-shadow: 0 0 0 0.25rem #999, 1.25rem 0 0 0.25rem #999, 2.5rem 0 0 0.25rem #999;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      content: '';
+    }
+    .toolbar-copy{
+      position: absolute;
+      top: 0;
+      right: .5rem;
+      z-index: 3;
+      padding: 0;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
       &::after {
-        color: #1c5f84;
-        font-weight: bold;
+        display: block;
+        color: #4d4d4c;
+        font-weight: 600;
+        font-size: .875rem;
+        font-family: 'monako__icon', sans-serif;
+        line-height: 1.5rem;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        content: '\e631';
+      }
+      &:hover {
+        &::after {
+          color: #1c5f84;
+          font-weight: bold;
+        }
       }
     }
   }
-  &::before {
-    position: absolute;
-    top: 0.625rem;
-    left: 0.75rem;
-    z-index: 2;
-    display: inline-block;
-    width: 0.25rem;
-    height: 0.25rem;
-    text-align: center;
-    background-color: #444;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 0 0.25rem #999, 1.25rem 0 0 0.25rem #999, 2.5rem 0 0 0.25rem #999;
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    content: '';
-  }
   > code {
-    position: relative;
     display: block;
-    max-width: initial;
-    max-height: 600px;
-    padding: .5rem 0 0;
-    padding-right: 0.625rem;
+    max-width: 100%;
+    // max-height: 300px;
+    margin-top: 1.625rem;
+    margin-right: 0.625rem;
+    padding: .5rem 0;
     overflow: auto;
     color: #585260;
     line-height: 1.8;
     white-space: pre;
     transition: color 0.2s, background-color 0.2s;
     pointer-events: auto;
-    &::-webkit-scrollbar {
-      display: inherit;
-      width: 0.3125rem;
-      height: 0.0625rem;
+    .line-numbers-rows {
+      background-color: #fff;
     }
   }
-  &::-webkit-scrollbar {
-    display: block;
-    height: 0.5rem;
+  &::-webkit-scrollbar, & ::-webkit-scrollbar {
+    display: none;
   }
   &:hover {
     box-shadow: 0 0.125rem 1.25rem rgba(0, 0, 0, 0.2);
-    &::before {
+    .toolbar::before {
       background-color: #fc625d;
       box-shadow: 0 0 0 0.25rem #fc625d, 1.25rem 0 0 0.25rem #fdbc40, 2.5rem 0 0 0.25rem #35cd4b;
     }
@@ -167,9 +169,9 @@ pre {
 }
 
 [data-copy] {
-  >code::before {
+  &::before {
     position: absolute;
-    top: 0.625rem;
+    top: 2rem;
     right: 0;
     left: 0;
     z-index: 1;
@@ -186,7 +188,7 @@ pre {
   }
 }
 [data-copy='success'] {
-  >code::before {
+  &::before {
     color: #03a9f4;
     background-color: #f5fafe;
     border-color: #a5dafb;
@@ -196,7 +198,7 @@ pre {
 }
 
 [data-copy='failure'] {
-  >code::before {
+  &::before {
     color: #f44336;
     background-color: #fef5f4;
     border-color: #fdb1aa;
@@ -206,7 +208,7 @@ pre {
 }
 
 [data-copy-exit] {
-  >code::before {
+  &::before {
     animation: copy-slide-out 0.3s forwards ease-in-out;
   }
 }
@@ -214,32 +216,38 @@ pre {
 :root [ui-theme='night'] {
   pre {
     background-color: #1d1d1d;
-    &::after {
-      color: #c6c6c1;
-      background-color: rgba(63, 63, 63, 0.2);
+    .line-numbers-rows {
+      background-color: #1d1d1d;
+      border-right-color: rgba(153, 153, 153, 0.5);
     }
-    .toolbar-copy {
-      
-&::after {
-  color: #c6c6c1;
-}
-    &:hover {
+    .toolbar {
       &::after {
-        color: #1c5f84;
-        font-weight: bold;
+        color: #c6c6c1;
+        background-color: rgba(63, 63, 63, 0.2);
+      }
+      
+    .toolbar-copy {
+      &::after {
+        color: #c6c6c1;
+      }
+      &:hover {
+        &::after {
+          color: #1c5f84;
+          font-weight: bold;
+        }
       }
     }
     }
   }
   [data-copy='success'] {
-    >code::before {
+    &::before {
       color: #03a9f4;
       background-color:  #1d1d1d;
       border-color:#1c5f84;
     }
   }
   [data-copy='failure'] {
-    >code::before {
+    &::before {
       color: #f44336;
       background-color: #1d1d1d;
       border-color: #6d2923;
@@ -247,6 +255,10 @@ pre {
   }
   @import url(./night.less);
 }
+
+@import url(./line-numbers.less);
+@import url(./treeview.less);
+@import url(./rainbow-braces.less);
 
 @keyframes copy-slide-in {
   from {
