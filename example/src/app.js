@@ -46,11 +46,7 @@ const App = () => {
     <div style={{
       padding: '30px'
     }}>
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
-    <MarkDownEdit />
+    <MarkDownEdit htmlClass="monako__markdown-box" />
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}

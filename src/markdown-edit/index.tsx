@@ -2,7 +2,7 @@ import React from 'react';
 import isEqual from 'lodash/isEqual';
 import isFunction from 'lodash/isFunction';
 import { BubblyButton } from '../bubbly-button';
-import marked from 'marked-completed';
+import { markdownUtil } from '../utils/markdown-util';
 import Editor from 'react-markdown-editor-lite';
 import Sub from './plugin/sub';
 import Sup from './plugin/sup';
@@ -76,7 +76,12 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
           'full-screen',
           'tab-insert'
         ]}
-        renderHTML={(text) => marked(text, { breaks: true })}
+        renderHTML={(text) =>
+          markdownUtil(text, {
+            langToolbar: [],
+            langLineNumber: false
+          })
+        }
         config={{
           htmlClass: htmlClass,
           markdownClass: 'textarea'
