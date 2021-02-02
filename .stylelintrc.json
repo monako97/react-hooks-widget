@@ -14,7 +14,7 @@
       }
     ],
     "block-no-empty": null,
-    "unit-allowed-list": ["vw", "vh", "px", "%", "em", "rem", "s", "deg", "ch"],
+    "unit-allowed-list": ["vw", "vh", "px", "%", "em", "rem", "s", "deg", "ch", "ex"],
     "no-invalid-double-slash-comments": null,
     "comment-empty-line-before": null,
     "no-descending-specificity": null,
