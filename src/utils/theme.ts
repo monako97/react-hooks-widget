@@ -6,10 +6,9 @@ interface ThemeTypes {
  * @returns {string} light | night
  */
 export const getDefaultTheme = (): ThemeTypes['type'] => {
-  let time: Date | null = new Date();
-  let endTime: number | null = time.setHours(6, 0, 0, 0); // 当天6点
-  let startTime: number | null = time.setHours(18, 0, 0, 0); // 当天18点
-  let justNowTime: number | null = time.getTime(); // 现在
+  let endTime: number | null = new Date().setHours(6, 0, 0, 0); // 当天6点
+  let startTime: number | null = new Date().setHours(18, 0, 0, 0); // 当天18点
+  let justNowTime: number | null = new Date().getTime(); // 现在
   let defaultTheme: ThemeTypes['type'] = 'light';
 
   if (justNowTime > endTime) {
@@ -26,7 +25,6 @@ export const getDefaultTheme = (): ThemeTypes['type'] => {
     defaultTheme = 'night';
   }
 
-  time = null;
   endTime = null;
   startTime = null;
   justNowTime = null;
