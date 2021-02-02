@@ -79,6 +79,15 @@ const App = () => {
             }}
           />
           <MarkDown text={`
+\`\`\`jsx
+function proxyHOC(WrappedComponent) {
+  return class extends Component {
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  }
+}
+\`\`\`
 ### match-braces
 \`\`\`javascript match-braces rainbow-braces
 (defun factorial (n)
