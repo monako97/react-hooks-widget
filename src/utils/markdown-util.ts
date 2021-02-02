@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import marked from 'marked-completed';
 import { entityToString } from './document';
-import * as Prism from '../lib/prism.js';
+import * as Prism from '../libs/prism.js';
 // import * as Prism from 'prismjs';
 // import 'prismjs/components/prism-diff';
 // import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
