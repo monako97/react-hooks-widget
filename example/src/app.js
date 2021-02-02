@@ -46,7 +46,6 @@ const App = () => {
     <div style={{
       padding: '30px'
     }}>
-    <MarkDownEdit htmlClass="monako__markdown-box" />
       <BrowserMockup
         title={`标题标题标题标题标题标题标题标题标题标题标题标题标题标题`}
         theme={theme}
@@ -74,6 +73,8 @@ const App = () => {
               toast.primary('primary', s % 5 ? -1 : 2000, true);
             }}
           />
+
+    <MarkDownEdit htmlClass="monako__markdown-box" />
           <MarkDown text={`
 \`\`\`jsx
 function proxyHOC(WrappedComponent) {

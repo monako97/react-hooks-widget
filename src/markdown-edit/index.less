@@ -1,4 +1,4 @@
-@border-color: #ddd;
+
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC',
   'Noto Sans', 'Noto Sans CJK SC', 'Microsoft YaHei', '微软雅黑', sans-serif;
 @code-font-family: source-code-pro, 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo,
@@ -26,7 +26,7 @@
   .editor_submit {
     width: fit-content;
     margin-top: 1rem;
-    border: 1px solid @border-color;
+    border: 1px solid var(--md-editor-border);
     border-radius: 5rem;
     outline: none;
   }
@@ -37,16 +37,45 @@
   width: 100%;
   height: calc(100% - 3rem);
   background-color: transparent;
-  border-color: @border-color;
+  border-color: var(--md-editor-border);
   border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0  0  0.75rem;
+  transition: border-color 0.2s;
   .rc-md-navigation {
     background-color: transparent;
+    border-color: var(--md-editor-border);
+    transition: border-color 0.2s;
     // border: none;
+    .button-wrap {
+      .button {
+        color: var(--md-navigation);
+        .drop-wrap {
+          background: var(--bg);
+          border-color: var(--md-editor-border);
+          .header-list {
+            .list-item:hover {
+              background-color: var(--md-editor-header-hover);
+            }
+          }
+          .table-list.wrap {
+            .list-item {
+              background-color: var(--md-editor-table);
+            }
+            .list-item.active {
+              background-color: var(--md-editor-table-active);
+            }
+          }
+        }
+        &:hover {
+          color: var(--md-navigation-hover);
+        }
+      }
+    }
   }
   .editor-container {
     .sec-md {
       .input {
+        color: var(--color);
         background-color: transparent;
       }
     }
