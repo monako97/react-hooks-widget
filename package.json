@@ -107,7 +107,7 @@
     "terser": "node ./compile.js --dir=./lib --terser"
   },
   "typings": "types/index.d.ts",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "files": [
     "example/dist",
     "lib",
