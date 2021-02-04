@@ -66,7 +66,7 @@ const _MarkDown: React.FC<MarkDownProps> = ({
       window.Prism.highlightAll();
       if (typeof _lineTimer === 'number') window.clearTimeout(_lineTimer);
       _lineTimer = null;
-    }, 500);
+    }, 0);
     if (pictureViewer) {
       setImgList(getMarkedImgList(htmlString));
     }
