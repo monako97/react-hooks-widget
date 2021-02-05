@@ -109,7 +109,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "typings": "types/index.d.ts",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "files": [
     "example/dist",
     "lib",
