@@ -13,16 +13,22 @@
     "baseUrl": ".",
     "paths": {
       // 配置模块路径映射
-      "@src": ["src"],
       "@/*": ["src/*"]
     },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths", 
+        "useRootDirs": true, 
+        "exclude": [ "**/node_modules/**" ]
+      }
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true, // 忽略所有的声明文件（ *.d.ts）的类型检查。
     // 下面这些选项对 babel 编译 TypeScript 没有作用但是可以让 VSCode 等编辑器正确提示错误
     "target": "ES5", // 指定ECMAScript目标版本
-    "module": "CommonJS", // 指定模块化类型
+    "module": "ESNext", // 指定模块化类型
     "outDir": "lib", // 输出目录
     "declaration": false, // 是否生成声明文件
     "removeComments": false, // 删除所有注释，除了以 /!*开头的版权信息。

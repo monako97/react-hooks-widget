@@ -15,7 +15,7 @@ const _WaveCircle: React.FC<WaveCircleProps> = ({
 }: WaveCircleProps) => {
   return (
     <div
-      className="monako__wave--circles"
+      className="neko__wave--circles"
       style={
         {
           ...style,
@@ -23,9 +23,9 @@ const _WaveCircle: React.FC<WaveCircleProps> = ({
         } as React.CSSProperties
       }
     >
-      <i className="monako__wave--circles--circle" />
-      <i className="monako__wave--circles--circle" />
-      <i className="monako__wave--circles--circle" />
+      <i className="neko__wave--circles--circle" />
+      <i className="neko__wave--circles--circle" />
+      <i className="neko__wave--circles--circle" />
       {children}
     </div>
   );

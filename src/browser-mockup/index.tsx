@@ -224,9 +224,9 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   return show !== null ? (
     <div
       ui-theme={theme}
-      className={`monako__browser--mockup${fixed ? ` monako__browser--mockup--fixed` : ''}${
+      className={`neko__browser--mockup${fixed ? ` neko__browser--mockup--fixed` : ''}${
         className ? ' ' + className : ''
-      }${show ? '' : ` monako__browser--mockup--out`}`}
+      }${show ? '' : ` neko__browser--mockup--out`}`}
       style={
         {
           ...style,
@@ -246,31 +246,31 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
       onTouchEndCapture={onMouseEnd}
       onTouchCancelCapture={onMouseEnd}
     >
-      <div className={'monako__browser--mockup--title'}>
-        <div className="monako__browser--mockup--title--left">
+      <div className={'neko__browser--mockup--title'}>
+        <div className="neko__browser--mockup--title--left">
           <i
-            className="monako__browser--mockup--close"
+            className="neko__browser--mockup--close"
             onClickCapture={() => handleScreen('close')}
           />
           <i
-            className="monako__browser--mockup--minimize"
+            className="neko__browser--mockup--minimize"
             // m-drag={screen === 'minimize' ? 'true' : null}
             onClickCapture={() => handleScreen('minimize')}
           />
           <i
-            className="monako__browser--mockup--fullscreen"
+            className="neko__browser--mockup--fullscreen"
             onClickCapture={() => handleScreen('fullscreen')}
           />
         </div>
         <h4 m-drag="true" title={title}>
           {title}
         </h4>
-        <div className={'monako__browser--mockup--tool'}>
+        <div className={'neko__browser--mockup--tool'}>
           <i className={'copy'} />
           <i className={'theme'} />
         </div>
       </div>
-      <div className={'monako__browser--mockup--body'} ref={browser}>
+      <div className={'neko__browser--mockup--body'} ref={browser}>
         {isValidElement && children}
       </div>
     </div>

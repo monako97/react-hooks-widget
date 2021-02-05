@@ -1,6 +1,6 @@
 import React from 'react';
-import { setClipboard } from '../utils/document';
-import { getMarkedImgList, markdownUtil } from '../utils/markdown-util';
+import { setClipboard } from '@/utils/document';
+import { getMarkedImgList, markdownUtil } from '@/utils/markdown-util';
 import { PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/index.css';
 import './index.less';
@@ -20,7 +20,7 @@ interface MarkDownProps {
   langToolbar?: langToolbarType[] | null;
 }
 
-const defaultCln = 'monako__markdown-box ';
+const defaultCln = 'neko__markdown-box ';
 
 /**
  * MarkDown

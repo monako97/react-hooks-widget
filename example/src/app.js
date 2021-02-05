@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop, WaveCircle } from '../../src';
-import { getDefaultTheme, openPanel } from '../../src/utils';
+import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop, WaveCircle } from '@/';
+import { getDefaultTheme, openPanel } from '@/utils';
+
 function ajaxGet(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
@@ -64,7 +65,36 @@ const App = () => {
           >
             {theme}
           </Button>
-
+          
+          <Button
+          dange
+            onClick={() => {
+              s++;
+              toast.success('success', s % 5 ? -1 : 2000, true);
+            }}
+          />
+          <Button
+            children="info"
+            onClick={() => {
+              s++;
+              toast.info('info', s % 5 ? -1 : 2000, true);
+            }}
+          />
+          <Button
+            children="dange"
+            onClick={() => {
+              s++;
+              toast.danger('dange', s % 5 ? -1 : 2000, true);
+            }}
+          />
+          <Button
+            type="warning"
+            children="warning"
+            onClick={() => {
+              s++;
+              toast.warn('warn', s % 5 ? -1 : 2000, true);
+            }}
+          />
           <Button
             type="primary"
             children="primary"
@@ -74,7 +104,7 @@ const App = () => {
             }}
           />
 
-    <MarkDownEdit htmlClass="monako__markdown-box" />
+    <MarkDownEdit htmlClass="neko__markdown-box" />
           <MarkDown text={`
 \`\`\`jsx
 function proxyHOC(WrappedComponent) {
@@ -232,7 +262,7 @@ interface IterationResult {
           />
           <BackTop target={() => {
             try {
-              return document.getElementsByClassName('markdown-demo')[0].getElementsByClassName('monako__browser--mockup--body')[0];
+              return document.getElementsByClassName('markdown-demo')[0].getElementsByClassName('neko__browser--mockup--body')[0];
             } catch (error) {
               // return null;
             }

@@ -28,7 +28,7 @@ const Checkbox: EditorPluginTypes = ({ editor }: EditorPlugin) => {
 
   return (
     <span
-      className={`button button-type-checkbox monako__icon`}
+      className={`button button-type-checkbox neko__icon`}
       title="复选框"
       onClick={handleClick}
     />

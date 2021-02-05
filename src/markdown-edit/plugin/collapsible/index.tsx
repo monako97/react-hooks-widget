@@ -30,7 +30,7 @@ const Collapsible: EditorPluginTypes = ({ editor }: EditorPlugin) => {
 
   return (
     <span
-      className={`button button-type-collapsible monako__icon`}
+      className={`button button-type-collapsible neko__icon`}
       title="折叠内容"
       onClick={handleClick}
     />

@@ -2,6 +2,7 @@
 import marked from 'marked-completed';
 import { entityToString } from './document';
 import * as Prism from '../libs/prism.js';
+
 // import * as Prism from 'prismjs';
 // import 'prismjs/components/prism-diff';
 // import 'prismjs/plugins/highlight-keywords/prism-highlight-keywords';
@@ -11,7 +12,7 @@ import * as Prism from '../libs/prism.js';
 // import 'prismjs/plugins/match-braces/prism-match-braces';
 // import 'prismjs/plugins/treeview/prism-treeview';
 // import 'prismjs/plugins/wpd/prism-wpd';
-// const getLang = (lang: string) => import(/**/ `prismjs/components/prism-${lang}`);
+// const getLang = (lang: string) => import(/* webpackChunkName: [request][index] */ `prismjs/components/prism-${lang}`);
 
 marked.setOptions({
   highlight: function (code: string, lang: string) {

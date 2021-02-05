@@ -17,7 +17,7 @@ interface ButtonTypes {
   onClick?: () => void;
 }
 
-const defaultCln = 'monako__button ';
+const defaultCln = 'neko__button ';
 const _Button: React.FC<ButtonTypes> = ({
   className = '',
   children = '按钮',

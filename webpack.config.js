@@ -62,10 +62,19 @@ const config = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].min.css'
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`Application running in http://localhost:8008/`]
+      },
+      clearConsole: true
     })
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      "@": path.resolve(__dirname, "src")
+    },
   },
   devServer: {
     compress: true,
@@ -94,24 +103,10 @@ const config = {
         secure: false
       }
     ],
+  },
+  optimization: {
+    minimize: true // 开启代码压缩
   }
 };
-
-// 是否是开发模式 process.env.WEBPACK_DEV_SERVER
-if (process.env.WEBPACK_DEV_SERVER) {
-  config.plugins = [
-    ...config.plugins,
-    new FriendlyErrorsWebpackPlugin({
-      compilationSuccessInfo: {
-        messages: [`Application running in http://localhost:8008/`]
-      },
-      clearConsole: true
-    })
-  ];
-} else {
-  config.optimization = {
-    minimize: true // 开启代码压缩
-  };
-}
 
 module.exports = config;

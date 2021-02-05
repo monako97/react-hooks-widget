@@ -21,7 +21,7 @@ const Sup: EditorPluginTypes = ({ editor }: EditorPlugin) => {
   };
 
   return (
-    <span className="button button-type-sup monako__icon" title="上标" onClick={handleClick} />
+    <span className="button button-type-sup neko__icon" title="上标" onClick={handleClick} />
   );
 };
 

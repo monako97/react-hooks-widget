@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { getMaxZindex } from '../utils/document';
+import { getMaxZindex } from '@/utils/document';
 import './index.less';
 
 interface NoticeType {
-  type: 'info' | 'success' | 'danger' | 'loading' | 'warning' | 'primary';
+  type: 'info' | 'success' | 'danger' | 'warning' | 'primary';
   content: string;
 }
 interface ToastProps {
@@ -15,15 +15,6 @@ interface ToastProps {
   close: boolean;
 }
 
-const icons: Record<NoticeType['type'], string> = {
-  loading: '',
-  info: 'iconinfo',
-  success: 'iconsuccess',
-  danger: 'icon14CIRCLE',
-  primary: 'iconzan-f',
-  warning: 'iconwarning'
-};
-
 const Toast: React.FC<ToastProps> = ({
   notice,
   duration,
@@ -31,16 +22,16 @@ const Toast: React.FC<ToastProps> = ({
   parentNode,
   panelBox
 }: ToastProps) => {
-  const [show, setShow] = React.useState<boolean>(true);
   const [closeTimer, setCloseTimer] = React.useState<number>();
 
   const handleColse = React.useCallback(() => {
     window.clearTimeout(closeTimer);
-    setShow(false);
-    const _timer = window.setTimeout(() => {
-      window.clearTimeout(_timer);
+    parentNode.className += ' rc-toast-exit';
+    let _timer: number | null = window.setTimeout(() => {
       unmountComponentAtNode(parentNode);
       panelBox.removeChild(parentNode);
+      if (typeof _timer === 'number') window.clearTimeout(_timer);
+      _timer = null;
     }, 300);
   }, [closeTimer, panelBox, parentNode]);
 
@@ -51,6 +42,15 @@ const Toast: React.FC<ToastProps> = ({
   }, [duration, handleColse]);
 
   React.useEffect(() => {
+    let initTimer: number | null = window.setTimeout(() => {
+      parentNode.className = `rc-toast ${notice.type}`;
+      if (typeof initTimer === 'number') window.clearTimeout(initTimer);
+      initTimer = null;
+    }, 300);
+
+    if (close) {
+      parentNode.addEventListener('click', handleColse, false);
+    }
     // 当 duration 为 -1 时，不自动关闭
     if (duration !== -1) {
       // 执行退场动画
@@ -58,18 +58,16 @@ const Toast: React.FC<ToastProps> = ({
     }
     return () => {
       window.clearTimeout(closeTimer);
+      if (typeof initTimer === 'number') window.clearTimeout(initTimer);
+      initTimer = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={`${notice.type}${show ? '' : ' react-toast-exit'}`}>
-      <i className={'monako__icon '.concat(icons[notice.type])} />
+    <>
       <strong>{notice.content}</strong>
-      {close ? (
-        <i className={'monako__icon iconclose close'} onClick={() => handleColse()} />
-      ) : null}
-    </div>
+    </>
   );
 };
 
@@ -80,12 +78,12 @@ const notice = (
   close = false
 ) => {
   // 检测父容器是否存在
-  let panelBox = document.getElementById('@monako__panel--box');
+  let panelBox = document.getElementById('@neko__panel--box');
   const isOldPanel = Boolean(panelBox);
 
   if (!panelBox) {
     panelBox = document.createElement('div');
-    panelBox.id = '@monako__panel--box';
+    panelBox.id = '@neko__panel--box';
     panelBox.style.display = 'contents';
     panelBox.style.position = 'fixed';
   }
@@ -93,7 +91,7 @@ const notice = (
   // 创建节点插入到父容器
   const div = document.createElement('div');
 
-  div.className = `react-toast ${type}`;
+  div.className = `rc-toast ${type} init-view`;
   div.style.zIndex = getMaxZindex() + 2 + '';
   panelBox.appendChild(div);
 
@@ -157,15 +155,6 @@ export const toast = {
    */
   danger: (content: string, duration?: number, close?: boolean): void =>
     notice('danger', content, duration, close),
-  /**
-   * Loading
-   * @constructor
-   * @param {string} content               - 内容.
-   * @param {Number} duration                 - 显示时间.
-   * @param {Boolean} close                   - 显示关闭按钮.
-   */
-  loading: (content: string, duration?: number, close?: boolean): void =>
-    notice('loading', content, duration, close),
   /**
    * 警告
    * @constructor
