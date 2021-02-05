@@ -86,14 +86,22 @@ const notice = (
     panelBox.id = '@neko__panel--box';
     panelBox.style.display = 'contents';
     panelBox.style.position = 'fixed';
+    panelBox.style.top = '0';
+    panelBox.style.left = '0';
+    panelBox.style.display = 'block';
+    panelBox.style.width = '100vw';
+    panelBox.style.height = '100vh';
+    panelBox.style.pointerEvents = 'none';
   }
 
   // 创建节点插入到父容器
   const div = document.createElement('div');
 
   div.className = `rc-toast ${type} init-view`;
-  div.style.zIndex = getMaxZindex() + 2 + '';
-  panelBox.appendChild(div);
+  panelBox.style.zIndex = getMaxZindex() + 1 + '';
+  div.style.zIndex = panelBox.style.zIndex;
+  // panelBox.appendChild(div);
+  panelBox.insertBefore(div, panelBox.firstChild);
 
   if (!isOldPanel) {
     // 如果是新建的父节点，吧父节点插入到dom

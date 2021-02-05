@@ -40,7 +40,6 @@
   border-radius: 0.5rem;
   cursor: pointer;
   user-select: none;
-  pointer-events: none;
   &::after, &::before {
     font-size: 1rem;
     font-family: 'neko__icon', sans-serif;
@@ -71,48 +70,41 @@
     height: 100%;
   }
   &.init-view {
-    animation: opacity-in 0.3s forwards, transform-y-bottom 0.3s forwards;
+    animation: scale-in 0.3s ease-in forwards;
   }
   &-exit {
-    animation: opacity-out 0.3s forwards, transform-y-top 0.3s forwards;
+    animation: scale-out 0.3s ease-out forwards;
   }
-  &-exit ~ & {
-    transform: translate3d(0, calc(-100% - 10px), 0) !important;
-    transition: all 0.3s;
-  }
+  // &-exit ~ & {
+    // transform: translate3d(0, calc(-100% - 10px), 0) !important;
+    // transition: all 0.3s;
+  // }
 }
-@keyframes opacity-out {
+@keyframes scale-out {
   from {
+    margin-top: 10px;
+    transform: scale(1);
     opacity: 1;
   }
   to {
+    margin-top: -34px;
+    transform: scale(0);
     opacity: 0;
   }
 }
-@keyframes opacity-in {
+@keyframes scale-in {
   from {
+    margin-top: -34px;
+    transform: scale(0);
     opacity: 0;
   }
   to {
+    margin-top: 10px;
+    transform: scale(1);
     opacity: 1;
   }
 }
-@keyframes transform-y-top {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(0, -100%, 0);
-  }
-}
-@keyframes transform-y-bottom {
-  from {
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
+
 @keyframes error {
   0%,
   100% {

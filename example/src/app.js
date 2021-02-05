@@ -70,14 +70,14 @@ const App = () => {
           dange
             onClick={() => {
               s++;
-              toast.success('success', s % 5 ? -1 : 2000, true);
+              toast.success('success');
             }}
           />
           <Button
             children="info"
             onClick={() => {
               s++;
-              toast.info('info', s % 5 ? -1 : 2000, true);
+              toast.info('info');
             }}
           />
           <Button
