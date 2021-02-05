@@ -9,7 +9,7 @@
   "dependencies": {
     "highlight.js": "^10.4.1",
     "lodash": "^4.17.20",
-    "marked-completed": "^1.1.13",
+    "marked-completed": "^1.1.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-markdown-editor-lite": "^1.2.4",
