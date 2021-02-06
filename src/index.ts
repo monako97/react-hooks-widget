@@ -1,4 +1,4 @@
-import './common.less';
+import './index.less';
 export { BrowserMockup } from './browser-mockup';
 export { toast } from './toast';
 export { WaveCircle } from './wave-circle';
@@ -7,6 +7,7 @@ export { MarkDownEdit } from './markdown-edit';
 export { BubblyButton } from './bubbly-button';
 export { Button } from './button';
 export { BackTop } from './back-top';
+export { ProgressBar } from './progress-bar';
 export {
   markdownUtil,
   getMarkedImgList,

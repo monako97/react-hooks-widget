@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop, WaveCircle } from '@/';
+import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop, WaveCircle, ProgressBar } from '@/';
 import { getDefaultTheme, openPanel } from '@/utils';
 
 function ajaxGet(url, callback) {
@@ -54,6 +54,7 @@ const App = () => {
         className="markdown-demo"
       >
         <div>
+          <ProgressBar progress={80} />
           <Button
             dashed
             ghost
@@ -84,7 +85,7 @@ const App = () => {
             children="dange"
             onClick={() => {
               s++;
-              toast.danger('dange', s % 5 ? -1 : 2000, true);
+              toast.danger('dange', s % 5 ? -1 : 2000, false);
             }}
           />
           <Button

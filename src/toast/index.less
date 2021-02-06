@@ -46,11 +46,14 @@
     opacity: 0.75;
   }
   &::after {
+    min-width: 1rem;
     margin-left: 0.5rem;
-    font-weight: lighter;
     cursor: pointer;
-    content: '\e720';
+    content: '';
     pointer-events: auto;
+  }
+  &-close::after {
+    content: '\e720';
   }
   &:hover {
     &::after {
@@ -59,7 +62,7 @@
   }
   strong {
     flex: 1;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
   }
   .loop-toast-type(@types-length, 1);
@@ -70,10 +73,10 @@
     height: 100%;
   }
   &.init-view {
-    animation: scale-in 0.3s ease-in forwards;
+    animation: scale-in 0.3s forwards;
   }
   &-exit {
-    animation: scale-out 0.3s ease-out forwards;
+    animation: scale-out 0.3s forwards;
   }
   // &-exit ~ & {
     // transform: translate3d(0, calc(-100% - 10px), 0) !important;

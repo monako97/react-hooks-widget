@@ -121,7 +121,7 @@ function walk(dir) {
 
       switch (path.extname(file)) {
         case '.less':
-          if (options['--lessc']) {
+          if (options['--lessc'] && file.endsWith('index.less')) {
             outputPath = file.replace(pathWithRegex, './lib/').replace(lessRegex, '.css');
             // console.log('lessc:'.magenta, `${outputPath}`.cyan, 'Compiling...'.yellow);
             execute(`npx lessc ${file} > ${outputPath}`)

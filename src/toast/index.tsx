@@ -43,7 +43,7 @@ const Toast: React.FC<ToastProps> = ({
 
   React.useEffect(() => {
     let initTimer: number | null = window.setTimeout(() => {
-      parentNode.className = `rc-toast ${notice.type}`;
+      parentNode.className = `rc-toast ${notice.type}${close ? ' rc-toast-close' : ''}`;
       if (typeof initTimer === 'number') window.clearTimeout(initTimer);
       initTimer = null;
     }, 300);
@@ -60,6 +60,9 @@ const Toast: React.FC<ToastProps> = ({
       window.clearTimeout(closeTimer);
       if (typeof initTimer === 'number') window.clearTimeout(initTimer);
       initTimer = null;
+      if (close) {
+        parentNode.removeEventListener('click', handleColse, false);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -97,7 +100,7 @@ const notice = (
   // 创建节点插入到父容器
   const div = document.createElement('div');
 
-  div.className = `rc-toast ${type} init-view`;
+  div.className = `rc-toast ${type} init-view${close ? ' rc-toast-close' : ''}`;
   panelBox.style.zIndex = getMaxZindex() + 1 + '';
   div.style.zIndex = panelBox.style.zIndex;
   // panelBox.appendChild(div);
@@ -105,7 +108,7 @@ const notice = (
 
   if (!isOldPanel) {
     // 如果是新建的父节点，吧父节点插入到dom
-    document.body.appendChild(panelBox);
+    document.documentElement.appendChild(panelBox);
   }
 
   render(
