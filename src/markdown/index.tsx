@@ -130,4 +130,4 @@ const _MarkDown: React.FC<MarkDownProps> = ({
  * @param {MarkDownProps.langToolbar} langToolbar 开启代码块工具条
  * @returns {Element} ReactNode
  */
-export const MarkDown = React.memo(_MarkDown, (pre, next) => isEqual(pre, next));
+export const Markdown = React.memo(_MarkDown, (pre, next) => isEqual(pre, next));

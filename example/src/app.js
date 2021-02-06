@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
-import { BrowserMockup, MarkDown, toast, Button, MarkDownEdit, BackTop, WaveCircle, ProgressBar } from '@/';
+import { BrowserMockup, Markdown, toast, Button, MarkdownEdit, BackTop, WaveCircle, ProgressBar } from '@/';
 import { getDefaultTheme, openPanel } from '@/utils';
 
 function ajaxGet(url, callback) {
@@ -105,8 +105,8 @@ const App = () => {
             }}
           />
 
-    <MarkDownEdit htmlClass="neko__markdown-box" />
-          <MarkDown text={`
+    <MarkdownEdit htmlClass="neko__markdown-box" />
+          <Markdown text={`
 \`\`\`jsx
 function proxyHOC(WrappedComponent) {
   return class extends Component {

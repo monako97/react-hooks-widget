@@ -93,7 +93,7 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
   );
 };
 
-export const MarkDownEdit = React.memo(
+export const MarkdownEdit = React.memo(
   _MarkDownEdit,
   (pre: MarkDownEditType, next: MarkDownEditType) => isEqual(pre, next)
 );
