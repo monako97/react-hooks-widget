@@ -12,7 +12,7 @@ interface MarkedImageListType {
 }
 
 type langToolbarType = 'copy';
-interface MarkDownProps {
+interface MarkdownProps {
   text: string;
   className: string;
   pictureViewer: boolean;
@@ -31,13 +31,13 @@ const defaultCln = 'neko__markdown-box ';
  * @param {MarkDownProps.langToolbar} langToolbar 开启代码块工具条
  * @returns {Element} ReactNode
  */
-const _MarkDown: React.FC<MarkDownProps> = ({
+const _Markdown: React.FC<MarkdownProps> = ({
   text = '#### 加载中...',
   className = '',
   pictureViewer = false,
   langLineNumber = true,
   langToolbar = ['copy']
-}: MarkDownProps): React.ReactElement<unknown, React.FC<MarkDownProps>> => {
+}: MarkdownProps): React.ReactElement<unknown, React.FC<MarkdownProps>> => {
   const [cln, setCln] = React.useState(defaultCln);
   const [visible, setVisible] = React.useState(false);
   const [photoIndex, setPhotoIndex] = React.useState(0);
@@ -130,4 +130,6 @@ const _MarkDown: React.FC<MarkDownProps> = ({
  * @param {MarkDownProps.langToolbar} langToolbar 开启代码块工具条
  * @returns {Element} ReactNode
  */
-export const Markdown = React.memo(_MarkDown, (pre, next) => isEqual(pre, next));
+const Markdown = React.memo(_Markdown, (pre, next) => isEqual(pre, next));
+
+export default Markdown;

@@ -10,7 +10,7 @@ interface ProgressBarProps {
  * @param {number} progress 进度
  * @constructor
  */
-export const ProgressBar: React.FC<ProgressBarProps> = ({ progress = 0 }: ProgressBarProps) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress = 0 }: ProgressBarProps) => {
   return (
     <div className="progress_bar_box">
       <p className="progress_info">{progress}</p>
@@ -25,3 +25,5 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress = 0 }: Progre
     </div>
   );
 };
+
+export default ProgressBar;

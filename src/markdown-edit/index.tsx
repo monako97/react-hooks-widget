@@ -1,7 +1,7 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import isFunction from 'lodash/isFunction';
-import { BubblyButton } from '../bubbly-button';
+import BubblyButton from '../bubbly-button';
 import { markdownUtil } from '../utils/markdown-util';
 import Editor from 'react-markdown-editor-lite';
 import Sub from './plugin/sub';
@@ -13,7 +13,7 @@ import Collapsible from './plugin/collapsible';
 import 'react-markdown-editor-lite/lib/index.css';
 import './index.less';
 
-interface MarkDownEditType {
+interface MarkdownEditType {
   initValue?: string;
   submitText?: string;
   // eslint-disable-next-line no-unused-vars
@@ -27,12 +27,12 @@ Editor.use(Emoji);
 Editor.use(Checkbox);
 Editor.use(Collapsible);
 
-const _MarkDownEdit: React.FC<MarkDownEditType> = ({
+const _MarkdownEdit: React.FC<MarkdownEditType> = ({
   initValue,
   onSubmit,
   submitText = '提交',
   htmlClass
-}: MarkDownEditType) => {
+}: MarkdownEditType) => {
   const [value, setValue] = React.useState('');
   const mdEditor = React.useRef<Editor>(null);
 
@@ -93,7 +93,15 @@ const _MarkDownEdit: React.FC<MarkDownEditType> = ({
   );
 };
 
-export const MarkdownEdit = React.memo(
-  _MarkDownEdit,
-  (pre: MarkDownEditType, next: MarkDownEditType) => isEqual(pre, next)
+/**
+ * markdown 编辑器
+ * @param {string} initValue 初始值
+ * @param {string} submitText 提交按钮文案
+ * @param {MarkdownEditType['onSubmit']} onSubmit 提交回调
+ * @param {string} htmlClass html容器class
+ */
+const MarkdownEdit = React.memo(_MarkdownEdit, (pre: MarkdownEditType, next: MarkdownEditType) =>
+  isEqual(pre, next)
 );
+
+export default MarkdownEdit;

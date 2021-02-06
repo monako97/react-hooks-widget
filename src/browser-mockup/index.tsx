@@ -297,6 +297,8 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
  * </BrowserMockup>
  * ```
  */
-export const BrowserMockup = React.memo(_BrowserMockup, (pre, next) => {
+const BrowserMockup = React.memo(_BrowserMockup, (pre, next) => {
   return isEqual(pre, next);
 });
+
+export default BrowserMockup;

@@ -126,4 +126,6 @@ const _BackTop: React.FC<BackTopTypes> = ({ children, target, className }: BackT
  * @param {BackTopTypes['target']} target 返回 HTMLElement 的方法
  * @param {BackTopTypes['children']} children children
  */
-export const BackTop = React.memo(_BackTop, () => true);
+const BackTop = React.memo(_BackTop, () => true);
+
+export default BackTop;

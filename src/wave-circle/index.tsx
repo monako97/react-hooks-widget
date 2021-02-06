@@ -38,6 +38,8 @@ const _WaveCircle: React.FC<WaveCircleProps> = ({
  * @param {CSSProperties} style 样式
  * @param {React.ReactNode} children 内容
  */
-export const WaveCircle = React.memo(_WaveCircle, (pre, next) => {
+const WaveCircle = React.memo(_WaveCircle, (pre, next) => {
   return isEqual(pre, next);
 });
+
+export default WaveCircle;

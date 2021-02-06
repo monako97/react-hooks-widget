@@ -138,7 +138,7 @@ const notice = (
  * toast.success("成功", -1);
  * ```
  */
-export const toast = {
+const toast = {
   /**
    * 信息
    * @constructor
@@ -185,3 +185,5 @@ export const toast = {
   primary: (content: string, duration?: number, close?: boolean): void =>
     notice('primary', content, duration, close)
 };
+
+export default toast;

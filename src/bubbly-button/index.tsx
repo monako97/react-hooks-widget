@@ -39,4 +39,11 @@ const _BubblyButton: React.FC<BubblyButtonProps> = function ({
   );
 };
 
-export const BubblyButton = React.memo(_BubblyButton, (pre, next) => isEqual(pre, next));
+/**
+ * 发散按钮
+ * @param {string} text 文案
+ * @param {Function} onClick 点击回调
+ */
+const BubblyButton = React.memo(_BubblyButton, (pre, next) => isEqual(pre, next));
+
+export default BubblyButton;
