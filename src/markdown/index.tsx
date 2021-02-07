@@ -99,6 +99,31 @@ const _Markdown: React.FC<MarkdownProps> = ({
     [imgList, langToolbar, pictureViewer]
   );
 
+  const handleWheel = React.useCallback((event: React.WheelEvent<HTMLDivElement>) => {
+    let target: HTMLImageElement | null = event.target as HTMLImageElement;
+    let offsetParent = target.offsetParent;
+
+    if (!offsetParent || offsetParent.tagName !== 'PRE') {
+      return;
+    }
+    let rows: HTMLCollectionOf<Element> | null | undefined = offsetParent?.getElementsByClassName(
+      'line-numbers-rows'
+    );
+
+    if (rows?.length) {
+      let codeTag: HTMLElement | null = offsetParent.getElementsByTagName('code')[0];
+
+      if (codeTag.scrollHeight - codeTag.offsetHeight && rows[0].scrollTop !== codeTag.scrollTop) {
+        // 可滚动高度大于0
+        rows[0].scrollTop = codeTag.scrollTop;
+      }
+      codeTag = null;
+    }
+    target = null;
+    rows = null;
+    offsetParent = null;
+  }, []);
+
   return (
     <>
       <div
@@ -107,6 +132,7 @@ const _Markdown: React.FC<MarkdownProps> = ({
           __html: htmlString
         }}
         onClick={handleClick}
+        onWheel={handleWheel}
       />
       {pictureViewer && imgList?.length ? (
         <PhotoSlider

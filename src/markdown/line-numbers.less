@@ -1,27 +1,32 @@
 pre.line-numbers {
-  // padding-left: 3.8em;
+  // max-height: 50vh;
+  // overflow-y: auto;
   > code {
-    // position: relative;
-    margin: 1.625rem 0.625rem 0 0;
-    padding-left: 3.8em;
+    // margin: 1.625rem .625rem .625rem 3.375rem;
+    max-height: 50vh;
+    margin: 0 .625rem 0 3.375rem;
     white-space: inherit;
     counter-reset: linenumber;
+    // overflow-y: hidden;
+    // overflow-x: auto;
   }
   .line-numbers-rows {
     position: absolute;
-    top: 2.125rem;
-    // top: 0.5rem;
+    // top: 2.125rem;
+    top: 0;
     left: 0;
-    width: 3em;
+    width: 2.75rem;
+    max-height: inherit;
+    // z-index: 1;
+    padding: 2rem 0 0.5rem;
+    overflow-y: auto;
     font-size: 100%;
     letter-spacing: -1px;
-    border-right: 1px solid rgba(204, 204, 204, 0.5);
+    border-right: 0.0625rem solid rgba(204, 204, 204, 0.5);
+    border-radius: 0.3125rem 0 0 0.3125rem;
     transition: color 0.2s, background-color 0.2s, border-color 0.2s;
     user-select: none;
     pointer-events: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
     > span {
       display: block;
       counter-increment: linenumber;
