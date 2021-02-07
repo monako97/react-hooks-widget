@@ -2,6 +2,28 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
+const os = require('os');
+
+// 获取本机ip地址
+function getIPAdress() {
+  let interfaces = os.networkInterfaces();
+  for (let devName in interfaces) {
+    let iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      let alias = iface[i];
+      if (
+        alias.family === 'IPv4' &&
+        alias.address !== '127.0.0.1' &&
+        !alias.address.startsWith('169.254') &&
+        !alias.internal
+      ) {
+        return alias.address;
+      }
+    }
+  }
+}
+
 const config = {
   entry: [path.resolve(__dirname, './example/src/app.js')],
   output: {
@@ -78,7 +100,9 @@ const config = {
   },
   devServer: {
     compress: true,
+    public: `${getIPAdress()}:8008`,
     port: 8008,
+    host: '0.0.0.0', // 监听本机所有能外部访问的ip
     quiet: true,
     overlay: true,
     open: true,
