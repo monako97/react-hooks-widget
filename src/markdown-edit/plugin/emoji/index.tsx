@@ -31,6 +31,7 @@ const Emoji: EditorPluginTypes = ({ editor }: EditorPlugin) => {
     <span
       className={`button button-type-emoji neko__icon`}
       onMouseEnter={() => handleShow(true)}
+      onTouchStart={() => handleShow(true)}
       onMouseLeave={() => handleShow(false)}
     >
       <DropList show={show} onClose={() => handleShow(false)}>
