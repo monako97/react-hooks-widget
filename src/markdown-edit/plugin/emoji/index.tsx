@@ -29,7 +29,7 @@ const Emoji: EditorPluginTypes = ({ editor }: EditorPlugin) => {
 
   return (
     <span
-      className={`button button-type-emoji neko__icon`}
+      className="button button-type-emoji neko__icon"
       onMouseEnter={() => handleShow(true)}
       onTouchStart={() => handleShow(true)}
       onMouseLeave={() => handleShow(false)}

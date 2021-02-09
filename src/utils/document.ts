@@ -1,3 +1,4 @@
+import toast from '@/toast';
 import isNull from 'lodash/isNull';
 import isUndefined from 'lodash/isUndefined';
 
@@ -79,6 +80,34 @@ export const entityToString = (entity: string): string => {
  * @returns {Promise<void>} Promise<void>
  */
 export const setClipboard = (text: string, target?: HTMLElement | Element | null): void => {
+  const clipboardTimer = (_target: HTMLElement | Element) => {
+    let _clipboardTimer: number | null = window.setTimeout(() => {
+      _target.setAttribute('data-copy-exit', '');
+      if (_clipboardTimer !== null) {
+        window.clearTimeout(_clipboardTimer);
+        _clipboardTimer = null;
+      }
+      let _clipboardTimerExit: number | null = window.setTimeout(() => {
+        _target.removeAttribute('data-copy-exit');
+        _target.removeAttribute('data-copy');
+        if (_clipboardTimerExit !== null) {
+          window.clearTimeout(_clipboardTimerExit);
+          _clipboardTimerExit = null;
+        }
+      }, 300);
+    }, 4000);
+  };
+
+  if (typeof navigator.clipboard === 'undefined') {
+    if (target) {
+      target.setAttribute('data-copy', 'failure');
+      clipboardTimer(target);
+    } else {
+      toast.danger('复制失败');
+    }
+    return;
+  }
+
   if (target) {
     navigator.clipboard
       .writeText(text)
@@ -90,23 +119,7 @@ export const setClipboard = (text: string, target?: HTMLElement | Element | null
           target.setAttribute('data-copy', 'failure');
         }
       )
-      .finally(() => {
-        let _clipboardTimer: number | null = window.setTimeout(() => {
-          target.setAttribute('data-copy-exit', '');
-          if (_clipboardTimer !== null) {
-            window.clearTimeout(_clipboardTimer);
-            _clipboardTimer = null;
-          }
-          let _clipboardTimerExit: number | null = window.setTimeout(() => {
-            target.removeAttribute('data-copy-exit');
-            target.removeAttribute('data-copy');
-            if (_clipboardTimerExit !== null) {
-              window.clearTimeout(_clipboardTimerExit);
-              _clipboardTimerExit = null;
-            }
-          }, 300);
-        }, 3000);
-      });
+      .finally(() => clipboardTimer(target));
   } else {
     navigator.clipboard.writeText(text);
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { render } from 'react-dom';
 import { BrowserMockup, Markdown, toast, Button, MarkdownEdit, BackTop, WaveCircle, ProgressBar } from '@/';
 import { getDefaultTheme, openPanel } from '@/utils';
@@ -18,12 +18,18 @@ let s = 1;
 const App = () => {
   const [theme, setTheme] = useState(getDefaultTheme());
   const [md, setMD] = useState();
+  const [progress, setProgress] = useState(0);
   useMemo(() => {
     // 14a01a2b-b736-473f-a36d-3bd1f3576345 a1ad17f0-782d-4751-a86d-c340a54056bb 9fad4afb-4454-47e5-a1c2-6903ba20c3e1
     ajaxGet('/docs/array.md', function (data) {
       setMD(data);
     });
   }, []);
+  const updateProgress = useCallback(() => {
+    if (progress < 100) {
+      setProgress(progress + 1);
+    }
+  }, [progress]);
   useEffect(() => {
     window.addEventListener('dblclick', function (e) {
       if (e.target.tagName === 'PRE') {
@@ -42,6 +48,14 @@ const App = () => {
       }
     });
   }, []);
+  let _timer;
+  useEffect(() => {
+    window.clearTimeout(_timer);
+    _timer = window.setTimeout(() => {
+      window.clearTimeout(_timer);
+      updateProgress();
+    }, 16);
+  }, [progress]);
   return (
     <>
     <div style={{
@@ -54,7 +68,7 @@ const App = () => {
         className="markdown-demo"
       >
         <div>
-          <ProgressBar progress={80} />
+          <ProgressBar progress={progress} />
           <Button
             dashed
             ghost

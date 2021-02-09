@@ -2,20 +2,19 @@
 .emoji_container {
   overflow-x: hidden !important;
   overflow-y: auto;
+  &::after {
+    position: sticky;
+    top: 14rem;
+    display: block;
+    color: #ccc;
+    font-size: 0.875rem;
+    text-align: center;
+    content: '\ff5e \6211\662f\6709\5e95\7ebf\7684 \ff5e';
+  }
   > ul {
-    &::after {
-      position: sticky;
-      top: 14rem;
-      display: block;
-      color: #ccc;
-      font-size: 0.875rem;
-      text-align: center;
-      content: '~ 我是有底线的 ～';
-    }
     &::before {
       position: absolute;
       z-index: 2;
-      // display: flex;
       display: none;
       align-items: center;
       justify-content: center;
