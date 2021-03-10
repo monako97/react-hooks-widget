@@ -19,6 +19,12 @@
 </head>
 
 <body>
+
+    <form method="post" action="http://upload.qiniup.com/" encType="multipart/form-data">
+        <input name="upload_token" type="hidden" value="<upload_token>" />
+        <input name="file" type="file" />
+        <input type="submit" value="上传文件" />
+      </form>
     <div id="root"></div>
 </body>
 

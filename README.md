@@ -9,3 +9,5 @@
 - [x] markdown-edit
 - [x] button
 - [x] bubbly-button
+- [x] back-top
+- [x] progress-bar
