@@ -35,6 +35,7 @@
 | BackTop       | 返回顶部          |                                  |
 | ProgressBar   | 进度条            |                                  |
 | EdgeDrag      | 边缘拖拽容器       | 拖拽边缘调整元素大小                |
+| HighlightText | 文字高亮          | 通过特定语法将文字指定高亮           |
 
 ## 兼容性
 
