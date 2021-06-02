@@ -34,6 +34,7 @@
 | BubblyButton  | 扩散按钮          |                                  |
 | BackTop       | 返回顶部          |                                  |
 | ProgressBar   | 进度条            |                                  |
+| EdgeDrag      | 边缘拖拽容器       | 拖拽边缘调整元素大小                |
 
 ## 兼容性
 

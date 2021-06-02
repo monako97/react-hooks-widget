@@ -8,6 +8,7 @@ export { default as BubblyButton } from './bubbly-button';
 export { default as Button } from './button';
 export { default as BackTop } from './back-top';
 export { default as ProgressBar } from './progress-bar';
+export { default as EdgeDrag } from './edge-drag';
 
 // export {
 //   markdownUtil,
