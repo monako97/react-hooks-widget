@@ -20,6 +20,7 @@ interface BrowserMockupProps {
   style?: React.CSSProperties;
   title?: string;
   children?: React.ReactNode | Node;
+  initScreen?: 'window' | 'minimize' | 'fullscreen';
 }
 
 const _BrowserMockup: React.FC<BrowserMockupProps> = ({
@@ -30,7 +31,8 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
   visible = true,
   style = {},
   title = '',
-  children = <p style={{ textAlign: 'center', margin: 0 }}>无内容</p>
+  children = <p style={{ textAlign: 'center', margin: 0 }}>无内容</p>,
+  initScreen = 'window'
 }: BrowserMockupProps) => {
   const browser = React.useRef<HTMLDivElement | null>(null);
   // 显示
@@ -54,7 +56,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
     React.isValidElement(children)
   );
   // 设置全屏
-  const [screen, setScreen] = React.useState<'window' | 'minimize' | 'fullscreen'>('window');
+  const [screen, setScreen] = React.useState<'window' | 'minimize' | 'fullscreen'>(initScreen);
 
   // 获取最大z-index
   const getMaxZInde = () => {
@@ -287,6 +289,7 @@ const _BrowserMockup: React.FC<BrowserMockupProps> = ({
  * @param {boolean} visible                  - 是否显示.
  * @param {React.CSSProperties} style        - 样式.
  * @param {React.ReactNode} children         - ReactNode.
+ * @param {'window' | 'minimize' | 'fullscreen'} initScreen            - 默认的窗口形态
  * @example
  * ``` js
  * <BrowserMockup
