@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import isFunction from 'lodash/isFunction';
-import styles from './index.less';
+import './index.less';
 
 interface EdgeDragPropType {
   type?: 'horizontal' | 'vertical';
@@ -123,7 +123,7 @@ const EdgeDrag: React.FC<EdgeDragPropType> = ({
 
   return (
     <div
-      className={`${styles.edge_drag} ${className ? className : ''}`}
+      className={`edge-drag ${className ? className : ''}`}
       style={style}
       data-type={type}
       data-position={position}
